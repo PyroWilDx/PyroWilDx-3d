@@ -11,11 +11,19 @@ export class CameraFollowObject extends THREE.Mesh implements ObjectLookedInterf
         return this.position;
     }
 
+    getMouseRotatedQuaternion(quaternion: THREE.Quaternion): THREE.Quaternion {
+        let mousePosition = Utils.mousePosition;
+        let rotationQuaternion = new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(mousePosition.y / 6, -mousePosition.x / 6, 0));
+        let resQuaternion = quaternion.clone().multiply(rotationQuaternion);
+        return resQuaternion;
+    }
+
     setCameraLerpParams(cameraLerp: CameraLerp): void {
         let finalPosition = Utils.getObjectBehindPosition(this, -MainInit.scrollLengthAdv);
         cameraLerp.setFinalPosition(finalPosition);
         let i = Math.floor(MainInit.i / MainInit.scrollLengthAdv);
-        cameraLerp.setLookQuaternion(MainInit.quaternionList[i]);
+        cameraLerp.setLookQuaternion(this.getMouseRotatedQuaternion(MainInit.quaternionList[i]));
     }
 
     onLookStart(cameraLerp: CameraLerp): void {
@@ -28,7 +36,13 @@ export class CameraFollowObject extends THREE.Mesh implements ObjectLookedInterf
     }
 
     onLookProgress(cameraLerp: CameraLerp): void {
-        this.setCameraLerpParams(cameraLerp);
+        if (cameraLerp.getMaxDist() == -1) {
+            if (Scene.camera.position.y < 1.10 * Scene.galaxy.getGalaxyModelPosition().y) {
+                Scene.removeCameraLerp();
+            }
+        } else {
+            this.setCameraLerpParams(cameraLerp);
+        }
     }
 
     onLookEnd(): void {

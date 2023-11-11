@@ -17,9 +17,15 @@ export class CustomAnimation {
             f = () => { animatable.beingAnimated = false; }
         }
         anim.onComplete(f);
+
+        if (animatable.currentAnimation != null) {
+            animatable.currentAnimation.stop();
+        }
+
         anim.start();
 
         animatable.beingAnimated = true;
+        animatable.currentAnimation = anim;
     }
 
     static popInAnimation(animatable: AnimatableInterface, duration: number,

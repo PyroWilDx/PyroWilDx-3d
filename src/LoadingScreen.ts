@@ -1,5 +1,5 @@
 export class LoadingScreen {
-    public static readonly maxCount: number = 6;
+    public static readonly maxCount: number = 8;
     public static currCount: number = 0;
 
     private static loadingBar = document.getElementById("loadingBar");

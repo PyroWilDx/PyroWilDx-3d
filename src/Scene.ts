@@ -4,6 +4,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { CameraLerp } from './CameraLerp';
 import { Galaxy } from './Galaxy';
+import { LoadingScreen } from './LoadingScreen';
 import { MainInit } from './MainInit';
 import { ObjectLookedInterface } from './ObjectLookedInterface';
 import { ProjectDisplayer, ProjectDisplayerInterface } from './ProjectDisplayerInterface';
@@ -32,10 +33,15 @@ export class Scene {
     public static cameraLerp: CameraLerp | null = null;
     public static cameraFollowingObj: boolean = false;
 
-    public static readonly fadeInDuration: number = 600;
+    public static readonly fadeInDuration0: number = 600;
+    public static readonly fadeInDuration1: number = 200;
     public static projectDisplayer: ProjectDisplayer | null = null;
     public static projBgContainerId: string = "main";
     public static rmDisplayHold: boolean = false;
+
+    // public static progressBar: HTMLElement | null = null;
+
+    public static currentMenu: number = 0;
 
     static initScene(): void {
         Scene.scene = new THREE.Scene();
@@ -73,6 +79,34 @@ export class Scene {
         Scene.cameraLight = new THREE.PointLight(0xFFFFFF, 600);
         Scene.cameraLight.position.copy(Scene.camera.position);
         Scene.addEntity(Scene.cameraLight);
+
+        // Scene.progressBar = document.getElementById("progressBar");
+        // if (Scene.progressBar != null) {
+        //     Scene.progressBar.style.width = 
+        //         (((Utils.getScrollbarWidth()) / 2) * window.innerWidth) + "px";
+        //     Scene.removeProjectDisplayer();
+        // }
+        LoadingScreen.updateCount();
+    }
+
+    static setCurrentMenu(value: number) {
+        Scene.removeProjectDisplayer();
+        Scene.removeCameraLerp();
+
+        this.currentMenu = value;
+
+        let menuRoad = document.getElementById("menuRoad");
+        let menuOverview = document.getElementById("menuOverview");
+        let menuAbout = document.getElementById("menuAbout");
+        if (menuRoad != null && menuOverview != null && menuAbout != null) {
+            menuRoad.style.opacity = "";
+            menuOverview.style.opacity = "";
+            menuAbout.style.opacity = "";
+            let maxOpacity = "1";
+            if (value == 0) menuRoad.style.opacity = maxOpacity;
+            if (value == 1) menuOverview.style.opacity = maxOpacity;
+            if (value == 2) menuAbout.style.opacity = maxOpacity;
+        }
     }
 
     static addEntity(entity: THREE.Object3D): void {
@@ -184,8 +218,11 @@ export class Scene {
 
     static setProjectDisplayer(displayer: ProjectDisplayerInterface,
             displayed: HTMLElement): void {
+        document.documentElement.style.height = "100%";
+        window.scrollTo(0, 0);
+
         displayed.style.display = "";
-        displayed.style.opacity = "0";
+        displayed.style.opacity = "0.01";
 
         if (Scene.isDisplayingProject()) {
             Scene.removeProjectDisplayer();
@@ -217,24 +254,32 @@ export class Scene {
 
             displayer.onProjectHideDisplay();
         }
+
+    	document.documentElement.style.height = MainInit.htmlHeight;
+        window.scrollTo({
+			top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
+			behavior: 'auto'
+		});
     }
 
     static updateFrame(): void {
         if (Scene.cameraLerp != null) {
             Scene.cameraLerp.updateFrame();
         } else {
-            if (!Scene.isDisplayingProject()) {
+            if (!Scene.isDisplayingProject() && Scene.currentMenu == 0) {
                 Scene.setCameraLerp(MainInit.target.position, MainInit.target);
             }
         }
         if (Scene.isDisplayingProject()) {
             // @ts-ignore
             let elapsed = (Utils.getTime() - Scene.projectDisplayer.startTime)
+            let fadeInDuration = (Scene.currentMenu == 0) ? Scene.fadeInDuration0 : Scene.fadeInDuration1;
             // @ts-ignore
-            Scene.projectDisplayer.displayed.style.opacity = (elapsed / Scene.fadeInDuration).toString();
+            Scene.projectDisplayer.displayed.style.opacity = (elapsed / fadeInDuration).toString();
             // @ts-ignore
             Scene.projectDisplayer.displayer.updateFrameDisplayer();
         }
+
         Scene.renderScene();
     }
 

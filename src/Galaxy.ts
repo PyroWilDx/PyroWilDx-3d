@@ -10,7 +10,14 @@ import { Star } from './Star.ts';
 import { Utils } from './Utils.ts';
 
 export class Galaxy {
+    public static readonly galaxyModelY = 4000;
+    public static readonly galaxyModelScale = 2000;
+
     private radius: number;
+
+    private galaxyModel: THREE.Group<THREE.Object3DEventMap> | null;
+    private menuFlags: Flag[];
+
     private allStars: Star[];
     private allPlanets: Planet[];
     private player: Player | null;
@@ -24,6 +31,10 @@ export class Galaxy {
 
     constructor(radius: number) {
         this.radius = radius;
+
+        this.galaxyModel = null;
+        this.menuFlags = [];
+
         this.allStars = [];
         this.allPlanets = [];
         this.player = null;
@@ -45,6 +56,29 @@ export class Galaxy {
               })
         );
         Scene.addEntity(backgroundMesh);
+    }
+
+    static getGalaxyModelViewY(): number {
+        return Galaxy.galaxyModelY + Galaxy.galaxyModelScale + 1600;
+    }
+
+    setGalaxyModel(galaxyModel: THREE.Group<THREE.Object3DEventMap>): void {
+        this.galaxyModel = galaxyModel;
+        Scene.addEntity(galaxyModel);
+    }
+
+    getGalaxyModelPosition(): THREE.Vector3 {
+        if (this.galaxyModel != null) return this.galaxyModel.position.clone();
+        return new THREE.Vector3(0, 0, 0);
+    }
+
+    getGalaxyModelScale(): number {
+        if (this.galaxyModel != null) return this.galaxyModel.scale.x;
+        return 0;
+    }
+
+    addMenuFlag(flag: Flag): void {
+        this.menuFlags.push(flag);
     }
 
     addStars(nStars: number, modelPath: string): void {
@@ -164,14 +198,26 @@ export class Galaxy {
 
     updateFrame(): void {
         this.rayCast();
+        
+        if (Scene.currentMenu == 0) {
+            for (const currStar of this.allStars) {
+                currStar.updateFrame();
+            }
+            for (const currPlanet of this.allPlanets) {
+                currPlanet.updateFrame();
+            }
+            if (this.player != null) this.player.updateFrame();
+        }
 
-        for (const currStar of this.allStars) {
-            currStar.updateFrame();
+        if (Scene.currentMenu == 1) {
+            if (this.galaxyModel != null) {
+                this.galaxyModel.rotateY(0.001 * Utils.dt);
+
+                for (const currFlag of this.menuFlags) {
+                    currFlag.updateFrame();
+                }
+            }
         }
-        for (const currPlanet of this.allPlanets) {
-            currPlanet.updateFrame();
-        }
-        if (this.player != null) this.player.updateFrame();
     }
     
 }

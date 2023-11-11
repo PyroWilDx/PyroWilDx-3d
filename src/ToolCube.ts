@@ -12,6 +12,7 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
     public static readonly cubeSize: number = 10;
 
     public beingAnimated: boolean;
+    public currentAnimation: any;
 
     private light: THREE.PointLight;
     private link: string;
@@ -31,6 +32,7 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
         );
 
         this.beingAnimated = false;
+        this.currentAnimation = null;
 
         this.light = new THREE.PointLight(0xFFFFFF, 400);
         Scene.addEntity(this.light);
@@ -55,11 +57,14 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
     }
 
     onRayCast(): boolean {
-        return CustomAnimation.focusBigAnimation(this, 200, true);
+        let success = CustomAnimation.focusBigAnimation(this, 200, true);
+        if (success) document.body.style.cursor = "pointer";
+        return success;
     }
 
     onRayCastLeave(): void {
         CustomAnimation.focusBigAnimation(this, 200, false, true);
+        document.body.style.cursor = "auto";
     }
 
     onClick(): void {
@@ -74,6 +79,7 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
     addSelf(): void {
         Scene.addEntity(this);
         Scene.addEntity(this.light);
+        CustomAnimation.popInAnimation(this, 800, true);
     }
 
     removeSelf(): void {

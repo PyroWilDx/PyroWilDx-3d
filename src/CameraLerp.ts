@@ -73,8 +73,8 @@ export class CameraLerp {
     }
 
     setSpeeds(lerpSpeed: number, rotateSpeed: number): void {
-        this.lerpSpeed = lerpSpeed;
-        this.rotateSpeed = rotateSpeed;
+        if (lerpSpeed >= 0) this.lerpSpeed = lerpSpeed;
+        if (rotateSpeed >= 0) this.rotateSpeed = rotateSpeed;
     }
 
     multiplySpeeds(factor: number): void {
@@ -109,6 +109,10 @@ export class CameraLerp {
 
     getLookObject(): ObjectLookedInterface | null {
         return this.lookObject;
+    }
+
+    getMaxDist(): number {
+        return this.maxDist;
     }
 
 }

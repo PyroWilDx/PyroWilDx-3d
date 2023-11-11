@@ -7,14 +7,14 @@ export class MainInit {
 
     private static readonly curvePoints: number[] = [
         0, 0, 0,
-        -200, -40, -200,
-        -300, 0, -400,
         -300, 0, -500,
+        -300, 0, -400,
+        -200, -40, -200,
         0, 0, 0,
     ];
 
-    private static readonly ls: number = 1400;
-    private static readonly lss: number = MainInit.ls + 1;
+    public static readonly ls: number = 1400;
+    public static readonly lss: number = MainInit.ls + 1;
 
     private static t: THREE.Vector3[] = [];
     private static n: THREE.Vector3[] = [];
@@ -169,25 +169,32 @@ export class MainInit {
 
     private static M3 = new THREE.Matrix3();
     private static M4 = new THREE.Matrix4();
-    public static i = 0;
     public static readonly scrollLengthAdv: number = 20;
+    public static i = -MainInit.scrollLengthAdv;
     public static forward: boolean = false;
     public static doneOneRound: boolean = false;
     public static quaternionList: THREE.Quaternion[] = [];
 
-    static moveForward(length: number, forward: boolean) {
+    public static readonly barLength = 20;
+    public static readonly scrollHeight = 
+        window.innerHeight * (MainInit.barLength / 100);
+    public static readonly htmlHeight: string = 
+        (100 + MainInit.barLength * (MainInit.ls / MainInit.scrollLengthAdv - 1)) + "%";
+
+    static moveForward(forward: boolean) {
         MainInit.forward = forward;
+
+        let length = MainInit.scrollLengthAdv;
         if (forward) {
             MainInit.i += length;
-            if (MainInit.i >= MainInit.lss) {
+            if (MainInit.i >= MainInit.ls) {
                 MainInit.doneOneRound = true;
-                MainInit.i = MainInit.i - MainInit.lss;
+                MainInit.i = 0;
             }
         } else {
             MainInit.i -= length;
             if (MainInit.i < 0) {
-                if (MainInit.doneOneRound) MainInit.i = MainInit.lss + MainInit.i;
-                else MainInit.i = 0;
+                MainInit.i = MainInit.ls - length;
             }
         }
 
@@ -210,6 +217,11 @@ export class MainInit {
             points[MainInit.i].y + 10,
             points[MainInit.i].z + 0.18 * n[MainInit.i].z
         );
+
+        window.scrollTo({
+			top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
+			behavior: 'auto'
+		});
 
         if (!MainInit.doneOneRound) {
             let tmpCam = Scene.camera.clone();

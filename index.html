@@ -3,21 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="res/imgs/Flag.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Un Site Sans Nom</title>
   </head>
   <body>
     <div id="app"></div>
 
-    <div class="loading-screen" id="loadingScreen">
-      <div class="loading-bar" id="loadingBar"></div>
-      <div class="loading-text" id="loadingText">Loading... 0%</div>
+    <div id="loadingScreen" class="loading-screen">
+      <div id="loadingBar" class="loading-bar"></div>
+      <div id="loadingText" class="loading-text">Loading... 0%</div>
     </div>
-
+    
     <canvas id="bg" style="display: none;"></canvas>
 
     <main id="main">
-
       <!-- Project Template
       <section id="ProjectId" style="display: none;">
         <div class="el-center">
@@ -42,6 +42,10 @@
         </div>
 
         <p>
+          Year
+        </p>
+
+        <p>
           Technology
         </p>
 
@@ -58,7 +62,7 @@
       <!-- Project Keqing -->
       <section id="ProjectKeqing" style="display: none;">
         <div class="el-center">
-          <h2>Keqing</h2>
+          <h2>Keqing (2023)</h2>
           
           <div class="el-center">
             <a href="https://github.com/PyroWilDx/Keqing" class="button-link" target="_blank">
@@ -72,6 +76,10 @@
             </video>
           </div>
         </div>
+
+        <p>
+          Year : 2023 - Now.
+        </p>
 
         <p>
           Language : C++.<br>
@@ -106,6 +114,10 @@
         </div>
 
         <p>
+          Year : 2019 - 2020.
+        </p>
+
+        <p>
           Language : Java.<br>
           Code Editor : Android Studio.
         </p>
@@ -114,8 +126,34 @@
           Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu Oregairu
         </p>
       </section>
-
     </main>
+
+    <div id="menu" class="menu" style="display: none;">
+      <div id="menuRoad" class="menu-clickable">Road</div>
+      <div id="menuOverview" class="menu-clickable">Overview</div>
+      <div id="menuAbout" class="menu-clickable">About Me</div>
+    </div>
+
+    <div id="socialIcons" class="social-icons" style="display: none;">
+      <a href="https://github.com/PyroWilDx" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
+          <path fill="white" d="M16.29,0a16.29,16.29,0,0,0-5.15,31.75c.82.15,1.11-.36,1.11-.79s0-1.41,0-2.77C7.7,29.18,6.74,26,6.74,26a4.36,4.36,0,0,0-1.81-2.39c-1.47-1,.12-1,.12-1a3.43,3.43,0,0,1,2.49,1.68,3.48,3.48,0,0,0,4.74,1.36,3.46,3.46,0,0,1,1-2.18c-3.62-.41-7.42-1.81-7.42-8a6.3,6.3,0,0,1,1.67-4.37,5.94,5.94,0,0,1,.16-4.31s1.37-.44,4.48,1.67a15.41,15.41,0,0,1,8.16,0c3.11-2.11,4.47-1.67,4.47-1.67A5.91,5.91,0,0,1,25,11.07a6.3,6.3,0,0,1,1.67,4.37c0,6.26-3.81,7.63-7.44,8a3.85,3.85,0,0,1,1.11,3c0,2.18,0,3.94,0,4.47s.29.94,1.12.78A16.29,16.29,0,0,0,16.29,0Z"></path>
+        </svg>
+      </a>
+      <a href="mailto:pierre.lin.x@gmail.com" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492 318.2">
+          <path fill="white" d="M143.6,83.9q51.3,33.15,102.5,66.2a21.41,21.41,0,0,0,1.9-1.3q67-43.35,134-86.6L477.1.7a19,19,0,0,0-5.4-.7H20.4A23.47,23.47,0,0,0,15,.7Q79.35,42.4,143.6,83.9Z"></path>
+          <path fill="white" d="M389.6,203.9q51.15,48.15,102.3,96.2a17.7,17.7,0,0,0,.1-2.3V20.4a20.1,20.1,0,0,0-2.5-9.8Q422.75,53.65,356.1,96.8c-15.9,10.3-31.7,20.5-47.6,30.8Z"></path>
+          <path fill="white" d="M348.6,191.3q-28.2-26.55-56.4-53l-42.3,27.3a7.4,7.4,0,0,1-7.6,0c-1.9-1.2-3.8-2.5-5.7-3.7q-18.3-11.85-36.6-23.6l-89.9,84.5Q60.6,269.3,11,315.9a21,21,0,0,0,9.3,2.3H471.6a19.41,19.41,0,0,0,9.3-2.3Q414.9,253.5,348.6,191.3Z"></path>
+          <path fill="white" d="M2,298.4q67.05-63,134-126c15.9-14.9,31.7-29.8,47.6-44.8q-40.5-26.25-81.1-52.4Q52.55,43,2.5,10.6A20.1,20.1,0,0,0,0,20.4V297.7c0,.8.1,1.6.1,2.3A14.62,14.62,0,0,0,2,298.4Z"></path>
+        </svg>
+      </a>
+      <a href="CV.pdf" download="CV.pdf">
+        <img src="res/imgs/LinkIcon_CV.png">
+      </a>
+    </div>
+
+    <!-- <div id="progressBar"></div> -->
 
     <script type="module" src="/src/Main.ts"></script>
   </body>

@@ -1,28 +1,17 @@
+WHEN HOVER OVER ONE OF THOSE CUBES, DISPLAY NAME DATE (SHORT DESC?);
+
 scale up blurry
 
 block zooming functions
 
 easter egg : cliquer sur la soucoupe pour commencer a la controler!
-
-BUTTON oR ESCAPE TO GO OUT OF PROJECT
-
-LANGUAGE
-FRAMEWORKS & LIBRARIES
-GAME ENGINE,
-CODE EDITOR
-
-TITLE
-YEAR
-TECHNO
-DESC
-
 IF TOO FAR AWAY, GO TO OVERVIEW
 
-MENU : ROAD,  OVERVIEW, LIST, ABOUT (CV ?) : EN HAUT A DROITE
-ICONE LIEN SITE : EN BAS A DROITE, LINKEDIN GITHUB MAIL
-
-OVERVIEW/LIST -> VUE SUR LA GALAXIE
+BUTTON OR ESCAPE TO GO OUT OF PROJECT
 
 MUSIQUE OKLM ESPACE
+bouton son,
 
-loading...
+minimum rotating speed
+
+path progress on a circle

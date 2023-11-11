@@ -255,11 +255,17 @@ export class Scene {
             displayer.onProjectHideDisplay();
         }
 
-    	document.documentElement.style.height = MainInit.htmlHeight;
-        window.scrollTo({
-			top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
-			behavior: 'auto'
-		});
+        if (Scene.currentMenu == 0) {
+            document.documentElement.style.height = MainInit.htmlHeight;
+            window.scrollTo({
+                top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
+                behavior: 'auto'
+            });
+        }
+        if (Scene.currentMenu == 1) {
+            document.documentElement.style.height = "100%";
+            window.scrollTo(0, 0);
+        }
     }
 
     static updateFrame(): void {

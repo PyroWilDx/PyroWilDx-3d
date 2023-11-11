@@ -214,7 +214,7 @@ export class Galaxy {
                 this.galaxyModel.rotateY(0.001 * Utils.dt);
 
                 for (const currFlag of this.menuFlags) {
-                    currFlag.updateFrame();
+                    // currFlag.updateFrame();
                 }
             }
         }

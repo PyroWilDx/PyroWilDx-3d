@@ -18,7 +18,7 @@ Scene.initScene();
 let galaxy: Galaxy = Scene.galaxy;
 galaxy.addStars(400, "res/3d/MarioStar/scene.gltf");
 
-const menuFlagAddY = -400;
+const menuFlagAddY = -200;
 
 let kqPlanet = new Planet("res/imgs/Sun.jpg", 40,
 	new THREE.Vector3(0, -100, -200), 10, "red");
@@ -35,7 +35,9 @@ let kqFlag = new Flag(106.6670, 60,
 kqPlanet.setFlag(kqFlag);
 galaxy.addPlanet(kqPlanet);
 let kqMenuFlag = kqFlag.cloneForMenu();
-kqMenuFlag.position.set(0, Galaxy.getGalaxyModelViewY() + menuFlagAddY, 0);
+kqMenuFlag.position.set(-300,
+	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 
+	-100);
 kqMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(kqMenuFlag);
 LoadingScreen.updateCount();
@@ -52,7 +54,9 @@ let oregairuFlag = new Flag(90, 60,
 oregairuPlanet.setFlag(oregairuFlag);
 galaxy.addPlanet(oregairuPlanet);
 let oregairuMenuFlag = oregairuFlag.cloneForMenu();
-oregairuMenuFlag.position.set(-200, Galaxy.getGalaxyModelViewY() + menuFlagAddY, 0);
+oregairuMenuFlag.position.set(-260,
+	Galaxy.getGalaxyModelViewY() + menuFlagAddY,
+	0);
 oregairuMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(oregairuMenuFlag);
 LoadingScreen.updateCount();
@@ -124,21 +128,24 @@ window.addEventListener('mousemove', (event) => {
 window.addEventListener("wheel", (event) => {
 	Utils.mouseWheel = true;
 
+	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject()) {
+		event.preventDefault();
+	}
+
 	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
 		let forward = event.deltaY >= 0;
 		MainInit.moveForward(forward);
-
-		event.preventDefault();
 	}
 }, {passive: false});
 
 window.addEventListener("scroll", (event) => {
 	if (Utils.mouseWheel) return;
 
-	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
+	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject()) {
 		event.preventDefault();
+	}
 
-
+	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
 		const currentScrollHeight = document.documentElement.scrollTop;
 		let i = (currentScrollHeight / MainInit.scrollHeight) * MainInit.scrollLengthAdv;
 		i = Math.round(i / MainInit.scrollLengthAdv) * MainInit.scrollLengthAdv;
@@ -165,6 +172,8 @@ window.addEventListener("keyup", function(event) {
 	let key = event.key;
 	Utils.updateKeyMap(key, false);
 });
+
+document.documentElement.style.overflowY = 'scroll';
 
 let menuRoad = document.getElementById("menuRoad");
 let menuOverview = document.getElementById("menuOverview");
@@ -196,7 +205,6 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 
 		document.documentElement.style.height = "100%";
         window.scrollTo(0, 0);
-		document.documentElement.style.overflowY = 'scroll';
 
 		let galaxyModelPosition = galaxy.getGalaxyModelPosition();
 		let finalPosition = new THREE.Vector3(galaxyModelPosition.x, 

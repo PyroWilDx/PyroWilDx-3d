@@ -39,6 +39,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     private xZoomShift: number;
     private yZoomShift: number;
 
+    private centeredText: HTMLElement | null;
+
     private halfFlagW: number;
     private AX1: number;
     private DX1: number;
@@ -125,6 +127,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         this.xZoomShift = xZoomShift;
         this.yZoomShift = yZoomShift;
 
+        this.centeredText = null;
+
         this.halfFlagW = this.flagW / 2;
 
         let ratio = (this.flagW / 10 + this.flagH / 6) / 2;
@@ -139,13 +143,42 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     }
 
     onRayCast(): boolean {
-        this.glowEffect(true);
+        let success = true;
+        if (!(Scene.currentMenu == 1 && Scene.isDisplayingProject())) {
+            this.glowEffect(true);
+        } else {
+            return false;
+        }
 
-        return true;
+        if (Scene.currentMenu == 1) {
+            if (!Scene.isDisplayingProject()) {
+                let projectOverviewText = document.getElementById("projectOverviewText");
+                let projectOverviewTitle = document.getElementById("projectOverviewTitle");
+                let projectOverviewYear = document.getElementById("projectOverviewYear");
+                this.centeredText = projectOverviewText;
+                if (projectOverviewText != null && projectOverviewTitle != null &&
+                        projectOverviewYear != null) {
+                    projectOverviewText.style.opacity = "1";
+                    let titleEl = document.getElementById(this.flagProjectSectionId + "Title");
+                    let yearEl = document.getElementById(this.flagProjectSectionId + "Year");
+                    if (titleEl != null && yearEl != null) {
+                        projectOverviewTitle.textContent = titleEl.textContent;
+                        projectOverviewYear.textContent = yearEl.textContent;
+                    }
+                }
+            }
+        }
+
+        return success;
     }
 
     onRayCastLeave(): void {
         this.glowEffect(false);
+
+        if (this.centeredText != null) {
+            this.centeredText.style.opacity = "";
+            this.centeredText.style.transform = "";
+        }
     }
 
     getObjectPosition(): THREE.Vector3 {
@@ -178,7 +211,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             let addY = -1.4 * ToolCube.cubeSize / Scene.getScreenSizeRatio();
             let addZ = 0;
             currCubePosition.x -= addX;
-            currCubePosition.y -= addY * Math.ceil(this.toolCubes.length / 2);
+            currCubePosition.y -= addY * Math.ceil(this.toolCubes.length / 2) + 6;
             if (Scene.currentMenu == 1) {
                 addZ = addY;
                 addY = 0;
@@ -186,7 +219,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 currCubePosition.x -= addX;
                 currCubePosition.y = Galaxy.getGalaxyModelViewY();
                 currCubePosition.y -= Math.min(this.flagW, this.flagH) / Scene.getScreenSizeRatio();
-                currCubePosition.z += addZ * Math.ceil(this.toolCubes.length / 2);
+                currCubePosition.z = 0;
+                currCubePosition.z += addZ * Math.ceil(this.toolCubes.length / 2) + 6;
             }
             for (let i = 0; i < this.toolCubes.length; i++) {
                 this.toolCubes[i].setPosition(currCubePosition, i % 2 == 0);
@@ -284,6 +318,10 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             }
 
             if (Scene.currentMenu == 1) {
+                if (this.centeredText != null) {
+                    this.centeredText.style.opacity = "";
+                    this.centeredText.style.transform = "";
+                }
                 this.displayProject();
             }
 

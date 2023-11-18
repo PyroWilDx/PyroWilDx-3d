@@ -222,6 +222,7 @@ export class MainInit {
 			top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
 			behavior: 'auto'
 		});
+        Scene.setProgressBarProgress();
 
         if (!MainInit.doneOneRound) {
             let tmpCam = Scene.camera.clone();

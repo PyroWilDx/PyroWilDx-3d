@@ -11,6 +11,8 @@ import { Scene } from './Scene.ts';
 import { Utils } from './Utils.ts';
 import './style.css';
 
+let loaded = false;
+
 // Inits
 Scene.initScene();
 
@@ -126,6 +128,11 @@ window.addEventListener('mousemove', (event) => {
 });
 
 window.addEventListener("wheel", (event) => {
+	if (!loaded) {
+		event.preventDefault();
+		return;
+	}
+
 	Utils.mouseWheel = true;
 
 	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject()) {
@@ -133,12 +140,25 @@ window.addEventListener("wheel", (event) => {
 	}
 
 	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
+		if (!Utils.scrolled) {
+			let scrollToExplore = document.getElementById("scrollToExplore");
+			if (scrollToExplore != null) {
+				Scene.scrollToExploreFadeOut();
+			}
+			Utils.scrolled = true;
+		}
+		
 		let forward = event.deltaY >= 0;
 		MainInit.moveForward(forward);
 	}
 }, {passive: false});
 
 window.addEventListener("scroll", (event) => {
+	if (!loaded) {
+		event.preventDefault();
+		return;
+	}
+
 	if (Utils.mouseWheel) return;
 
 	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject()) {
@@ -146,6 +166,14 @@ window.addEventListener("scroll", (event) => {
 	}
 
 	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
+		if (!Utils.scrolled) {
+			let scrollToExplore = document.getElementById("scrollToExplore");
+			if (scrollToExplore != null) {
+				Scene.scrollToExploreFadeOut();
+			}
+			Utils.scrolled = true;
+		}
+
 		const currentScrollHeight = document.documentElement.scrollTop;
 		let i = (currentScrollHeight / MainInit.scrollHeight) * MainInit.scrollLengthAdv;
 		i = Math.round(i / MainInit.scrollLengthAdv) * MainInit.scrollLengthAdv;
@@ -185,12 +213,15 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	menuRoad.addEventListener("click", function () {
 		if (Scene.currentMenu == 0) return;
 		Scene.setCurrentMenu(0);
+		
+		if (!Utils.scrolled) Scene.showScrollToExplore(true);
 
 		document.documentElement.style.height = MainInit.htmlHeight;
         window.scrollTo({
 			top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
 			behavior: 'auto'
 		});
+		Scene.showProgressBar();
 
 		let cameraLerp = Scene.setCameraLerp(MainInit.target.position, MainInit.target);
 		cameraLerp.setFinalPosition(new THREE.Vector3(0, 0, 0));
@@ -203,8 +234,11 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 		if (Scene.currentMenu == 1) return;
 		Scene.setCurrentMenu(1);
 
+		if (!Utils.scrolled) Scene.showScrollToExplore(false);
+
 		document.documentElement.style.height = "100%";
         window.scrollTo(0, 0);
+		Scene.hideProgressBar();
 
 		let galaxyModelPosition = galaxy.getGalaxyModelPosition();
 		let finalPosition = new THREE.Vector3(galaxyModelPosition.x, 
@@ -216,13 +250,18 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 		cameraLerp.setEpsilons(0, 0);
 	});
 
-	menuAbout.addEventListener("click", function () {
-		if (Scene.currentMenu == 2) return;
-		Scene.setCurrentMenu(2);
+	menuAbout.addEventListener("mouseover", function () {
+		let aboutSection = document.getElementById("aboutSection");
+		if (aboutSection != null) {
+			aboutSection.style.display = "";
+		}
+	});
 
-		document.documentElement.style.height = "100%";
-        window.scrollTo(0, 0);
-		document.documentElement.style.overflowY = 'scroll';
+	menuAbout.addEventListener("mouseout", function () {
+		let aboutSection = document.getElementById("aboutSection");
+		if (aboutSection != null) {
+			aboutSection.style.display = "none";
+		}
 	});
 }
 
@@ -254,16 +293,39 @@ while (LoadingScreen.currCount < LoadingScreen.maxCount) {
 
 let loadingScreen = document.getElementById("loadingScreen");
 let bg = document.getElementById("bg");
+let scrollToExplore = document.getElementById("scrollToExplore");
 let socialIcons = document.getElementById("socialIcons");
 let menu = document.getElementById("menu");
-if (loadingScreen != null && bg != null &&
+if (loadingScreen != null && bg != null && scrollToExplore != null &&
 		socialIcons != null && menu != null) {
 	loadingScreen.style.display = "none";
 	bg.style.display = "";
+	scrollToExplore.style.display = "";
 	socialIcons.style.display = "";
 	menu.style.display = "";
 	document.documentElement.style.height = MainInit.htmlHeight;
 	window.scrollTo(0, 0);
 }
+
+let music = new Audio("res/sfx/NimbleAsLightning.ogg");
+music.play().then(() => {
+	Scene.isPlayingSound = true;
+}).catch(() => {
+	Scene.isPlayingSound = false;
+	Scene.muteSoundEqualizer();
+});
+let soundEqualizer = document.getElementById("soundEqualizer");
+if (soundEqualizer != null) {
+	soundEqualizer.addEventListener("click", () => {
+		Scene.isPlayingSound = !Scene.isPlayingSound;
+		if (Scene.isPlayingSound) music.play();
+		else {
+			music.pause();
+			Scene.muteSoundEqualizer();
+		}
+	});
+}
+
+loaded = true;
 
 animate();

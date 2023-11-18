@@ -75,6 +75,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             new THREE.MeshBasicMaterial({
                 map: flagTexture,
                 side: THREE.DoubleSide,
+                transparent: true
                 // emissiveIntensity: 0.46,
                 // emissiveMap: flagTexture
             })
@@ -166,6 +167,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                         projectOverviewYear.textContent = yearEl.textContent;
                     }
                 }
+                // @ts-ignore
+                this.material.opacity = 0.4;
             }
         }
 
@@ -174,6 +177,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
 
     onRayCastLeave(): void {
         this.glowEffect(false);
+        // @ts-ignore
+        this.material.opacity = 1;
 
         if (this.centeredText != null) {
             this.centeredText.style.opacity = "";
@@ -347,6 +352,10 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
 
         this.geometry.attributes.position.needsUpdate = true;
 
+        this.updateVideo();
+    }
+
+    updateVideo() {
         if (this.flagVidTexture != null) {
             this.flagVidTexture.needsUpdate = true;
         }

@@ -21,7 +21,8 @@ export class Utils {
     public static isMouseDown: boolean = false;
     public static lastMousePosition: THREE.Vector2 = new THREE.Vector2(0, 0);
     public static mousePosition: THREE.Vector2 = new THREE.Vector2(0, 0);
-    public static mouseWheel: boolean;
+    public static mouseWheel: boolean = false;
+    public static scrolled: boolean = false;
     public static keyMap: { [key: string]: boolean } = {};
     
     static sleep(ms: number) {

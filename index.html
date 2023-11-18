@@ -17,6 +17,43 @@
     
     <canvas id="bg" style="display: none;"></canvas>
 
+    <div id="scrollToExplore" class="text-center-normal" style="display: none;">
+      <section class="scroll-to-explore">
+        <div class="mouse-scroll">
+            <div class="scroll-mouse">
+              <div class="scroll-wheel"></div>
+            </div>
+            <div class="scroll-text">Scroll to Explore</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="text-center">
+      <div id="projectOverviewText">
+        <p id="project-overview-wrapper">
+          <span id="projectOverviewTitle">
+            Project Title
+          </span>
+          <br>
+          <span id="projectOverviewYear">
+            2022
+          </span>
+        </p>
+      </div>
+    </div>
+
+    
+    <main id="aboutSection" style="display: none;">
+      <section id="aboutSectionContent">
+        <div class="el-center">
+          <h2>Moi</h2>
+        </div>
+        <p>
+          About MeAbout Me About Me About Me About MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout MeAbout Me
+        </p>
+      </section>
+    </main>
+
     <main id="main">
       <!-- Project Template
       <section id="ProjectId" style="display: none;">
@@ -153,21 +190,20 @@
       </a>
     </div>
 
-    <div class="text-center">
-      <div id="projectOverviewText">
-        <p id="project-overview-wrapper">
-          <span id="projectOverviewTitle">
-            Project Title
-          </span>
-          <br>
-          <span id="projectOverviewYear">
-            2022
-          </span>
-        </p>
-      </div>
+    <div id="progressContainer" class="progress">
+      <div id="progressBar" class="progress-value"></div>
     </div>
 
-    <!-- <div id="progressBar"></div> -->
+    <svg id="soundEqualizer" class="equalizer" viewBox="0 0 99 62" 
+        style="enable-background:new 0 0 99 62;" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+      <line stroke="white" stroke-width="2" x1="99" y1="0" x2="0" y2="0"></line>
+      <line id="sEL0" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="85.6" y1="60" x2="85.6" y2="0" data-svg-origin="85.5999984741211 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.7153,0,0)"></line>
+      <line id="sEL1" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="67.6" y1="60" x2="67.6" y2="0" data-svg-origin="67.5999984741211 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.5773,0,0)"></line>
+      <line id="sEL2" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="49.6" y1="60" x2="49.6" y2="0" data-svg-origin="49.599998474121094 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.1453,0,0)"></line>
+      <line id="sEL3" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="31.6" y1="60" x2="31.6" y2="0" data-svg-origin="31.600000381469727 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.7825,0,0)"></line>
+      <line id="sEL4" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="13.6" y1="60" x2="13.6" y2="0" data-svg-origin="13.600000381469727 0" transform="matrix(1,0,0,0.5184,0,0)" style="transform-origin: 0px 0px;"></line>
+    </svg>
 
     <script type="module" src="/src/Main.ts"></script>
   </body>

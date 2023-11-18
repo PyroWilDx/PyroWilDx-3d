@@ -1,3 +1,5 @@
+// @ts-ignore
+import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
@@ -39,9 +41,21 @@ export class Scene {
     public static projBgContainerId: string = "main";
     public static rmDisplayHold: boolean = false;
 
-    // public static progressBar: HTMLElement | null = null;
-
     public static currentMenu: number = 0;
+
+    public static progressContainer: HTMLElement | null = null;
+    public static progressBar: HTMLElement | null = null;
+
+    public static isPlayingSound: boolean = true;
+    public static readonly sECount: number = 5;
+    public static sELines: (HTMLElement | null)[] = [null, null, null, null, null];
+    public static sEHeights: number[] = [0.7153, 0.5773, 0.1453, 0.7825, 0.5184];
+    public static sESpeeds: number[] = [0.009, 0.006, 0.004, 0.007, 0.005];
+    public static readonly sEMin: number = 0.1;
+    public static sEMins: number[] = [0.1, 0.26, 0.32, 0.2, 0.22];
+    public static readonly sEMax: number = 1;
+    public static sEMaxs: number[] = [Scene.sEMax, Scene.sEMax, Scene.sEMax,
+        Scene.sEMax, Scene.sEMax];
 
     static initScene(): void {
         Scene.scene = new THREE.Scene();
@@ -80,12 +94,13 @@ export class Scene {
         Scene.cameraLight.position.copy(Scene.camera.position);
         Scene.addEntity(Scene.cameraLight);
 
-        // Scene.progressBar = document.getElementById("progressBar");
-        // if (Scene.progressBar != null) {
-        //     Scene.progressBar.style.width = 
-        //         (((Utils.getScrollbarWidth()) / 2) * window.innerWidth) + "px";
-        //     Scene.removeProjectDisplayer();
-        // }
+        Scene.progressContainer = document.getElementById("progressContainer");
+        Scene.progressBar = document.getElementById("progressBar");
+
+        for (let i = 0; i < Scene.sECount; i++) {
+            Scene.sELines[i] = document.getElementById("sEL" + i);
+        }
+
         LoadingScreen.updateCount();
     }
 
@@ -268,6 +283,61 @@ export class Scene {
         }
     }
 
+    static showProgressBar() {
+        if (Scene.progressContainer != null) {
+            Scene.progressContainer.style.display = "";
+            this.setProgressBarProgress();
+        }
+    }
+
+    static hideProgressBar() {
+        if (Scene.progressContainer != null) {
+            Scene.progressContainer.style.display = "none";
+        }
+    }
+
+    static setProgressBarProgress() {
+        if (Scene.progressBar != null) {
+            let progress = 6 + (MainInit.i / MainInit.lss) * 94;
+            Scene.progressBar.style.width = progress + "%";
+        }
+    }
+
+    static muteSoundEqualizer() {
+        for (let i = 0; i < Scene.sECount; i++) {
+            // @ts-ignore
+            Scene.sELines[i].setAttribute("transform", "matrix(1, 0, 0, 0.1, 0, 0)");
+        }
+    }
+
+    static showScrollToExplore(show: boolean) {
+        let scrollToExplore = document.getElementById("scrollToExplore");
+        if (scrollToExplore != null) {
+            if (show) scrollToExplore.style.display = "";
+            else scrollToExplore.style.display = "none";
+        }
+    }
+
+    static scrollToExploreFadeOut() {
+        let scrollToExplore = document.getElementById("scrollToExplore");
+        let opacity = { value: 1 };
+        new TWEEN.Tween(opacity)
+            .to({ value: 0 }, 300)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .onUpdate(function () {
+                if (scrollToExplore != null) {
+                    // @ts-ignore
+                    scrollToExplore.style.opacity = opacity.value.toString();
+                }
+            })
+            .onComplete(function () {
+                if (scrollToExplore != null) {
+                    Scene.showScrollToExplore(false);
+                }
+            })
+            .start();
+    }
+ 
     static updateFrame(): void {
         if (Scene.cameraLerp != null) {
             Scene.cameraLerp.updateFrame();
@@ -280,13 +350,32 @@ export class Scene {
             // @ts-ignore
             let elapsed = (Utils.getTime() - Scene.projectDisplayer.startTime)
             let fadeInDuration = (Scene.currentMenu == 0) ? Scene.fadeInDuration0 : Scene.fadeInDuration1;
+            let opacity = Math.min(elapsed / fadeInDuration, 1);
             // @ts-ignore
-            Scene.projectDisplayer.displayed.style.opacity = (elapsed / fadeInDuration).toString();
+            Scene.projectDisplayer.displayed.style.opacity = opacity.toString();
             // @ts-ignore
             Scene.projectDisplayer.displayer.updateFrameDisplayer();
         }
 
         Scene.renderScene();
+
+        if (Scene.isPlayingSound) {
+            for (let i = 0; i < Scene.sECount; i++) {
+                let matrixStr = "matrix(1, 0, 0, " + Scene.sEHeights[i] + ", 0, 0)";
+                // @ts-ignore
+                Scene.sELines[i].setAttribute("transform", matrixStr);
+
+                Scene.sEHeights[i] += Scene.sESpeeds[i];
+                if (Scene.sEHeights[i] > Scene.sEMaxs[i]) {
+                    Scene.sEHeights[i] = Scene.sEMaxs[i];
+                    Scene.sESpeeds[i] = -Scene.sESpeeds[i];
+                }
+                if (Scene.sEHeights[i] < Scene.sEMins[i]) {
+                    Scene.sEHeights[i] = Scene.sEMins[i];
+                    Scene.sESpeeds[i] = -Scene.sESpeeds[i];
+                }
+            }
+        }
     }
 
 }

@@ -189,7 +189,14 @@ window.addEventListener("scroll", (event) => {
 	}
 }, {passive: false});
 
-window.addEventListener("keydown", function(event) {
+let closeButton = document.getElementById("closeButton");
+if (closeButton != null) {
+	closeButton.addEventListener("click", () => {
+		Scene.removeProjectDisplayer();
+	});
+}
+
+window.addEventListener("keydown", (event) => {
 	let key = event.key;
 	Utils.updateKeyMap(key, true);
 
@@ -198,7 +205,7 @@ window.addEventListener("keydown", function(event) {
 	}
 });
 
-window.addEventListener("keyup", function(event) {
+window.addEventListener("keyup", (event) => {
 	let key = event.key;
 	Utils.updateKeyMap(key, false);
 });
@@ -212,7 +219,7 @@ let menuAbout = document.getElementById("menuAbout");
 if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	menuRoad.style.opacity = "1";
 
-	menuRoad.addEventListener("click", function () {
+	menuRoad.addEventListener("click", () => {
 		if (Scene.currentMenu == 0) return;
 		Scene.setCurrentMenu(0);
 		
@@ -232,7 +239,7 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 		cameraLerp.setMaxDist(-1);
 	});
 
-	menuOverview.addEventListener("click", function () {
+	menuOverview.addEventListener("click", () => {
 		if (Scene.currentMenu == 1) return;
 		Scene.setCurrentMenu(1);
 
@@ -252,11 +259,11 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 		cameraLerp.setEpsilons(0, 0);
 	});
 
-	menuAbout.addEventListener("mouseover", function () {
+	menuAbout.addEventListener("mouseover", () => {
 		Scene.aboutSectionTargetOpacity = 1;
 	});
 
-	menuAbout.addEventListener("mouseout", function () {
+	menuAbout.addEventListener("mouseout", () => {
 		Scene.aboutSectionTargetOpacity = 0;
 	});
 }

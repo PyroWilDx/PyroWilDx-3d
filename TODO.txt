@@ -1,5 +1,3 @@
 scale up blurry
 
 block zooming functions
-
-BUTTON OR ESCAPE TO GO OUT OF PROJECT

@@ -279,6 +279,32 @@ p {
     text-align: justify;
 }
 
+.close-button {
+    position: fixed;
+    top: 16px;
+    right: 19.2%;
+    background-color: #FF5733;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background-color: #D64519;
+}
+
+.cross {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
 .button-link {
     display: inline-block;
     padding: 6px 20px;

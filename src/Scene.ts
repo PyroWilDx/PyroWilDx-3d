@@ -245,6 +245,11 @@ export class Scene {
         displayed.style.display = "";
         displayed.style.opacity = "0.01";
 
+        let closeButton = document.getElementById("closeButton");
+        if (closeButton != null ) {
+            closeButton.style.display = "";
+        }
+
         if (Scene.isDisplayingProject()) {
             Scene.removeProjectDisplayer();
         }
@@ -267,6 +272,10 @@ export class Scene {
         if (Scene.isDisplayingProject()) {
             // @ts-ignore
             Scene.projectDisplayer.displayed.style.display = "none";
+            let closeButton = document.getElementById("closeButton");
+            if (closeButton != null ) {
+                closeButton.style.display = "none";
+            }
 
             // @ts-ignore
             let displayer = Scene.projectDisplayer.displayer;

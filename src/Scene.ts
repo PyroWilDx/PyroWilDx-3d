@@ -43,6 +43,10 @@ export class Scene {
 
     public static currentMenu: number = 0;
 
+    public static aboutSection: HTMLElement | null = null;
+    public static aboutSectionCurrOpacity: number = 0;
+    public static aboutSectionTargetOpacity: number = 0;
+
     public static progressContainer: HTMLElement | null = null;
     public static progressBar: HTMLElement | null = null;
 
@@ -62,7 +66,7 @@ export class Scene {
 
         Scene.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight,
             0.1, Scene.worldRadius * 2);
-        Scene.camera.position.set(0, 0, 0);
+        Scene.camera.position.set(0, 2000, 0);
 
         Scene.renderer = new THREE.WebGLRenderer({
             canvas: document.querySelector('#bg')!,
@@ -93,6 +97,8 @@ export class Scene {
         Scene.cameraLight = new THREE.PointLight(0xFFFFFF, 600);
         Scene.cameraLight.position.copy(Scene.camera.position);
         Scene.addEntity(Scene.cameraLight);
+
+        Scene.aboutSection = document.getElementById("aboutSection");
 
         Scene.progressContainer = document.getElementById("progressContainer");
         Scene.progressBar = document.getElementById("progressBar");
@@ -358,6 +364,24 @@ export class Scene {
         }
 
         Scene.renderScene();
+
+        if (Scene.aboutSection != null && 
+                Scene.aboutSectionCurrOpacity != Scene.aboutSectionTargetOpacity) {
+            if (Scene.aboutSectionCurrOpacity < Scene.aboutSectionTargetOpacity) {
+                Scene.aboutSectionCurrOpacity = Math.min(Scene.aboutSectionCurrOpacity + Utils.dt / 30., 
+                    Scene.aboutSectionTargetOpacity);
+            } else {
+                Scene.aboutSectionCurrOpacity = Math.max(Scene.aboutSectionCurrOpacity - Utils.dt / 30., 
+                    Scene.aboutSectionTargetOpacity);
+            }
+            Scene.aboutSection.style.opacity = Scene.aboutSectionCurrOpacity.toString();
+            if (Scene.aboutSectionCurrOpacity == 0) {
+                Scene.aboutSection.style.display = "none";
+            }
+            if (Scene.aboutSectionTargetOpacity > 0) {
+                Scene.aboutSection.style.display = "";
+            }
+        }
 
         if (Scene.isPlayingSound) {
             for (let i = 0; i < Scene.sECount; i++) {

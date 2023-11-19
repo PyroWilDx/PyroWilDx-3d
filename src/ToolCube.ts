@@ -28,7 +28,8 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
                 emissiveIntensity: 2,
                 emissiveMap: cubeTexture
             }),
-            Utils.getRandomVector3Spread(0.004)
+            Utils.getRandomVector3Spread(0.004),
+            0.001
         );
 
         this.beingAnimated = false;

@@ -1,6 +1,11 @@
 export class LoadingScreen {
+    public static loadPercentage: number = 48;
+    public static preLoadPercentage: number = 48;
+
     public static readonly maxCount: number = 8;
+    public static readonly preLoadMaxCount: number = 100;
     public static currCount: number = 0;
+    public static preLoadCount: number = 0;
 
     private static loadingBar = document.getElementById("loadingBar");
     private static loadingText = document.getElementById("loadingText");
@@ -13,10 +18,16 @@ export class LoadingScreen {
 
     static updateLoadingScreen() {
         if (LoadingScreen.loadingBar != null && LoadingScreen.loadingText != null) {
-            let progress = Math.floor((LoadingScreen.currCount / LoadingScreen.maxCount) * 100);
-            let progressStr = progress.toString() + "%";
-            LoadingScreen.loadingBar.style.width = progressStr;
-            LoadingScreen.loadingText.textContent = "Loading... " + progressStr;
+            let progressBarValue = 4 + ((LoadingScreen.currCount + 1) / LoadingScreen.maxCount) * LoadingScreen.loadPercentage
+                + (LoadingScreen.preLoadCount / LoadingScreen.preLoadMaxCount) * LoadingScreen.preLoadPercentage;
+            progressBarValue = Math.round(progressBarValue);
+            let progressTextValue = 4 + (LoadingScreen.currCount / LoadingScreen.maxCount) * LoadingScreen.loadPercentage
+                + (LoadingScreen.preLoadCount / LoadingScreen.preLoadMaxCount) * LoadingScreen.preLoadPercentage;
+            progressTextValue = Math.round(progressTextValue);
+            let progressBarStr = progressBarValue.toString() + "%";
+            let progressTextStr = progressTextValue.toString() + "%";
+            LoadingScreen.loadingBar.style.width = progressBarStr;
+            LoadingScreen.loadingText.textContent = "Loading... " + progressTextStr;
         }
     }
 }

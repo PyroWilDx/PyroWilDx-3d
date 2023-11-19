@@ -7,9 +7,12 @@ export class RotatingObject extends THREE.Mesh {
 
     constructor(geometry: THREE.BufferGeometry, 
             material: THREE.Material | THREE.Material[],
-            rSpeed: THREE.Vector3) {
+            rSpeed: THREE.Vector3, minSpeed: number = 0) {
         super(geometry, material);
         this.rSpeed = rSpeed;
+        if (this.rSpeed.x < minSpeed) rSpeed.x = minSpeed;
+        if (this.rSpeed.y < minSpeed) rSpeed.y = minSpeed;
+        if (this.rSpeed.z < minSpeed) rSpeed.z = minSpeed;
         
         let rRot = Utils.getRandomVector3(0, 2 * Math.PI);
         this.rotation.set(rRot.x, rRot.y, rRot.z);

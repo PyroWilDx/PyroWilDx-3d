@@ -64,7 +64,9 @@ galaxy.addMenuFlag(oregairuMenuFlag);
 LoadingScreen.updateCount();
 
 Utils.gltfLoader.load("res/3d/RobotUFO/scene.gltf", ( gltf ) => {
-	galaxy.setPlayer(new Player(gltf.scene, 0.01));
+	let player = new Player(gltf.scene, 0.01);
+	galaxy.setPlayer(player);
+	player.position.set(-600, 100, -600);
 	LoadingScreen.updateCount();
 });
 
@@ -251,17 +253,11 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	});
 
 	menuAbout.addEventListener("mouseover", function () {
-		let aboutSection = document.getElementById("aboutSection");
-		if (aboutSection != null) {
-			aboutSection.style.display = "";
-		}
+		Scene.aboutSectionTargetOpacity = 1;
 	});
 
 	menuAbout.addEventListener("mouseout", function () {
-		let aboutSection = document.getElementById("aboutSection");
-		if (aboutSection != null) {
-			aboutSection.style.display = "none";
-		}
+		Scene.aboutSectionTargetOpacity = 0;
 	});
 }
 
@@ -288,7 +284,7 @@ LoadingScreen.updateCount();
 while (LoadingScreen.currCount < LoadingScreen.maxCount) {
 	LoadingScreen.updateLoadingScreen();
 
-	await Utils.sleep(20);
+	await Utils.sleep(0);
 }
 
 let loadingScreen = document.getElementById("loadingScreen");
@@ -298,11 +294,21 @@ let socialIcons = document.getElementById("socialIcons");
 let menu = document.getElementById("menu");
 if (loadingScreen != null && bg != null && scrollToExplore != null &&
 		socialIcons != null && menu != null) {
-	loadingScreen.style.display = "none";
 	bg.style.display = "";
 	scrollToExplore.style.display = "";
 	socialIcons.style.display = "";
 	menu.style.display = "";
+	for (LoadingScreen.preLoadCount = 0;
+			LoadingScreen.preLoadCount < LoadingScreen.preLoadMaxCount;
+			LoadingScreen.preLoadCount++) {
+		Utils.updateDt();
+		galaxy.updateFrame();
+		Scene.updateFrame();
+		LoadingScreen.updateLoadingScreen();
+		await Utils.sleep(0);
+	}
+	Scene.camera.position.set(0, 2000, 0);
+	loadingScreen.style.display = "none";
 	document.documentElement.style.height = MainInit.htmlHeight;
 	window.scrollTo(0, 0);
 }

@@ -1,17 +1,5 @@
-WHEN HOVER OVER ONE OF THOSE CUBES, DISPLAY NAME DATE (SHORT DESC?);
-
 scale up blurry
 
 block zooming functions
 
-easter egg : cliquer sur la soucoupe pour commencer a la controler!
-IF TOO FAR AWAY, GO TO OVERVIEW
-
 BUTTON OR ESCAPE TO GO OUT OF PROJECT
-
-MUSIQUE OKLM ESPACE
-bouton son,
-
-minimum rotating speed
-
-path progress on a circle

@@ -18,7 +18,7 @@ Scene.initScene();
 
 // World Building
 let galaxy: Galaxy = Scene.galaxy;
-galaxy.addStars(400, "res/3d/MarioStar/scene.gltf");
+galaxy.addStars(200, "res/3d/MarioStar/scene.gltf");
 
 const menuFlagAddY = -200;
 
@@ -44,6 +44,27 @@ kqMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(kqMenuFlag);
 LoadingScreen.updateCount();
 
+let robotsPVZPlanet = new Planet("res/imgs/Sun.jpg", 40,
+	new THREE.Vector3(0, 0, -300), 10, "red");
+robotsPVZPlanet.addRing(2, 10, null, 0x00BFFF);
+robotsPVZPlanet.addRing(2, 10, null, 0xDC143C);
+let robotsPVZFlag = new Flag(106.6670, 60, 
+	"res/imgs/WIP.jpg", null,
+	1, 120, 0xFFFFFF, "ProjectRobotsPVZ", 0, 0,
+	null,
+	"res/imgs/Icon_C++.png",
+	"res/imgs/Icon_UnrealEngine.jpg",
+	"res/imgs/Icon_VisualStudio.png");
+robotsPVZPlanet.setFlag(robotsPVZFlag);
+galaxy.addPlanet(robotsPVZPlanet);
+let robotsPVZMenuFlag = robotsPVZFlag.cloneForMenu();
+robotsPVZMenuFlag.position.set(-300,
+	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 
+	100);
+robotsPVZMenuFlag.rotateX(-Math.PI / 2);
+galaxy.addMenuFlag(robotsPVZMenuFlag);
+LoadingScreen.updateCount();
+
 let oregairuPlanet = new Planet("res/imgs/Sun.jpg", 20,
 	new THREE.Vector3(-120, -100, -400), 10, "red");
 oregairuPlanet.addRing(1, 6, null, 0xFFFFFF);
@@ -61,6 +82,66 @@ oregairuMenuFlag.position.set(-260,
 	0);
 oregairuMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(oregairuMenuFlag);
+LoadingScreen.updateCount();
+
+let bleachPlanet = new Planet("res/imgs/Sun.jpg", 20,
+	new THREE.Vector3(0, 0, -500), 10, "red");
+bleachPlanet.addRing(1, 6, null, 0xFFFFFF);
+let bleachFlag = new Flag(90, 60,
+	null, "res/vids/Bleach.mp4",
+	1, 120, 0xFFFFFF, "ProjectBleach", 0, 0,
+	null,
+	"res/imgs/Icon_Python.png",
+	"res/imgs/Icon_PyGame.png",
+	"res/imgs/Icon_Pyzo.png",
+	"res/imgs/Icon_cxFreeze.png");
+bleachPlanet.setFlag(bleachFlag);
+galaxy.addPlanet(bleachPlanet);
+let bleachMenuFlag = bleachFlag.cloneForMenu();
+bleachMenuFlag.position.set(260,
+	Galaxy.getGalaxyModelViewY() + menuFlagAddY,
+	0);
+bleachMenuFlag.rotateX(-Math.PI / 2);
+galaxy.addMenuFlag(bleachMenuFlag);
+LoadingScreen.updateCount();
+
+let igPlanet = new Planet("res/imgs/Sun.jpg", 20,
+	new THREE.Vector3(0, 0, -600), 10, "red");
+igPlanet.addRing(1, 6, null, 0xFFFFFF);
+let igFlag = new Flag(90, 60,
+	"res/imgs/IGPuzzle.png", null,
+	1, 120, 0xFFFFFF, "ProjectENSIMAG_ProjetIG", 0, 0,
+	null,
+	"res/imgs/Icon_CLanguage.png",
+	"res/imgs/Icon_CLion.png");
+igPlanet.setFlag(igFlag);
+galaxy.addPlanet(igPlanet);
+let igMenuFlag = igFlag.cloneForMenu();
+igMenuFlag.position.set(260,
+	Galaxy.getGalaxyModelViewY() + menuFlagAddY,
+	100);
+igMenuFlag.rotateX(-Math.PI / 2);
+galaxy.addMenuFlag(igMenuFlag);
+LoadingScreen.updateCount();
+
+let fftPlanet = new Planet("res/imgs/Sun.jpg", 20,
+	new THREE.Vector3(0, 0, -700), 10, "red");
+fftPlanet.addRing(1, 6, null, 0xFFFFFF);
+let fftFlag = new Flag(90, 60,
+	"res/imgs/FFT.jpg", null,
+	1, 120, 0xFFFFFF, "ProjectUPMC_FFT", 0, 0,
+	null,
+	"res/imgs/Icon_CLanguage.png",
+	"res/imgs/Icon_AVX2.png",
+	"res/imgs/Icon_VSCode.png");
+fftPlanet.setFlag(fftFlag);
+galaxy.addPlanet(fftPlanet);
+let fftMenuFlag = fftFlag.cloneForMenu();
+fftMenuFlag.position.set(260,
+	Galaxy.getGalaxyModelViewY() + menuFlagAddY,
+	-100);
+fftMenuFlag.rotateX(-Math.PI / 2);
+galaxy.addMenuFlag(fftMenuFlag);
 LoadingScreen.updateCount();
 
 Utils.gltfLoader.load("res/3d/RobotUFO/scene.gltf", ( gltf ) => {
@@ -212,6 +293,9 @@ window.addEventListener("keydown", (event) => {
 	Utils.updateKeyMap(key, true);
 
 	if (key == "Escape") {
+		if (Scene.isCameraLerping() && !Scene.cameraFollowingObj) {
+			Scene.removeCameraLerp();
+		}
 		Scene.removeProjectDisplayer();
 	}
 });
@@ -271,9 +355,13 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	});
 
 	menuAbout.addEventListener("mouseover", () => {
-		if (!Scene.isDisplayingProject() &&
-			(!Scene.isCameraLerping() || Scene.cameraFollowingObj) &&
-				Scene.aboutSection != null) {
+		if ((Scene.currentMenu == 0 && 
+				!Scene.isDisplayingProject() &&
+				(!Scene.isCameraLerping() || Scene.cameraFollowingObj) &&
+				Scene.aboutSection != null) ||
+			(Scene.currentMenu == 1 &&
+				!Scene.isDisplayingProject() &&
+				Scene.aboutSection != null)) {
 			Scene.aboutSection.style.position = "absolute";
 			Scene.aboutSection.style.top = "8px";
 			Scene.aboutSectionTargetOpacity = 1;
@@ -299,6 +387,8 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	});
 
 	menuAbout.addEventListener("click", () => {
+		if (Scene.aboutSectionTargetOpacity == 1) return;
+		 
 		Scene.removeProjectDisplayer(false);
 		if (Scene.isCameraLerping() && !Scene.cameraFollowingObj) {
 			Scene.removeCameraLerp();
@@ -366,6 +456,7 @@ if (loadingScreen != null && bg != null && scrollToExplore != null &&
 }
 
 let music = new Audio("res/sfx/NimbleAsLightning.ogg");
+music.loop = true;
 music.play().then(() => {
 	Scene.isPlayingSound = true;
 }).catch(() => {

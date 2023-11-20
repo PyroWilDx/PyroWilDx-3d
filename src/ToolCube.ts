@@ -45,12 +45,21 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
     initLink(imgPath: string) {
         if (!imgPath.includes("Icon")) return;
 
-        if (imgPath.includes("C++")) this.link = "https://isocpp.org/";
-        else if (imgPath.includes("Java")) this.link = "https://www.java.com/fr/";
+        if (imgPath.includes("CLanguage")) this.link = "https://www.open-std.org/jtc1/sc22/wg14/";
+        else if (imgPath.includes("C++")) this.link = "https://isocpp.org/";
+        else if (imgPath.includes("Java")) this.link = "https://www.java.com/";
+        else if (imgPath.includes("Python")) this.link = "https://www.python.org/";
+        else if (imgPath.includes("UnrealEngine")) this.link = "https://www.unrealengine.com/";
         else if (imgPath.includes("SDL2")) this.link = "https://www.libsdl.org/";
         else if (imgPath.includes("Boost")) this.link = "https://www.boost.org/";
-        else if (imgPath.includes("CLion")) this.link = "https://www.jetbrains.com/fr-fr/clion/";
+        else if (imgPath.includes("AVX2")) this.link = "https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#techs=AVX_ALL";
+        else if (imgPath.includes("PyGame")) this.link = "https://www.pygame.org/";
+        else if (imgPath.includes("cxFreeze")) this.link = "https://cx-freeze.readthedocs.io/";
+        else if (imgPath.includes("CLion")) this.link = "https://www.jetbrains.com/clion/";
         else if (imgPath.includes("AndroidStudio")) this.link = "https://developer.android.com/studio";
+        else if (imgPath.includes("VisualStudio")) this.link = "https://visualstudio.microsoft.com/";
+        else if (imgPath.includes("VSCode")) this.link = "https://code.visualstudio.com/";
+        else if (imgPath.includes("Pyzo")) this.link = "https://pyzo.org/";
     }
 
     getObject(): THREE.Object3D {

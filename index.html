@@ -15,6 +15,7 @@
         <div id="loadingBar" class="loading-value"></div>
       </div>
       <div id="loadingText" class="loading-text">Loading... 0%</div>
+      <div class="loading-notice">This website is made for Desktop.</div>
     </div>
     
     <canvas id="bg" style="display: none;"></canvas>
@@ -48,7 +49,7 @@
       <!-- Project Template
       <section id="ProjectId" style="display: none;">
         <div class="el-center">
-          <h2>Project Title</h2>
+          <h2 id="ProjectIdTitle">Project Title</h2>
           
           <div class="el-center-button">
             <a href="" class="button-link" target="_blank">
@@ -60,7 +61,8 @@
           </div>
 
           <div class="el-center">
-            <img class="src-img-vertical" id="ProjectIdImg" style="width: ??%" src="ProjectImage">
+            <img class="src-img-vertical" id="ProjectIdImg"
+                style="width: ??%" src="ProjectImage">
             
             <video class="src-img-horizontal" id="ProjectIdImg" style="width: ??%" autoplay loop muted>
               <source src="ProjectVideo" type="video/mp4">
@@ -69,7 +71,7 @@
         </div>
 
         <p class="p-padding-small">
-          <i>Year</i> : <b>??</b> &ndash; <b>??</b>.
+          <i>Year</i> : <span id="ProjectIdYear"><b>??</b> &ndash; <b>??</b></span>.
         </p>
 
         <p class="p-padding-small">
@@ -107,7 +109,7 @@
         </div>
 
         <p class="p-padding-small">
-          <i>Year</i> : <span id="ProjectKeqingYear"><b>2023</b> &ndash; <b>Now</b></span>.
+          <i>Year</i> : <span id="ProjectKeqingYear"><b>June 2023</b> &ndash; <b>Now</b></span>.
         </p>
 
         <p class="p-padding-small">
@@ -130,6 +132,40 @@
           Right now, I'm working on the actual Gameplay of the game using this Game Engine.
         </p>
       </section>
+
+      <!-- Project RobotsPVZ -->
+      <section id="ProjectRobotsPVZ" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectRobotsPVZTitle">RobotsPVZ</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/RobotsPVZ" class="button-link" target="_blank">
+              Source Code
+            </a>
+          </div>
+          <img class="src-img-horizontal" id="ProjectRobotsPVZImg"
+              style="width: 80%" src="res/imgs/WIP.jpg">
+            <!-- <video class="src-img-horizontal" id="ProjectRobotsPVZImg" style="width: 80%" autoplay loop muted>
+              <source src="ProjectVideo" type="video/mp4">
+            </video> -->
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectRobotsPVZYear"><b>October 2023</b> &ndash; <b>Now</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C++</b>.<br>
+          <i>Game Engine</i> : <b>Unreal Engine 5.3</b>.<br>
+          <i>Code Editor</i> : <b>Visual Studio 2022</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          Work in Progress...
+        </p>
+      </section>
+     
 
       <!-- Project Oregairu -->
       <section id="ProjectOregairu" style="display: none;">
@@ -163,7 +199,7 @@
 
         <p class="p-padding-mid">
           <span class="tabulation"></span>
-          This project is an Android application inspired by the animé Oregairu.
+          This project is an Android application inspired by the Oregairu series.
         </p>
         <p class="p-padding-mid">
           <span class="tabulation"></span>
@@ -171,6 +207,151 @@
           a music player, a book reader, or a mini-game inspired by the popular 
           <a class="text-link" href="https://play.google.com/store/apps/details?id=com.VizegrafIndie.Tuturu&hl=ln" target="_blank">Tuturu</a> 
           application found on the Google Play Store.
+        </p>
+        <div class="el-center-img">
+          <img src="res/imgs/OregairuMP.png" style="width: 38%; padding-right: 2%;">
+          <img src="res/imgs/OregairuTuturu.png" style="width: 38%; padding-left: 2%;">
+        </div>
+      </section>
+
+      <!-- Project Bleach -->
+      <section id="ProjectBleach" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectBleachTitle">Bleach Mini-Games</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/Mini-Jeux_Bleach" class="button-link" target="_blank">
+              Source Code
+            </a>
+            <a href="https://www.mediafire.com/file/27hmef479qztqk4/Bleach.msi/file" class="button-link" target="_blank">
+              Download
+            </a>
+          </div>
+
+          <div class="el-center">            
+            <video class="src-img-horizontal" id="ProjectBleachImg" style="width: 80%" autoplay loop muted>
+              <source src="res/vids/Bleach.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectBleachYear"><b>2018</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>Python</b>.<br>
+          <i>Library</i> : <b>PyGame</b>, <b>cx_Freeze</b>.<br>
+          <i>Code Editor</i> : <b>Pyzo</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This is my first-ever personal project, where it all started. This project features mini-games about the Bleach series.
+          The mini-games include an obstacle-dodging game, a song blind-test game with tunes from Bleach, 
+          and a gacha simulator for summoning characters from the Bleach universe.
+        </p>
+        <div class="el-center-img">
+          <img src="res/imgs/BleachMenu.png" style="width: 80%;">
+        </div>
+      </section>
+     
+      <!-- Project ENSIMAG_ProjetIG -->
+      <section id="ProjectENSIMAG_ProjetIG" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectENSIMAG_ProjetIGTitle">Graphic Interaction</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/ENSIMAG_ProjetIG" class="button-link" target="_blank">
+              Source Code
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-horizontal" id="ProjectENSIMAG_ProjetIGImg"
+                style="width: 80%" src="res/imgs/IGPuzzle.png">
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectENSIMAG_ProjetIGYear"><b>May 2023</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C</b>.<br>
+          <i>Code Editor</i> : <b>CLion</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          This project was carried out as a team of 3 with Antoine Borget and 
+          Frédéric Vaquer during my first year at ENSIMAG.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project is a library that helps programmers in creating and managing 
+          widgets (windows, buttons, text inputs...) on the screen. It also helps  
+          them in handling user events with these elements.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          To draw these widgets on the screen, we've implemented our version of 
+          the "Scanline" algorithm to efficiently draw polygons. Furthermore, we've
+          used profiling to optimize our code.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Here are some examples of applications a programmer can quickly create
+          using our library :
+        </p>
+        <div class="el-center-img">
+          <img src="res/imgs/IG2048.png" style="width: 46%; padding-right: 1%;">
+          <img src="res/imgs/IGPuzzle.png" style="width: 46%; padding-left: 1%;">
+        </div>
+      </section>
+     
+      <!-- Project UPMC_FFT -->
+      <section id="ProjectUPMC_FFT" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectUPMC_FFTTitle">Fast Fourier Transform</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/UPMC_FFT" class="button-link" target="_blank">
+              Source Code
+            </a>
+            <a href="res/download/FFTRapport.pdf" download="FFT_Rapport.pdf" class="button-link">
+              Project Report
+            </a>
+            <a href="res/download/FFTSoutenance.pdf" download="FFT_Soutenance.pdf" class="button-link">
+              Project Slides
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-horizontal" id="ProjectUPMC_FFTImg"
+                style="width: 80%" src="res/imgs/FFT.jpg">
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectUPMC_FFTYear"><b>January 2022</b> &ndash; <b>July 2022</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C</b>.<br>
+          <i>Vectorization Extension</i> : <b>AVX2</b>.<br>
+          <i>Code Editor</i> : <b>VSCode</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          This project was carried out as a team of 2 with Enzo Roaldes 
+          during my second year at Sorbonne Université.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project is an HPC (High Performance Computing) implementation of
+          the FFT (Fast Fourier Transform) algorithm to efficiently multiply two
+          polynoms in the Z/pZ ring. To further optimize this algorithm we've used 
+          vectorization (AVX2).
         </p>
       </section>
 
@@ -206,7 +387,11 @@
           with fellow enthusiasts.
         </p>
         <p class="p-padding-mid">
-          Feel free to contact me, let's bring our ideas to life together !
+          Feel free to contact me, let's bring our ideas to life together!
+        </p>
+
+        <p class="p-padding-mid" style="font-size: smaller;">
+          (You can find my contacts at the bottom right of the screen.)
         </p>
       </section>
     </main>
@@ -231,7 +416,7 @@
           <path fill="white" d="M2,298.4q67.05-63,134-126c15.9-14.9,31.7-29.8,47.6-44.8q-40.5-26.25-81.1-52.4Q52.55,43,2.5,10.6A20.1,20.1,0,0,0,0,20.4V297.7c0,.8.1,1.6.1,2.3A14.62,14.62,0,0,0,2,298.4Z"></path>
         </svg>
       </a>
-      <a href="CV.pdf" download="CV.pdf">
+      <a href="res/download/CV.pdf" download="CV.pdf">
         <img src="res/imgs/LinkIcon_CV.png">
       </a>
     </div>

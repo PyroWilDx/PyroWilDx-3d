@@ -203,7 +203,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     }
 
     onLookInterruption(): void {
-        this.glowEffect(false);
+        this.glowEffect(false, true);
     }
 
     displayProject(): void {
@@ -305,7 +305,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     }
 
     onClick(): void {
-        if (Scene.getProjectDisplayer() != this) {
+        if (Scene.getCameraLerpObject() != this &&
+                Scene.getProjectDisplayer() != this) {
             Scene.removeProjectDisplayer();
 
             if (Scene.currentMenu == 0) {
@@ -334,23 +335,25 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     }
 
     updateFrame(): void {
-        let vPositions = this.geometry.attributes.position;
+        if (Scene.camera.position.distanceTo(this.position) < 400) {
+            let vPositions = this.geometry.attributes.position;
 
-        for (let i = 0; i < vPositions.count; i++) {
-            const x = vPositions.getX(i);
-            const y = vPositions.getY(i);
-            const t = Utils.getElapsedTime();
+            for (let i = 0; i < vPositions.count; i++) {
+                const x = vPositions.getX(i);
+                const y = vPositions.getY(i);
+                const t = Utils.getElapsedTime();
 
-            const waveX1 = this.AX1 * Math.sin(x * this.DX1 + t * 3.02);
-            const waveX2 = this.AX2 * Math.sin(x * this.DX2 + t * 2);
-            const waveY1 = this.AY1 * Math.sin(y * this.DY1 + t * 0.52);
-            const waveY2 = this.AY2 * Math.sin(y * this.DY2 + t * 0.36);
-            const ig = (x + this.halfFlagW) / this.flagW;
-            
-            vPositions.setZ(i, (waveX1 + waveX2 + waveY1 + waveY2) * ig);
+                const waveX1 = this.AX1 * Math.sin(x * this.DX1 + t * 3.02);
+                const waveX2 = this.AX2 * Math.sin(x * this.DX2 + t * 2);
+                const waveY1 = this.AY1 * Math.sin(y * this.DY1 + t * 0.52);
+                const waveY2 = this.AY2 * Math.sin(y * this.DY2 + t * 0.36);
+                const ig = (x + this.halfFlagW) / this.flagW;
+                
+                vPositions.setZ(i, (waveX1 + waveX2 + waveY1 + waveY2) * ig);
+            }
+
+            this.geometry.attributes.position.needsUpdate = true;
         }
-
-        this.geometry.attributes.position.needsUpdate = true;
 
         this.updateVideo();
     }

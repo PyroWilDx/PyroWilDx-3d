@@ -223,7 +223,13 @@ export class Scene {
     }
 
     static removeCameraLerp(): void {
+        let lastLookObject = Scene.getCameraLerpObject();
+
         Scene.cameraLerp = null;
+    
+        if (lastLookObject != null) {
+            lastLookObject.onLookInterruption();
+        }
     }
 
     static isCameraLerping(): boolean {

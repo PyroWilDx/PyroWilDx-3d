@@ -173,6 +173,15 @@
     font-weight: bold;
 }
 
+.loading-notice {
+    position: absolute;
+    bottom: 6%;
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+}
+
 #bg {
     position: fixed;
     top: 0;
@@ -202,6 +211,7 @@
 }
 
 .social-icons {
+    user-select: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -237,6 +247,7 @@
 }
 
 #aboutSection {
+    user-select: none;
     position: absolute;
     display: flex;
     margin-bottom: var(--spacing);
@@ -280,12 +291,14 @@ h2 {
 }
 
 img {
+    user-select: none;
     width: 100%;
     max-width: 100%;
     height: auto;
 }
 
 video {
+    user-select: none;
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -354,6 +367,11 @@ p {
   
 .button-link:hover {
     background-color: #0056a9;
+}
+
+.el-center-img {
+    user-select: none;
+    text-align: center;
 }
 
 .el-center {

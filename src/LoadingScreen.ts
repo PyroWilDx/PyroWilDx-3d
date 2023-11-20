@@ -3,7 +3,7 @@ export class LoadingScreen {
     public static preLoadPercentage: number = 48;
 
     public static readonly maxCount: number = 8;
-    public static readonly preLoadMaxCount: number = 100;
+    public static readonly preLoadMaxCount: number = 1;
     public static currCount: number = 0;
     public static preLoadCount: number = 0;
 

@@ -5,7 +5,7 @@ export interface ProjectDisplayerInterface {
 }
 
 export interface ProjectDisplayer {
-    displayer: ProjectDisplayerInterface;
+    displayer: ProjectDisplayerInterface | null;
     displayed: HTMLElement;
     startTime: number;
 }

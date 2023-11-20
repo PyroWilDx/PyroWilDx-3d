@@ -88,6 +88,8 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('mousedown', (event) => {
+	if (!loaded) return;
+
 	if (event.button === 0) {
 		if (Utils.mousePosition.x > 1 - Utils.getScrollbarWidth()) return;
 
@@ -106,6 +108,8 @@ window.addEventListener('mousedown', (event) => {
 });
   
 window.addEventListener('mouseup', (event) => {
+	if (!loaded) return;
+
 	if (event.button === 0 ) {
 		if (Utils.mousePosition.x > 1 - ((Utils.getScrollbarWidth() / window.innerWidth) * 2)) return;
 
@@ -126,6 +130,8 @@ window.addEventListener('mouseup', (event) => {
 });
 
 window.addEventListener('mousemove', (event) => {
+	if (!loaded) return;
+	
 	Utils.updateMousePosition(event);
 });
 
@@ -137,21 +143,23 @@ window.addEventListener("wheel", (event) => {
 
 	Utils.mouseWheel = true;
 
-	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject()) {
+	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject() &&
+			!(Scene.aboutSectionTargetOpacity == 1)) {
 		event.preventDefault();
 	}
 
-	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
-		if (!Utils.scrolled) {
+	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj &&
+			!(Scene.aboutSectionTargetOpacity == 1)) {
+		let forward = event.deltaY >= 0;
+		MainInit.moveForward(forward);
+
+		if (!Utils.scrolled && MainInit.i != 0) {
 			let scrollToExplore = document.getElementById("scrollToExplore");
 			if (scrollToExplore != null) {
 				Scene.scrollToExploreFadeOut();
 			}
 			Utils.scrolled = true;
 		}
-		
-		let forward = event.deltaY >= 0;
-		MainInit.moveForward(forward);
 	}
 }, {passive: false});
 
@@ -163,19 +171,13 @@ window.addEventListener("scroll", (event) => {
 
 	if (Utils.mouseWheel) return;
 
-	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject()) {
+	if (Scene.currentMenu == 0 && !Scene.isDisplayingProject() &&
+			!(Scene.aboutSectionTargetOpacity == 1)) {
 		event.preventDefault();
 	}
 
-	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj) {
-		if (!Utils.scrolled) {
-			let scrollToExplore = document.getElementById("scrollToExplore");
-			if (scrollToExplore != null) {
-				Scene.scrollToExploreFadeOut();
-			}
-			Utils.scrolled = true;
-		}
-
+	if (Scene.currentMenu == 0 && Scene.cameraFollowingObj &&
+			!(Scene.aboutSectionTargetOpacity == 1)) {
 		const currentScrollHeight = document.documentElement.scrollTop;
 		let i = (currentScrollHeight / MainInit.scrollHeight) * MainInit.scrollLengthAdv;
 		i = Math.round(i / MainInit.scrollLengthAdv) * MainInit.scrollLengthAdv;
@@ -185,6 +187,15 @@ window.addEventListener("scroll", (event) => {
 		} else {
 			MainInit.i = i + MainInit.scrollLengthAdv;
 			MainInit.moveForward(false);
+		}
+
+		if (!Utils.scrolled && MainInit.i != 0) {
+			console.log(MainInit.i, MainInit.scrollLengthAdv)
+			let scrollToExplore = document.getElementById("scrollToExplore");
+			if (scrollToExplore != null) {
+				Scene.scrollToExploreFadeOut();
+			}
+			Utils.scrolled = true;
 		}
 	}
 }, {passive: false});
@@ -260,11 +271,45 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	});
 
 	menuAbout.addEventListener("mouseover", () => {
-		Scene.aboutSectionTargetOpacity = 1;
+		if (!Scene.isDisplayingProject() &&
+			(!Scene.isCameraLerping() || Scene.cameraFollowingObj) &&
+				Scene.aboutSection != null) {
+			Scene.aboutSection.style.position = "absolute";
+			Scene.aboutSection.style.top = "8px";
+			Scene.aboutSectionTargetOpacity = 1;
+			document.documentElement.style.height = "100%";
+            window.scrollTo(0, 0);
+		}
 	});
 
 	menuAbout.addEventListener("mouseout", () => {
+		if (Scene.aboutSection != null) {
+			let top = -window.scrollY + 8;
+			Scene.aboutSection.style.position = "fixed";
+			Scene.aboutSection.style.top = top + "px";
+		}
 		Scene.aboutSectionTargetOpacity = 0;
+		if (!Scene.isDisplayingProject() && Scene.currentMenu == 0) {
+			document.documentElement.style.height = MainInit.htmlHeight;
+			window.scrollTo({
+				top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
+				behavior: 'auto'
+			});
+		}
+	});
+
+	menuAbout.addEventListener("click", () => {
+		Scene.removeProjectDisplayer(false);
+		if (Scene.isCameraLerping() && !Scene.cameraFollowingObj) {
+			Scene.removeCameraLerp();
+		}
+		if (Scene.aboutSection != null) {
+			Scene.aboutSection.style.position = "absolute";
+			Scene.aboutSection.style.top = "8px";
+			Scene.aboutSectionTargetOpacity = 1;
+			document.documentElement.style.height = "100%";
+			window.scrollTo(0, 0);
+		}
 	});
 }
 

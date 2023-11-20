@@ -1,3 +1,20 @@
+.tabulation {
+    margin-left: 2em;
+}
+
+.text-link {
+    color: #6cc2ff;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+.text-link:visited {
+    color: #6cc2ff;
+}
+
 .text-center {
     user-select: none;
     pointer-events: none;
@@ -212,7 +229,7 @@
 
 :root {
     --dark-bg: rgba(42, 42, 42, 0.92);
-    --spacing: 360px;
+    --spacing: 30%;
   
     font-family: brandon-grotesque, sans-serif;
     font-weight: 400;
@@ -220,18 +237,17 @@
 }
 
 #aboutSection {
-    position: fixed;
+    position: absolute;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+    margin-bottom: var(--spacing);
+    /* height: 100vh; */
+}
 
 #aboutSectionContent {
     padding: 1rem;
     font-size: 1.26rem;
     line-height: 1.4;
-    margin-bottom: 0;
+    margin-bottom: var(--spacing);
     justify-content: center;
     align-items: center;
     width: 56%;
@@ -279,6 +295,21 @@ p {
     text-align: justify;
 }
 
+.p-padding-small {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.p-padding-mid {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.p-padding-big {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
 .close-button {
     position: fixed;
     top: 16px;
@@ -306,6 +337,7 @@ p {
 }
 
 .button-link {
+    user-select: none;
     display: inline-block;
     padding: 6px 20px;
     background-color: #0074d9;
@@ -336,6 +368,11 @@ p {
 .el-center .src-img-horizontal {
     height: auto;
     margin: 8 auto;
+}
+
+.el-center-button {
+    user-select: none;
+    text-align: center;
 }
 
 .progress {

@@ -237,8 +237,10 @@ export class Scene {
         return null;
     }
 
-    static setProjectDisplayer(displayer: ProjectDisplayerInterface,
+    static setProjectDisplayer(displayer: ProjectDisplayerInterface | null,
             displayed: HTMLElement): void {
+        Scene.aboutSectionTargetOpacity = 0;
+
         document.documentElement.style.height = "100%";
         window.scrollTo(0, 0);
 
@@ -250,9 +252,8 @@ export class Scene {
             closeButton.style.display = "";
         }
 
-        if (Scene.isDisplayingProject()) {
-            Scene.removeProjectDisplayer();
-        }
+        Scene.removeProjectDisplayer();
+
         let startTime = Utils.getTime();
         Scene.projectDisplayer = {displayer, displayed, startTime};
     }
@@ -268,7 +269,7 @@ export class Scene {
         return null;
     }
 
-    static removeProjectDisplayer(): void {
+    static removeProjectDisplayer(scroll: boolean = true): void {
         if (Scene.isDisplayingProject()) {
             // @ts-ignore
             Scene.projectDisplayer.displayed.style.display = "none";
@@ -282,19 +283,23 @@ export class Scene {
 
             Scene.projectDisplayer = null;
 
-            displayer.onProjectHideDisplay();
-        }
-
-        if (Scene.currentMenu == 0) {
-            document.documentElement.style.height = MainInit.htmlHeight;
-            window.scrollTo({
-                top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
-                behavior: 'auto'
-            });
-        }
-        if (Scene.currentMenu == 1) {
-            document.documentElement.style.height = "100%";
-            window.scrollTo(0, 0);
+            if (displayer != null) {
+                displayer.onProjectHideDisplay();
+            }
+        
+            if (scroll) {
+                if (Scene.currentMenu == 0) {
+                    document.documentElement.style.height = MainInit.htmlHeight;
+                    window.scrollTo({
+                        top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
+                        behavior: 'auto'
+                    });
+                }
+                if (Scene.currentMenu == 1) {
+                    document.documentElement.style.height = "100%";
+                    window.scrollTo(0, 0);
+                }
+            }
         }
     }
 
@@ -389,6 +394,9 @@ export class Scene {
             }
             if (Scene.aboutSectionTargetOpacity > 0) {
                 Scene.aboutSection.style.display = "";
+            }
+            if (Scene.isDisplayingProject()) {
+                Scene.aboutSection.style.display = "none";
             }
         }
 

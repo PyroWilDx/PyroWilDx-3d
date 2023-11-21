@@ -17,6 +17,9 @@ import { Utils } from './Utils';
 export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLookedInterface, 
         ProjectDisplayerInterface, ClickableInterface {
     public static readonly flagLerpDistance: number = 40;
+
+    private static titleHolder: Flag | null = null;
+
     private flagVidTexture: THREE.VideoTexture | null;
 
     private flagW: number;
@@ -167,8 +170,9 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                         projectOverviewYear.textContent = yearEl.textContent;
                     }
                 }
+                Flag.titleHolder = this;
                 // @ts-ignore
-                this.material.opacity = 0.4;
+                this.material.opacity = 1;
             }
         }
 
@@ -180,7 +184,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         // @ts-ignore
         this.material.opacity = 1;
 
-        if (this.centeredText != null) {
+        if (Flag.titleHolder == this && this.centeredText != null) {
             this.centeredText.style.opacity = "";
             this.centeredText.style.transform = "";
         }
@@ -216,7 +220,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             let addY = -1.4 * ToolCube.cubeSize / Scene.getScreenSizeRatio();
             let addZ = 0;
             currCubePosition.x -= addX;
-            currCubePosition.y -= addY * Math.ceil(this.toolCubes.length / 2) + 6;
+            currCubePosition.y -= addY * (this.toolCubes.length / 2.) + 6;
             if (Scene.currentMenu == 1) {
                 addZ = addY;
                 addY = 0;
@@ -225,7 +229,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 currCubePosition.y = Galaxy.getGalaxyModelViewY();
                 currCubePosition.y -= Math.min(this.flagW, this.flagH) / Scene.getScreenSizeRatio();
                 currCubePosition.z = 0;
-                currCubePosition.z += addZ * Math.ceil(this.toolCubes.length / 2) + 6;
+                currCubePosition.z += addZ * (this.toolCubes.length / 2.) + 6;
             }
             for (let i = 0; i < this.toolCubes.length; i++) {
                 this.toolCubes[i].setPosition(currCubePosition, i % 2 == 0);
@@ -312,7 +316,9 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             if (Scene.currentMenu == 0) {
                 let finalPosition = this.position.clone();
                 let lookPosition = finalPosition.clone();
-                finalPosition.z += Math.min(this.flagW, this.flagH) / Scene.getScreenSizeRatio();
+                let addZ = Math.min(this.flagW, this.flagH) / Scene.getScreenSizeRatio();
+                if (this.rotation.y != 0) addZ = -addZ;
+                finalPosition.z += addZ;
 
                 finalPosition.x += this.xZoomShift;
                 lookPosition.x += this.xZoomShift;
@@ -349,7 +355,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 const waveY2 = this.AY2 * Math.sin(y * this.DY2 + t * 0.36);
                 const ig = (x + this.halfFlagW) / this.flagW;
                 
-                vPositions.setZ(i, (waveX1 + waveX2 + waveY1 + waveY2) * ig);
+                let setI = (this.rotation.y == 0) ? i : vPositions.count - i - 1;
+                vPositions.setZ(setI, (waveX1 + waveX2 + waveY1 + waveY2) * ig);
             }
 
             this.geometry.attributes.position.needsUpdate = true;

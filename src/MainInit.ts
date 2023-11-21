@@ -6,12 +6,21 @@ import { Utils } from './Utils';
 export class MainInit {
 
     private static readonly curvePoints: number[] = [
-        0, 0, 0,
-        -300, 0, -500,
-        -300, 0, -400,
-        -200, -40, -200,
-        0, 0, 0,
+        600, 200, 300,
+        460, 200, 160,
+        400, 100, 60,
+        300, 100, -160,
+        400, 60, -400,
+        340, 60, -510,
+        130, 200, -560,
+        -100, 200, -300,
+        -200, 260, 0,
+        400, 200, 560,
+        780, 200, 480,
+        600, 200, 300,
     ];
+    
+    // private static readonly curvePoints: number[] = [];
 
     public static readonly ls: number = 1400;
     public static readonly lss: number = MainInit.ls + 1;
@@ -25,6 +34,20 @@ export class MainInit {
     public static target: CameraFollowObject = new CameraFollowObject();
 
     static initRoad() {
+        // let n = 64;
+        // let r = 200;
+        // for (let i = 0; i < n; i++) {
+        //     let theta = (2 * Math.PI * i) / n;
+        //     let x = r * Math.cos(theta);
+        //     let z = r * Math.sin(theta);
+        //     let y = 0;
+        //     if (i < n / 2) y = i;
+        //     else y = n - i;
+        //     MainInit.curvePoints.push(x, y, z);
+        // }
+        // MainInit.curvePoints.push(MainInit.curvePoints[0],
+        //     MainInit.curvePoints[1], MainInit.curvePoints[2]);
+        
         const pts = [];    
         for (let i = 0; i < MainInit.curvePoints.length; i += 3) {
             pts.push(new THREE.Vector3(MainInit.curvePoints[i], 
@@ -169,7 +192,7 @@ export class MainInit {
 
     private static M3 = new THREE.Matrix3();
     private static M4 = new THREE.Matrix4();
-    public static readonly scrollLengthAdv: number = 20;
+    public static readonly scrollLengthAdv: number = 10;
     public static i = -MainInit.scrollLengthAdv;
     public static forward: boolean = false;
     public static doneOneRound: boolean = false;

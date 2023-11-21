@@ -1,3 +1,11 @@
 scale up blurry
 
 block zooming functions
+
+change planets textures.
+add scroll button in overview and handle wheel.
+add primogems stars, and maybe other type of stars.
+lower camera distance to not see galaxy when going up on the road, or
+at least find another way.
+
+Optimize parce que ca bug fort quand meme la

@@ -172,7 +172,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 }
                 Flag.titleHolder = this;
                 // @ts-ignore
-                this.material.opacity = 1;
+                this.material.opacity = 0.4;
             }
         }
 
@@ -180,13 +180,21 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     }
 
     onRayCastLeave(): void {
-        this.glowEffect(false);
-        // @ts-ignore
-        this.material.opacity = 1;
+        if (Scene.currentMenu == 0) {
+            this.glowEffect(false);
+        }
 
-        if (Flag.titleHolder == this && this.centeredText != null) {
-            this.centeredText.style.opacity = "";
-            this.centeredText.style.transform = "";
+        if (Scene.currentMenu == 1) {
+            // @ts-ignore
+            this.material.opacity = 1;
+
+            if (Flag.titleHolder == this && this.centeredText != null) {
+                this.glowEffect(false);
+                this.centeredText.style.opacity = "";
+                this.centeredText.style.transform = "";
+            } else {
+                this.glowEffect(false, false, false);
+            }
         }
     }
 
@@ -269,7 +277,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         }
     }
 
-    glowEffect(start: boolean, force: boolean = false): void {
+    glowEffect(start: boolean, force: boolean = false, rmPointer: boolean = true): void {
         if (start) {
             if (Scene.getCameraLerpObject() != this &&
                     Scene.getProjectDisplayer() != this) {
@@ -286,7 +294,9 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 // Utils.removeEmissiveMesh(this);
                 // Scene.removeEntity(this.flagGlowLight);
                 Scene.removeEntity(this.flagGlowMesh);
-                document.body.style.cursor = "auto";
+                if (rmPointer) {
+                    document.body.style.cursor = "auto";
+                }
             }
         }
     }

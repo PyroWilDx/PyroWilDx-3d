@@ -29,6 +29,12 @@ export class Galaxy {
 
     private rayCastedObjects: RayCastableInterface[];
 
+    private currMenuFlagZShifts: number;
+
+    public static readonly zShiftScrollLength: number = 10; 
+    public static readonly buttonUp: HTMLElement | null = document.getElementById("buttonUp");
+    public static readonly buttonDown: HTMLElement | null = document.getElementById("buttonDown");
+
     constructor(radius: number) {
         this.radius = radius;
 
@@ -45,6 +51,8 @@ export class Galaxy {
         this.currObj = null;
     
         this.rayCastedObjects = [];
+    
+        this.currMenuFlagZShifts = 0;
     }
 
     addBackgroundImg(backgroundPath: string) {
@@ -60,6 +68,20 @@ export class Galaxy {
 
     static getGalaxyModelViewY(): number {
         return Galaxy.galaxyModelY + Galaxy.galaxyModelScale + 1600;
+    }
+
+    static showButtonUpDown(show: boolean) {
+        if (Galaxy.buttonUp != null && Galaxy.buttonDown != null) {
+            if (show) {
+                Galaxy.buttonUp.style.display = "";
+                Galaxy.buttonDown.style.display = "";
+                Galaxy.buttonUp.style.opacity = "0";
+                Galaxy.buttonDown.style.opacity = "0";
+            } else {
+                Galaxy.buttonUp.style.display = "none";
+                Galaxy.buttonDown.style.display = "none";
+            }
+        }
     }
 
     setGalaxyModel(galaxyModel: THREE.Group<THREE.Object3DEventMap>): void {
@@ -196,6 +218,16 @@ export class Galaxy {
         return false;
     }
 
+    zShiftMenuFlags(zShift: number) {
+        if (this.currMenuFlagZShifts + zShift < -70) return;
+        if (this.currMenuFlagZShifts + zShift > 0) return;
+
+        for (const currFlag of this.menuFlags) {
+            currFlag.position.z += zShift;
+        }
+        this.currMenuFlagZShifts += zShift;
+    }
+
     updateFrame(): void {
         this.rayCast();
         
@@ -216,6 +248,15 @@ export class Galaxy {
                 for (const currFlag of this.menuFlags) {
                     currFlag.updateVideo();
                 }
+            }
+
+            if (Galaxy.buttonUp != null && Galaxy.buttonDown != null) {
+                let max = 200.;
+                let curr = Scene.camera.position.y - (Galaxy.getGalaxyModelViewY() - max);
+                if (curr < 0) curr = 0;
+                let opacity = curr / max;
+                Galaxy.buttonUp.style.opacity = opacity.toString();
+                Galaxy.buttonDown.style.opacity = opacity.toString();
             }
         }
     }

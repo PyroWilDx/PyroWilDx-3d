@@ -117,12 +117,12 @@
 }
 
 #projectOverviewTitle {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: bold;
 }
 
 #projectOverviewYear {
-    font-size: 30px;
+    font-size: 26px;
 }
 
 .loading-screen {
@@ -241,7 +241,7 @@
     --dark-bg: rgba(42, 42, 42, 0.92);
     --spacing: 30%;
   
-    font-family: brandon-grotesque, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -433,4 +433,40 @@ p {
 
 .equalizer-line {
     transition: transform 0.1s ease-in-out;
+}
+
+.button-up,
+.button-down {
+    position: fixed;
+    left: calc(50% - 20px + 8px);
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.button-up {
+    top: 2.6%;
+}
+
+.button-down {
+    bottom: 2.6%;
+}
+
+.button-up:hover,
+.button-down:hover {
+    background-color: #2980b9;
+}
+
+.button-up::before {
+    content: '\2191';
+}
+
+.button-down::before {
+    content: '\2193';
 }

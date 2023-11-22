@@ -271,6 +271,15 @@ window.addEventListener("wheel", (event) => {
 			Utils.scrolled = true;
 		}
 	}
+
+	if (Scene.currentMenu == 1) {
+		if (event.deltaY < 0) {
+			galaxy.zShiftMenuFlags(Galaxy.zShiftScrollLength);
+		} else {
+			galaxy.zShiftMenuFlags(-Galaxy.zShiftScrollLength);
+		}
+	}
+
 }, {passive: false});
 
 window.addEventListener("scroll", (event) => {
@@ -348,6 +357,8 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 		
 		if (!Utils.scrolled) Scene.showScrollToExplore(true);
 
+		Galaxy.showButtonUpDown(false);
+
 		document.documentElement.style.height = MainInit.htmlHeight;
         window.scrollTo({
 			top: (MainInit.i / MainInit.scrollLengthAdv) * MainInit.scrollHeight,
@@ -367,6 +378,8 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 		Scene.setCurrentMenu(1);
 
 		if (!Utils.scrolled) Scene.showScrollToExplore(false);
+
+		Galaxy.showButtonUpDown(true);
 
 		document.documentElement.style.height = "100%";
         window.scrollTo(0, 0);
@@ -428,6 +441,16 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 			document.documentElement.style.height = "100%";
 			window.scrollTo(0, 0);
 		}
+	});
+}
+
+if (Galaxy.buttonUp != null && Galaxy.buttonDown != null) {
+	Galaxy.buttonUp.addEventListener("click", () => {
+		galaxy.zShiftMenuFlags(Galaxy.zShiftScrollLength);
+	});
+
+	Galaxy.buttonDown.addEventListener("click", () => {
+		galaxy.zShiftMenuFlags(-Galaxy.zShiftScrollLength);
 	});
 }
 

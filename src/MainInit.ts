@@ -5,19 +5,18 @@ import { Utils } from './Utils';
 
 export class MainInit {
 
+    public static readonly meanZ: number = 900;
+    public static readonly academicStartZ: number = 800;
     private static readonly curvePoints: number[] = [
-        600, 200, 300,
-        460, 200, 160,
-        400, 100, 60,
-        300, 100, -160,
-        400, 60, -400,
-        340, 60, -510,
-        130, 200, -560,
-        -100, 200, -300,
-        -200, 260, 0,
-        400, 200, 560,
-        780, 200, 480,
-        600, 200, 300,
+        0, 100, 1800,
+        0, 100, 1600,
+        0, 30, 1400,
+        0, 40, 1200,
+        0, -30, 1000,
+        0, -20, 800,
+        0, -90, 600,
+        0, -80, 400,
+        0, -80, 200
     ];
     
     // private static readonly curvePoints: number[] = [];
@@ -71,7 +70,7 @@ export class MainInit {
         
         const g = new THREE.BufferGeometry();
         g.setIndex(new THREE.BufferAttribute(indices, 1));	
-        g.setAttribute('position', new THREE.BufferAttribute(vertices, 3 ));
+        g.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
         g.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
         
         let idxCount = 0;
@@ -131,7 +130,7 @@ export class MainInit {
             
         }
         
-        const dw = [-12, -10, -1, 1, 10, 12];
+        const dw = [-10, -8, -1, 1, 8, 10];
         
         for ( let j = 0; j < MainInit.lss; j ++ ) {
             for ( let i = 0; i < wss; i ++ ) {

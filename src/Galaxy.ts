@@ -2,25 +2,30 @@ import * as THREE from 'three';
 import { ClickableInterface } from './ClickableInterface.ts';
 import { Flag } from './Flag.ts';
 import { LoadingScreen } from './LoadingScreen.ts';
+import { MainInit } from './MainInit.ts';
 import { Planet } from './Planet.ts';
 import { Player } from './Player.ts';
 import { RayCastableInterface } from './RayCastableInterface.ts';
+import { RotatingObject } from './RotatingObject.ts';
 import { Scene } from './Scene.ts';
 import { Star } from './Star.ts';
 import { Utils } from './Utils.ts';
 
 export class Galaxy {
-    public static readonly galaxyModelY = 4000;
-    public static readonly galaxyModelScale = 2000;
+    public static readonly galaxyModelY = 1000;
+    public static readonly galaxyModelScale = 200;
 
     private radius: number;
 
-    private galaxyModel: THREE.Group<THREE.Object3DEventMap> | null;
+    // private galaxyModel: THREE.Group<THREE.Object3DEventMap> | null;
+    private galaxyModel: THREE.Mesh | null;
     private menuFlags: Flag[];
 
     private allStars: Star[];
     private allPlanets: Planet[];
     private player: Player | null;
+
+    private otherObjects: RotatingObject[];
 
     private lastRayCastTime: number;
 
@@ -45,6 +50,8 @@ export class Galaxy {
         this.allPlanets = [];
         this.player = null;
 
+        this.otherObjects = [];
+
         this.lastRayCastTime = 0;
 
         this.currHoldObj = null;
@@ -57,8 +64,8 @@ export class Galaxy {
 
     addBackgroundImg(backgroundPath: string) {
         let backgroundMesh = new THREE.Mesh(
-            new THREE.SphereGeometry(this.radius, 160, 160),
-            new THREE.MeshStandardMaterial({ 
+            new THREE.SphereGeometry(this.radius, 64, 64),
+            new THREE.MeshBasicMaterial({ 
                 map: Utils.textureLoader.load(backgroundPath),
                 side: THREE.BackSide
               })
@@ -67,7 +74,7 @@ export class Galaxy {
     }
 
     static getGalaxyModelViewY(): number {
-        return Galaxy.galaxyModelY + Galaxy.galaxyModelScale + 1600;
+        return Galaxy.galaxyModelY + Galaxy.galaxyModelScale + 0;
     }
 
     static showButtonUpDown(show: boolean) {
@@ -84,14 +91,27 @@ export class Galaxy {
         }
     }
 
-    setGalaxyModel(galaxyModel: THREE.Group<THREE.Object3DEventMap>): void {
+    // setGalaxyModel(galaxyModel: THREE.Group<THREE.Object3DEventMap>): void {
+    //     this.galaxyModel = galaxyModel;
+    //     this.showGalaxyModel();
+    // }
+
+    setGalaxyModel(galaxyModel: THREE.Mesh): void {
         this.galaxyModel = galaxyModel;
-        Scene.addEntity(galaxyModel);
+        this.showGalaxyModel();
+    }
+
+    hideGalaxyModel(): void {
+        if (this.galaxyModel != null) Scene.removeEntity(this.galaxyModel);
+    }
+
+    showGalaxyModel(): void {
+        if (this.galaxyModel != null) Scene.addEntity(this.galaxyModel);
     }
 
     getGalaxyModelPosition(): THREE.Vector3 {
         if (this.galaxyModel != null) return this.galaxyModel.position.clone();
-        return new THREE.Vector3(0, 0, 0);
+        return new THREE.Vector3(0, 0, MainInit.meanZ);
     }
 
     getGalaxyModelScale(): number {
@@ -119,16 +139,21 @@ export class Galaxy {
         });
     }
 
-    addPlanet(planet: Planet) {
+    addPlanet(planet: Planet):void {
         this.allPlanets.push(planet);
     }
 
-    setPlayer(player: Player) {
+    setPlayer(player: Player): void {
         this.player = player;
     }
 
     getPlayer(): Player | null {
         return this.player;
+    }
+
+    addOtherObject(obj: RotatingObject): void {
+        this.otherObjects.push(obj);
+        Scene.addEntity(obj);
     }
 
     updateCurrentHoldObj(): void {
@@ -218,9 +243,9 @@ export class Galaxy {
         return false;
     }
 
-    zShiftMenuFlags(zShift: number) {
-        if (this.currMenuFlagZShifts + zShift < -80) return;
-        if (this.currMenuFlagZShifts + zShift > 0) return;
+    zShiftMenuFlags(zShift: number): void {
+        if (this.currMenuFlagZShifts + zShift <= -160) return;
+        if (this.currMenuFlagZShifts + zShift >= 20) return;
 
         for (const currFlag of this.menuFlags) {
             currFlag.position.z += zShift;
@@ -228,10 +253,28 @@ export class Galaxy {
         this.currMenuFlagZShifts += zShift;
     }
 
+    hidePlanetFlags(): void {
+        for (const currPlanet of this.allPlanets) {
+            currPlanet.hideFlag();
+        }
+        for (const currMenuFlag of this.menuFlags) {
+            Scene.addEntity(currMenuFlag);
+        }
+    }
+
+    showPlanetFlags(): void {
+        for (const currPlanet of this.allPlanets) {
+            currPlanet.showFlag();
+        }
+        for (const currMenuFlag of this.menuFlags) {
+            Scene.removeEntity(currMenuFlag);
+        }
+    }
+
     updateFrame(): void {
         this.rayCast();
         
-        if (Scene.currentMenu == 0) {
+        // if (Scene.currentMenu == 0) {
             for (const currStar of this.allStars) {
                 currStar.updateFrame();
             }
@@ -239,11 +282,15 @@ export class Galaxy {
                 currPlanet.updateFrame();
             }
             if (this.player != null) this.player.updateFrame();
-        }
+
+            for (const currObj of this.otherObjects) {
+                currObj.rotate();
+            }
+        // }
 
         if (Scene.currentMenu == 1) {
             if (this.galaxyModel != null) {
-                this.galaxyModel.rotateY(0.001 * Utils.dt);
+                this.galaxyModel.rotateZ(0.002 * Utils.dt);
 
                 for (const currFlag of this.menuFlags) {
                     currFlag.updateVideo();

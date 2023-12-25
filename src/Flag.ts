@@ -7,6 +7,7 @@ import { CameraLerp } from './CameraLerp';
 import { ClickableInterface } from './ClickableInterface';
 import { CustomAnimation } from './CustomAnimation';
 import { Galaxy } from './Galaxy';
+import { MainInit } from './MainInit';
 import { ObjectLookedInterface } from './ObjectLookedInterface';
 import { ProjectDisplayerInterface } from './ProjectDisplayerInterface';
 import { RayCastableInterface } from './RayCastableInterface';
@@ -74,7 +75,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             flagTexture.magFilter = THREE.LinearFilter;
         }
 
-        super(new THREE.PlaneGeometry(flagW, flagH, flagW / 2, flagH / 2),
+        super(new THREE.PlaneGeometry(flagW, flagH, 32, 32),
             new THREE.MeshBasicMaterial({
                 map: flagTexture,
                 side: THREE.DoubleSide,
@@ -98,8 +99,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         this.flagStickColor = flagStickColor;
         this.flagStickMesh = new THREE.Mesh(
             new THREE.CylinderGeometry(flagStickRadius, flagStickRadius,
-                flagStickH, 32, 32),
-            new THREE.MeshStandardMaterial({
+                flagStickH, 8, 8),
+            new THREE.MeshBasicMaterial({
                 color: flagStickColor,
                 side: THREE.FrontSide
             })
@@ -109,7 +110,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         this.flagGlowLight = new THREE.PointLight(0xFFFFFF, 1000);
 
         this.flagGlowMesh = new THREE.Mesh(
-            new THREE.PlaneGeometry(this.flagW, this.flagH, 32, 32),
+            new THREE.PlaneGeometry(this.flagW, this.flagH, 1, 1),
             new THREE.ShaderMaterial({
                 vertexShader: flagGlowVertexShader,
                 fragmentShader: flagGlowFragmentShader,
@@ -236,7 +237,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 currCubePosition.x -= addX;
                 currCubePosition.y = Galaxy.getGalaxyModelViewY();
                 currCubePosition.y -= Math.min(this.flagW, this.flagH) / Scene.getScreenSizeRatio();
-                currCubePosition.z = 0;
+                currCubePosition.z = MainInit.meanZ;
                 currCubePosition.z += addZ * (this.toolCubes.length / 2.) + 6;
             }
             for (let i = 0; i < this.toolCubes.length; i++) {
@@ -281,7 +282,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         if (start) {
             if (Scene.getCameraLerpObject() != this &&
                     Scene.getProjectDisplayer() != this) {
-                Utils.setEmissiveMesh(this.flagStickMesh, this.flagStickColor);
+                // Utils.setEmissiveMesh(this.flagStickMesh, this.flagStickColor);
                 // Utils.setEmissiveMesh(this, "white");
                 // Scene.addEntity(this.flagGlowLight);
                 Scene.addEntity(this.flagGlowMesh);
@@ -290,7 +291,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         } else {
             if (force || (Scene.getCameraLerpObject() != this &&
                     Scene.getProjectDisplayer() != this)) {
-                Utils.removeEmissiveMesh(this.flagStickMesh);
+                // Utils.removeEmissiveMesh(this.flagStickMesh);
                 // Utils.removeEmissiveMesh(this);
                 // Scene.removeEntity(this.flagGlowLight);
                 Scene.removeEntity(this.flagGlowMesh);
@@ -319,6 +320,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
     }
 
     onClick(): void {
+        if (Scene.isDisplayingProject()) return;
+        
         if (Scene.getCameraLerpObject() != this &&
                 Scene.getProjectDisplayer() != this) {
             Scene.removeProjectDisplayer();
@@ -350,8 +353,18 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
         }
     }
 
+    hideSelf(): void {
+        Scene.removeEntity(this);
+        Scene.removeEntity(this.flagStickMesh);
+    }
+
+    showSelf(): void {
+        Scene.addEntity(this);
+        Scene.addEntity(this.flagStickMesh);
+    }
+
     updateFrame(): void {
-        if (Scene.camera.position.distanceTo(this.position) < 400) {
+        if (Scene.camera.position.distanceTo(this.position) < 600) {
             let vPositions = this.geometry.attributes.position;
 
             for (let i = 0; i < vPositions.count; i++) {

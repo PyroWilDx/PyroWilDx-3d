@@ -16,11 +16,11 @@ export class Planet extends RotatingObject {
             position: THREE.Vector3, emissiveIntensity: number = 0,
             emissiveColor: THREE.ColorRepresentation = 0x0) {
 
-        let nVerticles = Math.max(64, radius / 4);
-        nVerticles = Math.min(128, nVerticles);
+        // let nVerticles = Math.max(32, radius / 4);
+        // nVerticles = Math.min(64, nVerticles);
         let planetTexture = Utils.textureLoader.load(imgPath);
 
-        super(new THREE.SphereGeometry(radius, nVerticles, nVerticles),
+        super(new THREE.SphereGeometry(radius, 32, 32),
             new THREE.MeshStandardMaterial({
                 map: planetTexture,
                 side: THREE.FrontSide,
@@ -47,26 +47,27 @@ export class Planet extends RotatingObject {
                 emissiveColor: THREE.ColorRepresentation = 0x0): void {
         let tStart = start + this.radius;
 
-        let nVerticles = Math.max(64, (tStart + length) / 4);
-        nVerticles = Math.min(160, nVerticles);
+        // let nVerticles = Math.max(64, (tStart + length) / 4);
+        // nVerticles = Math.min(160, nVerticles);
         let rSpeed = Utils.getRandomVector3Spread(0.004);
         let ringMesh: RotatingObject | null = null;
         if (colorV != null) {
             ringMesh = new RotatingObject(
-                new THREE.RingGeometry(tStart, tStart + length, nVerticles),
+                new THREE.RingGeometry(tStart, tStart + length, 64),
                 new THREE.MeshStandardMaterial({
                     color: colorV,
                     side: THREE.DoubleSide,
                     emissiveIntensity: emissiveIntensity,
                     emissive: colorV,
                 }),
-                rSpeed
+                rSpeed,
+                0.001
             ); 
         }
         if (texturePath != null) {
             let ringTexture = Utils.textureLoader.load(texturePath);
             ringMesh = new RotatingObject(
-                new THREE.RingGeometry(tStart, tStart + length, nVerticles),
+                new THREE.RingGeometry(tStart, tStart + length, 64),
                 new THREE.MeshStandardMaterial({
                     map: ringTexture,
                     side: THREE.DoubleSide,
@@ -86,6 +87,18 @@ export class Planet extends RotatingObject {
         }
     }
     
+    hideFlag(): void {
+        if (this.flag != null) {
+            this.flag.hideSelf();
+        }
+    }
+
+    showFlag(): void {
+        if (this.flag != null) {
+            this.flag.showSelf();
+        }
+    }
+
     updateFrame(): void {
         this.rotate();
     

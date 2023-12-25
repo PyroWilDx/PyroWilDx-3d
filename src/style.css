@@ -52,7 +52,7 @@
     background-color: transparent;
     opacity: 1;
     transition: opacity 0.2s ease-out;
-    transform: translateY(12vh);
+    transform: translateY(6vh);
 }
 
 .hidden {
@@ -414,6 +414,15 @@ p {
     background: #FFFFFF;
     height: 6px;
     width: 6%;
+}
+
+.progress-info-text {
+    color: white;
+    position: fixed;
+    top: 10px;
+    left: 12px;
+    margin-top: 12px;
+    font-weight: bold;
 }
 
 .equalizer {

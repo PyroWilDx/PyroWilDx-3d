@@ -51,6 +51,8 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
         else if (imgPath.includes("Python")) this.link = "https://www.python.org/";
         else if (imgPath.includes("UnrealEngine")) this.link = "https://www.unrealengine.com/";
         else if (imgPath.includes("SDL2")) this.link = "https://www.libsdl.org/";
+        else if (imgPath.includes("SFML")) this.link = "https://www.sfml-dev.org/index.php";
+        else if (imgPath.includes("OpenCV")) this.link = "https://opencv.org/";
         else if (imgPath.includes("Boost")) this.link = "https://www.boost.org/";
         else if (imgPath.includes("AVX2")) this.link = "https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#techs=AVX_ALL";
         else if (imgPath.includes("PyGame")) this.link = "https://www.pygame.org/";

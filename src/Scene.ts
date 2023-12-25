@@ -50,6 +50,8 @@ export class Scene {
     public static progressContainer: HTMLElement | null = null;
     public static progressBar: HTMLElement | null = null;
 
+    public static progressInfoText: HTMLElement | null = null;
+
     public static isPlayingSound: boolean = true;
     public static readonly sECount: number = 5;
     public static sELines: (HTMLElement | null)[] = [null, null, null, null, null];
@@ -65,7 +67,7 @@ export class Scene {
         Scene.scene = new THREE.Scene();
 
         Scene.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight,
-            0.1, Scene.worldRadius * 2);
+            0.1, 2000);
         Scene.camera.position.set(0, 2000, 0);
 
         Scene.renderer = new THREE.WebGLRenderer({
@@ -102,6 +104,8 @@ export class Scene {
 
         Scene.progressContainer = document.getElementById("progressContainer");
         Scene.progressBar = document.getElementById("progressBar");
+
+        Scene.progressInfoText = document.getElementById("progressInfoText");
 
         for (let i = 0; i < Scene.sECount; i++) {
             Scene.sELines[i] = document.getElementById("sEL" + i);
@@ -310,15 +314,17 @@ export class Scene {
     }
 
     static showProgressBar() {
-        if (Scene.progressContainer != null) {
+        if (Scene.progressContainer != null && Scene.progressInfoText != null) {
             Scene.progressContainer.style.display = "";
             this.setProgressBarProgress();
+            Scene.progressInfoText.style.display = "";
         }
     }
 
     static hideProgressBar() {
-        if (Scene.progressContainer != null) {
+        if (Scene.progressContainer != null && Scene.progressInfoText != null) {
             Scene.progressContainer.style.display = "none";
+            Scene.progressInfoText.style.display = "none";
         }
     }
 

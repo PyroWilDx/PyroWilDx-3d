@@ -17,7 +17,7 @@ export class Planet extends RotatingObject {
             emissiveColor: THREE.ColorRepresentation = 0x0) {
 
         let nVerticles = Math.max(64, radius / 4);
-        nVerticles = Math.min(160, nVerticles);
+        nVerticles = Math.min(128, nVerticles);
         let planetTexture = Utils.textureLoader.load(imgPath);
 
         super(new THREE.SphereGeometry(radius, nVerticles, nVerticles),
@@ -28,7 +28,8 @@ export class Planet extends RotatingObject {
                 emissive: emissiveColor,
                 emissiveMap: planetTexture
             }),
-            Utils.getRandomVector3Spread(0.0026)
+            Utils.getRandomVector3Spread(0.0036),
+            0.001
         );
         this.position.copy(position);
         Scene.addEntity(this);
@@ -42,7 +43,8 @@ export class Planet extends RotatingObject {
     }
 
     addRing(start: number, length: number, texturePath: string | null,
-                colorV: number | null): void {
+                colorV: number | null,  emissiveIntensity: number,
+                emissiveColor: THREE.ColorRepresentation = 0x0): void {
         let tStart = start + this.radius;
 
         let nVerticles = Math.max(64, (tStart + length) / 4);
@@ -54,19 +56,26 @@ export class Planet extends RotatingObject {
                 new THREE.RingGeometry(tStart, tStart + length, nVerticles),
                 new THREE.MeshStandardMaterial({
                     color: colorV,
-                    side: THREE.DoubleSide
+                    side: THREE.DoubleSide,
+                    emissiveIntensity: emissiveIntensity,
+                    emissive: colorV,
                 }),
                 rSpeed
             ); 
         }
         if (texturePath != null) {
+            let ringTexture = Utils.textureLoader.load(texturePath);
             ringMesh = new RotatingObject(
                 new THREE.RingGeometry(tStart, tStart + length, nVerticles),
                 new THREE.MeshStandardMaterial({
-                    map: Utils.textureLoader.load(texturePath),
-                    side: THREE.DoubleSide
+                    map: ringTexture,
+                    side: THREE.DoubleSide,
+                    emissiveIntensity: emissiveIntensity,
+                    emissive: emissiveColor,
+                    emissiveMap: ringTexture
                 }),
-                rSpeed
+                rSpeed,
+                0.001
             );
         }
 

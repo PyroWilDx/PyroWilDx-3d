@@ -1,15 +1,12 @@
-scale up blurry
+scale up blurry -> block zooming functions ?
 
-block zooming functions
-
-change planets textures.
-add primogems stars, and maybe other type of stars.
-lower camera distance to not see galaxy when going up on the road, or
-at least find another way.
 change road texture
 add more objects like more plants or rockets.. idk, to make the world more living
-bug: can click of other flags when displaying project
 add academic project/personnal when change project type
 
 Optimize parce que ca bug fort quand meme la (en fait c'est tween qui bug jsp pk)
 
+straight road is better i believe..
+lower camera distance to not see galaxy when going up on the road, or
+at least find another way.
+bug: can click of other flags when displaying project

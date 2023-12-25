@@ -18,7 +18,8 @@ Scene.initScene();
 
 // World Building
 let galaxy: Galaxy = Scene.galaxy;
-galaxy.addStars(200, "res/3d/MarioStar/scene.gltf");
+galaxy.addStars(200, "res/3d/MarioStar/scene.gltf", 1);
+// galaxy.addStars(60, "res/3d/Primogem/scene.gltf", 0.04);
 
 const menuFlagAddY = -200;
 
@@ -45,18 +46,19 @@ let igMenuPosition = new THREE.Vector3(220,
 let fftMenuPosition = new THREE.Vector3(220,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 36);
 
-let kqPlanet = new Planet("res/imgs/Sun.jpg", 40,
-	kqPosition, 10, "red");
-kqPlanet.addRing(2, 10, null, 0x00BFFF);
-kqPlanet.addRing(2, 10, null, 0xDC143C);
-let kqFlag = new Flag(106, 60, 
+let kqPlanet = new Planet("res/imgs/planets/Planet_Fiery.png", 40,
+	kqPosition, 0.6, "red");
+// kqPlanet.addRing(2, 10, null, 0x00BFFF);
+kqPlanet.addRing(2, 10, "res/imgs/rings/Ring.jpg", null, 1, 'orange');
+kqPlanet.addRing(12, 12, null, 0xDC143C, 1);
+let kqFlag = new Flag(106, 60,
 	null, "res/vids/Keqing.mp4",
 	1, 120, 0xFFFFFF, "ProjectKeqing", 0, 0,
 	null,
-	"res/imgs/Icon_C++.png",
-	"res/imgs/Icon_SDL2.png",
-	"res/imgs/Icon_CLion.png",
-	"res/imgs/Icon_Boost.png");
+	"res/imgs/icons/Icon_C++.png",
+	"res/imgs/icons/Icon_SDL2.png",
+	"res/imgs/icons/Icon_CLion.png",
+	"res/imgs/icons/Icon_Boost.png");
 kqPlanet.setFlag(kqFlag);
 galaxy.addPlanet(kqPlanet);
 let kqMenuFlag = kqFlag.cloneForMenu();
@@ -65,17 +67,17 @@ kqMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(kqMenuFlag);
 LoadingScreen.updateCount();
 
-let robotsPVZPlanet = new Planet("res/imgs/Sun.jpg", 40,
-	robotsPVZPosition, 10, "red");
-robotsPVZPlanet.addRing(2, 10, null, 0x00BFFF);
-robotsPVZPlanet.addRing(2, 10, null, 0xDC143C);
+let robotsPVZPlanet = new Planet("res/imgs/planets/Planet_Frozen.jpg", 40,
+	robotsPVZPosition, 0.4, "cyan");
+robotsPVZPlanet.addRing(2, 10, null, 0x00BFFF, 1);
+robotsPVZPlanet.addRing(2, 10, null, 0xDC143C, 1);
 let robotsPVZFlag = new Flag(100, 60,
 	"res/imgs/WIP.jpg", null,
 	1, 120, 0xFFFFFF, "ProjectRobotsPVZ", 0, 0,
 	null,
-	"res/imgs/Icon_C++.png",
-	"res/imgs/Icon_UnrealEngine.jpg",
-	"res/imgs/Icon_VisualStudio.png");
+	"res/imgs/icons/Icon_C++.png",
+	"res/imgs/icons/Icon_UnrealEngine.jpg",
+	"res/imgs/icons/Icon_VisualStudio.png");
 robotsPVZPlanet.setFlag(robotsPVZFlag);
 galaxy.addPlanet(robotsPVZPlanet);
 let robotsPVZMenuFlag = robotsPVZFlag.cloneForMenu();
@@ -84,15 +86,15 @@ robotsPVZMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(robotsPVZMenuFlag);
 LoadingScreen.updateCount();
 
-let oregairuPlanet = new Planet("res/imgs/Sun.jpg", 20,
-	oregairuPosition, 10, "red");
-oregairuPlanet.addRing(1, 6, null, 0xFFFFFF);
+let oregairuPlanet = new Planet("res/imgs/planets/Planet_Green.jpg", 20,
+	oregairuPosition, 0.8, "green");
+oregairuPlanet.addRing(1, 6, null, 0xFFFFFF, 1);
 let oregairuFlag = new Flag(60, 124,
 	null, "res/vids/Oregairu.mp4",
 	1, 160, 0xFFFFFF, "ProjectOregairu", 0, 0,
 	null,
-	"res/imgs/Icon_Java.png",
-	"res/imgs/Icon_AndroidStudio.png");
+	"res/imgs/icons/Icon_Java.png",
+	"res/imgs/icons/Icon_AndroidStudio.png");
 oregairuPlanet.setFlag(oregairuFlag);
 galaxy.addPlanet(oregairuPlanet);
 let oregairuMenuFlag = oregairuFlag.cloneForMenu();
@@ -101,17 +103,17 @@ oregairuMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(oregairuMenuFlag);
 LoadingScreen.updateCount();
 
-let bleachPlanet = new Planet("res/imgs/Sun.jpg", 20,
-	bleachPosition, 10, "red");
-bleachPlanet.addRing(1, 6, null, 0xFFFFFF);
+let bleachPlanet = new Planet("res/imgs/planets/Planet_Purple0.png", 20,
+	bleachPosition, 1, "purple");
+bleachPlanet.addRing(1, 6, null, 0xFFFFFF, 1);
 let bleachFlag = new Flag(112, 60,
 	null, "res/vids/Bleach.mp4",
 	1, 100, 0xFFFFFF, "ProjectBleach", 0, 0,
 	null,
-	"res/imgs/Icon_Python.png",
-	"res/imgs/Icon_PyGame.png",
-	"res/imgs/Icon_Pyzo.png",
-	"res/imgs/Icon_cxFreeze.png");
+	"res/imgs/icons/Icon_Python.png",
+	"res/imgs/icons/Icon_PyGame.png",
+	"res/imgs/icons/Icon_Pyzo.png",
+	"res/imgs/icons/Icon_cxFreeze.png");
 bleachPlanet.setFlag(bleachFlag);
 galaxy.addPlanet(bleachPlanet);
 let bleachMenuFlag = bleachFlag.cloneForMenu();
@@ -120,9 +122,9 @@ bleachMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(bleachMenuFlag);
 LoadingScreen.updateCount();
 
-let glPlanet = new Planet("res/imgs/Sun.jpg", 20,
-	glPosition, 10, "red");
-glPlanet.addRing(1, 6, null, 0xFFFFFF);
+let glPlanet = new Planet("res/imgs/planets/Planet_RedBlue.jpg", 20,
+	glPosition, 0.4, "white");
+glPlanet.addRing(1, 6, null, 0xFFFFFF, 1);
 let glFlag = new Flag(100, 60,
 	"res/imgs/WIP.jpg", null,
 	1, 100, 0xFFFFFF, "ProjectENSIMAG_GL", 0, 0,
@@ -136,15 +138,15 @@ glMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(glMenuFlag);
 LoadingScreen.updateCount();
 
-let igPlanet = new Planet("res/imgs/Sun.jpg", 20,
-	igPosition, 10, "red");
-igPlanet.addRing(1, 6, null, 0xFFFFFF);
+let igPlanet = new Planet("res/imgs/planets/Planet_Yellow.png", 20,
+	igPosition, 0.6, "yellow");
+igPlanet.addRing(1, 6, null, 0xFFFFFF, 1);
 let igFlag = new Flag(80, 60,
 	"res/imgs/IGPuzzle.png", null,
 	1, 100, 0xFFFFFF, "ProjectENSIMAG_IG", 0, 0,
 	null,
-	"res/imgs/Icon_CLanguage.png",
-	"res/imgs/Icon_CLion.png");
+	"res/imgs/icons/Icon_CLanguage.png",
+	"res/imgs/icons/Icon_CLion.png");
 igFlag.rotateY(Math.PI);
 igPlanet.setFlag(igFlag);
 galaxy.addPlanet(igPlanet);
@@ -154,16 +156,16 @@ igMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(igMenuFlag);
 LoadingScreen.updateCount();
 
-let fftPlanet = new Planet("res/imgs/Sun.jpg", 20,
-	fftPosition, 10, "red");
-fftPlanet.addRing(1, 6, null, 0xFFFFFF);
+let fftPlanet = new Planet("res/imgs/planets/Planet_Pink0.jpg", 20,
+	fftPosition, 0.6, "pink");
+fftPlanet.addRing(1, 6, null, 0xFFFFFF, 1);
 let fftFlag = new Flag(106, 60,
 	"res/imgs/FFT.jpg", null,
 	1, 100, 0xFFFFFF, "ProjectUPMC_FFT", 0, 0,
 	null,
-	"res/imgs/Icon_CLanguage.png",
-	"res/imgs/Icon_AVX2.png",
-	"res/imgs/Icon_VSCode.png");
+	"res/imgs/icons/Icon_CLanguage.png",
+	"res/imgs/icons/Icon_AVX2.png",
+	"res/imgs/icons/Icon_VSCode.png");
 fftFlag.rotateY(Math.PI);
 fftPlanet.setFlag(fftFlag);
 galaxy.addPlanet(fftPlanet);
@@ -272,7 +274,8 @@ window.addEventListener("wheel", (event) => {
 		}
 	}
 
-	if (Scene.currentMenu == 1) {
+	if (Scene.currentMenu == 1 && !Scene.isDisplayingProject() &&
+		!(Scene.aboutSectionTargetOpacity == 1)) {
 		if (event.deltaY < 0) {
 			galaxy.zShiftMenuFlags(Galaxy.zShiftScrollLength);
 		} else {
@@ -409,6 +412,10 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 			document.documentElement.style.height = "100%";
             window.scrollTo(0, 0);
 		}
+
+		if (Scene.currentMenu == 1 && !Scene.isDisplayingProject()) {
+			Galaxy.showButtonUpDown(false);
+		}
 	});
 
 	menuAbout.addEventListener("mouseout", () => {
@@ -425,6 +432,10 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 				behavior: 'auto'
 			});
 		}
+
+		if (Scene.currentMenu == 1) {
+			Galaxy.showButtonUpDown(true);
+		}
 	});
 
 	menuAbout.addEventListener("click", () => {
@@ -440,6 +451,10 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 			Scene.aboutSectionTargetOpacity = 1;
 			document.documentElement.style.height = "100%";
 			window.scrollTo(0, 0);
+		}
+
+		if (Scene.currentMenu == 1) {
+			Galaxy.showButtonUpDown(false);
 		}
 	});
 }

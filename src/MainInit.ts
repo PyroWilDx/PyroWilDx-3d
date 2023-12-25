@@ -147,7 +147,7 @@ export class MainInit {
             }
         }
         
-        const tex = new THREE.TextureLoader().load("res/imgs/Sun.jpg");
+        const tex = new THREE.TextureLoader().load("res/imgs/planets/Planet_Pink0.jpg");
         tex.wrapS = THREE.RepeatWrapping;
         tex.repeat.set(MainInit.ls * 2, 0);
         const eIntensity = 10;
@@ -198,6 +198,8 @@ export class MainInit {
     public static doneOneRound: boolean = false;
     public static quaternionList: THREE.Quaternion[] = [];
 
+    public static targetRoadHeight = 20;
+
     public static readonly barLength = 20;
     public static readonly scrollHeight = 
         window.innerHeight * (MainInit.barLength / 100);
@@ -211,13 +213,19 @@ export class MainInit {
         if (forward) {
             MainInit.i += length;
             if (MainInit.i >= MainInit.ls) {
+                if (!MainInit.doneOneRound) {
+                    MainInit.i = 0;
+                } else {
+                    MainInit.i = MainInit.ls - 1;
+                }
                 MainInit.doneOneRound = true;
-                MainInit.i = 0;
+                // MainInit.i = 0;
             }
         } else {
             MainInit.i -= length;
             if (MainInit.i < 0) {
-                MainInit.i = MainInit.ls - length;
+                // MainInit.i = MainInit.ls - length;
+                MainInit.i = 0;
             }
         }
 
@@ -237,7 +245,7 @@ export class MainInit {
         let points = MainInit.points;
         MainInit.target.position.set(
             points[MainInit.i].x + 0.18 * n[MainInit.i].x,
-            points[MainInit.i].y + 10,
+            points[MainInit.i].y + MainInit.targetRoadHeight,
             points[MainInit.i].z + 0.18 * n[MainInit.i].z
         );
 

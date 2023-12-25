@@ -31,7 +31,7 @@ export class Galaxy {
 
     private currMenuFlagZShifts: number;
 
-    public static readonly zShiftScrollLength: number = 10; 
+    public static readonly zShiftScrollLength: number = 20; 
     public static readonly buttonUp: HTMLElement | null = document.getElementById("buttonUp");
     public static readonly buttonDown: HTMLElement | null = document.getElementById("buttonDown");
 
@@ -103,17 +103,17 @@ export class Galaxy {
         this.menuFlags.push(flag);
     }
 
-    addStars(nStars: number, modelPath: string): void {
+    addStars(nStars: number, modelPath: string, scale: number): void {
         Utils.gltfLoader.load(modelPath, ( gltf ) => {
             let baseStarModel = gltf.scene;
             Utils.setEmissiveGLTF(baseStarModel, 52);
             for (let i = 0; i < nStars; i++) {
-                let currStar: Star = new Star(baseStarModel.clone(),
+                let currStar = new Star(baseStarModel.clone(),
                     THREE.MathUtils.randFloat(0.004, 0.02),
                     THREE.MathUtils.randFloat(0.0001, 0.001),
                     Utils.getRandomVector3Spread(this.radius / 1.2));
-
-                    this.allStars.push(currStar);
+                currStar.scale.set(scale, scale, scale);
+                this.allStars.push(currStar);
             }
             LoadingScreen.updateCount();
         });
@@ -219,7 +219,7 @@ export class Galaxy {
     }
 
     zShiftMenuFlags(zShift: number) {
-        if (this.currMenuFlagZShifts + zShift < -70) return;
+        if (this.currMenuFlagZShifts + zShift < -80) return;
         if (this.currMenuFlagZShifts + zShift > 0) return;
 
         for (const currFlag of this.menuFlags) {

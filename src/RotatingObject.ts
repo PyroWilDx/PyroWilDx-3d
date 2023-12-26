@@ -14,8 +14,10 @@ export class RotatingObject extends THREE.Mesh {
         if (this.rSpeed.y < minSpeed) rSpeed.y = minSpeed;
         if (this.rSpeed.z < minSpeed) rSpeed.z = minSpeed;
         
-        let rRot = Utils.getRandomVector3(0, 2 * Math.PI);
-        this.rotation.set(rRot.x, rRot.y, rRot.z);
+        if (rSpeed.x != 0 && rSpeed.y != 0 && rSpeed.z != 0) {
+            let rRot = Utils.getRandomVector3(0, 2 * Math.PI);
+            this.rotation.set(rRot.x, rRot.y, rRot.z);
+        }
     }
 
     rotate(): void {

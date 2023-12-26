@@ -18,11 +18,11 @@ Scene.initScene();
 
 // World Building
 let galaxy: Galaxy = Scene.galaxy;
-galaxy.addStars(100, "res/3d/MarioStar/scene.gltf", 1);
+galaxy.addStars(200, "res/3d/MarioStar/scene.gltf", 1);
 
 const menuFlagAddY = -200;
 
-let kqPosition = new THREE.Vector3(100, 40, 1600);
+let kqPosition = new THREE.Vector3(110, 40, 1600);
 let robotsPVZPosition = new THREE.Vector3(-130, 0, 1400);
 let badApplePosition = new THREE.Vector3(100, -20, 1200);
 let oregairuPosition = new THREE.Vector3(-110, -80, 1000);
@@ -31,29 +31,31 @@ let glPosition = new THREE.Vector3(-130, -130, 600);
 let igPosition = new THREE.Vector3(100, -146, 400);
 let fftPosition = new THREE.Vector3(-130, -122, 200);
 
-let kqMenuPosition = new THREE.Vector3(-220,
+let xMenu = 200;
+let kqMenuPosition = new THREE.Vector3(-xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, -100 + MainInit.meanZ);
-let robotsPVZMenuPosition = new THREE.Vector3(-220,
+let robotsPVZMenuPosition = new THREE.Vector3(-xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, -32 + MainInit.meanZ);
-let badAppleMenuPosition = new THREE.Vector3(-220,
+let badAppleMenuPosition = new THREE.Vector3(-xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 36 + MainInit.meanZ)
-let oregairuMenuPosition = new THREE.Vector3(-220,
+let oregairuMenuPosition = new THREE.Vector3(-xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 136 + MainInit.meanZ);
-let bleachMenuPosition = new THREE.Vector3(-220,
+let bleachMenuPosition = new THREE.Vector3(-xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 236 + MainInit.meanZ);
-let glMenuPosition = new THREE.Vector3(220,
+let glMenuPosition = new THREE.Vector3(xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, -100 + MainInit.meanZ);
-let igMenuPosition = new THREE.Vector3(220,
+let igMenuPosition = new THREE.Vector3(xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, -32 + MainInit.meanZ);
-let fftMenuPosition = new THREE.Vector3(220,
+let fftMenuPosition = new THREE.Vector3(xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, 36 + MainInit.meanZ);
 
-let kqPlanet = new Planet("res/imgs/planets/Planet_Fiery.png", 32,
+let kqPlanet = new Planet("res/imgs/planets/Planet_Fiery.png", 40,
 	kqPosition, 0.6, "red");
-kqPlanet.addRing(2, 10, "res/imgs/rings/Ring.jpg", null, 1, 'orange');
+kqPlanet.addRing(2, 8, "res/imgs/rings/Blue.jpg", null, 0.6, "cyan");
+kqPlanet.addRing(10, 10, "res/imgs/rings/Green.png", null, 6, 0x79B23F);
 let kqFlag = new Flag(106, 60,
 	null, "res/vids/Keqing.mp4",
-	1, 100, 0xFFFFFF, "ProjectKeqing", 0, 0,
+	1, 110, 0xFFFFFF, "ProjectKeqing", 0, 0,
 	null,
 	"res/imgs/icons/Icon_C++.png",
 	"res/imgs/icons/Icon_SDL2.png",
@@ -68,9 +70,9 @@ kqMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(kqMenuFlag);
 LoadingScreen.updateCount();
 
-let robotsPVZPlanet = new Planet("res/imgs/planets/Planet_Frozen.jpg", 26,
-	robotsPVZPosition, 0.4, "cyan");
-robotsPVZPlanet.addRing(2, 8, null, 0x00BFFF, 1);
+let robotsPVZPlanet = new Planet("res/imgs/planets/Planet_Grass0.jpg", 26,
+	robotsPVZPosition, 6, "green");
+robotsPVZPlanet.addRing(2, 8, "res/imgs/rings/Orange.jpg", null, 2, "orange");
 let robotsPVZFlag = new Flag(100, 60,
 	"res/imgs/WIP.jpg", null,
 	1, 100, 0xFFFFFF, "ProjectRobotsPVZ", 0, 0,
@@ -88,8 +90,8 @@ LoadingScreen.updateCount();
 
 let badApplePlanet = new Planet("res/imgs/planets/Planet_Frozen.jpg", 36,
 	badApplePosition, 0.4, "cyan");
-badApplePlanet.addRing(2, 8, null, 0x00BFFF, 1);
-badApplePlanet.addRing(10, 10, null, 0xDC143C, 1);
+badApplePlanet.addRing(2, 8, "res/imgs/rings/Green.png", null, 6, 0x79B23F);
+badApplePlanet.addRing(10, 10, "res/imgs/rings/Red.png", null, 2, "red");
 let badAppleFlag = new Flag(80, 60,
 	"res/imgs/BadApple.png", null,
 	1, 110, 0xFFFFFF, "ProjectBadApple", 0, 0,
@@ -106,9 +108,9 @@ badAppleMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(badAppleMenuFlag);
 LoadingScreen.updateCount();
 
-let oregairuPlanet = new Planet("res/imgs/planets/Planet_Green.jpg", 30,
-	oregairuPosition, 0.8, "green");
-oregairuPlanet.addRing(2, 8, null, 0xFFFFFF, 1);
+let oregairuPlanet = new Planet("res/imgs/planets/Planet_Lava.jpg", 30,
+	oregairuPosition, 0.4, "red");
+oregairuPlanet.addRing(2, 8, "res/imgs/rings/Blue.jpg", null, 0.6, "cyan");
 let oregairuFlag = new Flag(60, 124,
 	null, "res/vids/Oregairu.mp4",
 	1, 160, 0xFFFFFF, "ProjectOregairu", 0, 0,
@@ -125,7 +127,7 @@ LoadingScreen.updateCount();
 
 let bleachPlanet = new Planet("res/imgs/planets/Planet_Purple0.png", 26,
 	bleachPosition, 1, "purple");
-bleachPlanet.addRing(2, 8, null, 0xFFFFFF, 1);
+bleachPlanet.addRing(2, 8, "res/imgs/rings/Green.png", null, 6, 0x79B23F);
 let bleachFlag = new Flag(112, 60,
 	null, "res/vids/Bleach.mp4",
 	1, 100, 0xFFFFFF, "ProjectBleach", 0, 0,
@@ -144,8 +146,8 @@ LoadingScreen.updateCount();
 
 let glPlanet = new Planet("res/imgs/planets/Planet_RedBlue.jpg", 36,
 	glPosition, 0.4, "white");
-glPlanet.addRing(2, 8, null, 0xFFFFFF, 1);
-glPlanet.addRing(10, 10, null, 0xFFFFFF, 1);
+glPlanet.addRing(2, 8, "res/imgs/rings/Red.png", null, 2, "red");
+glPlanet.addRing(10, 10, "res/imgs/rings/Blue.jpg", null, 0.6, "cyan");
 let glFlag = new Flag(100, 60,
 	"res/imgs/WIP.jpg", null,
 	1, 110, 0xFFFFFF, "ProjectENSIMAG_GL", 0, 0,
@@ -160,7 +162,7 @@ LoadingScreen.updateCount();
 
 let igPlanet = new Planet("res/imgs/planets/Planet_Yellow.png", 32,
 	igPosition, 0.6, "yellow");
-igPlanet.addRing(2, 10, null, 0xFFFFFF, 1);
+igPlanet.addRing(2, 10, "res/imgs/rings/Pink.png", null, 2, 0xFF4E87);
 let igFlag = new Flag(80, 60,
 	"res/imgs/IGPuzzle.png", null,
 	1, 100, 0xFFFFFF, "ProjectENSIMAG_IG", 0, 0,
@@ -177,7 +179,7 @@ LoadingScreen.updateCount();
 
 let fftPlanet = new Planet("res/imgs/planets/Planet_Pink0.jpg", 30,
 	fftPosition, 0.6, "pink");
-fftPlanet.addRing(2, 8, null, 0xFFFFFF, 1);
+fftPlanet.addRing(2, 8, "res/imgs/rings/Green.png", null, 6, 0x79B23F);
 let fftFlag = new Flag(106, 60,
 	"res/imgs/FFT.jpg", null,
 	1, 100, 0xFFFFFF, "ProjectUPMC_FFT", 0, 0,
@@ -193,8 +195,24 @@ fftMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(fftMenuFlag);
 LoadingScreen.updateCount();
 
-let tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
-let tmpObj = new RotatingObject(
+let tmpTex: THREE.Texture;
+let tmpObj: RotatingObject;
+
+// Middle
+// tmpTex = Utils.textureLoader.load("res/imgs/maps/Ice.jpg");
+// tmpObj = new RotatingObject(
+// 	new THREE.TorusGeometry(40, 20, 32, 64),
+// 	new THREE.MeshBasicMaterial({
+// 		map: tmpTex,
+// 	}),
+// 	Utils.getRandomVector3Spread(0.006),
+// 	0.001
+// );
+// tmpObj.position.set(0, 360, 800);
+// galaxy.addOtherObject(tmpObj);
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/Magma.jpg");
+tmpObj = new RotatingObject(
 	new THREE.TorusGeometry(60, 30, 32, 64),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
@@ -202,80 +220,193 @@ let tmpObj = new RotatingObject(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(0, 0, 0);
+tmpObj.position.set(0, -60, 0);
 galaxy.addOtherObject(tmpObj);
 
-tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
+// Left
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioSurprise.png");
 tmpObj = new RotatingObject(
-	new THREE.TorusKnotGeometry(30, 8, 96, 16, 2, 3),
+	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-260, 200, 1520);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrick.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-600, -160, 1300);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStrength.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(46, 46, 46, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-400, -100, 1200);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioPow.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(80, 80, 80, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-600, 100, 1000);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStar.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(42, 42, 42, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-400, 0, 700);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioTnT.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(36, 36, 36, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-420, -20, 460);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCloudPink.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(-300, 100, 100);
+galaxy.addOtherObject(tmpObj); // OK
+
+//Right
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioEvent.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(260, 200, 1320);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrickBroken.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(600, -160, 1100);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioGlass.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(400, -100, 1000);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCoin.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(56, 56, 56, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(600, 100, 800);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrickPink.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(80, 80, 80, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(400, -180, 600);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCloud.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+tmpObj.position.set(520, 160, 420);
+galaxy.addOtherObject(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioSound.png");
+tmpObj = new RotatingObject(
+	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
 	}),
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(-300, 0, 0);
-galaxy.addOtherObject(tmpObj);
+tmpObj.position.set(420, 200, -100);
+galaxy.addOtherObject(tmpObj); // OK
 
-tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
-tmpObj = new RotatingObject(
-	new THREE.ConeGeometry(30, 60, 32, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(300, 0, 0);
-galaxy.addOtherObject(tmpObj);
-
-tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
-tmpObj = new RotatingObject(
-	new THREE.CapsuleGeometry(30, 30, 16, 32),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(300, 200, 0);
-galaxy.addOtherObject(tmpObj);
-
-tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
-tmpObj = new RotatingObject(
-	new THREE.BoxGeometry(30, 30, 30, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(300, 100, 0);
-galaxy.addOtherObject(tmpObj);
-
-tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
-tmpObj = new RotatingObject(
-	new THREE.BoxGeometry(30, 60, 30, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-300, 100, 0);
-galaxy.addOtherObject(tmpObj);
-
-tmpTex = Utils.textureLoader.load("res/imgs/planets/Planet_Sun.jpg");
-tmpObj = new RotatingObject(
-	new THREE.CylinderGeometry(20, 40, 60, 32, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-300, 200, 0);
-galaxy.addOtherObject(tmpObj);
+LoadingScreen.updateCount();
 
 // Utils.gltfLoader.load("res/3d/RobotUFO/scene.gltf", ( gltf ) => {
 // 	let player = new Player(gltf.scene, 0.01);

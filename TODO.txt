@@ -1,8 +1,5 @@
 scale up blurry -> block zooming functions ?
 
-change road texture
-add more objects like more plants or rockets.. idk, to make the world more living
-
 Optimize parce que ca bug fort quand meme la (en fait c'est tween qui bug jsp pk)
 
 at the start the html is appearing without css idk why.

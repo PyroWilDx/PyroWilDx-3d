@@ -12,7 +12,7 @@ import { Star } from './Star.ts';
 import { Utils } from './Utils.ts';
 
 export class Galaxy {
-    public static readonly galaxyModelY = 1000;
+    public static readonly galaxyModelY = 900;
     public static readonly galaxyModelScale = 200;
 
     private radius: number;

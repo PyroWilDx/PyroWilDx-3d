@@ -5,7 +5,7 @@ import { Utils } from './Utils';
 
 export class MainInit {
 
-    public static readonly meanZ: number = 900;
+    public static readonly meanZ: number = 1100;
     public static readonly academicStartZ: number = 800;
     private static readonly curvePoints: number[] = [
         0, 100, 1800,
@@ -21,7 +21,7 @@ export class MainInit {
     
     // private static readonly curvePoints: number[] = [];
 
-    public static readonly ls: number = 1400;
+    public static readonly ls: number = 1000;
     public static readonly lss: number = MainInit.ls + 1;
 
     private static t: THREE.Vector3[] = [];
@@ -131,7 +131,8 @@ export class MainInit {
         }
         
         const dw = [-10, -8, -1, 1, 8, 10];
-        
+        // const dw = [-10, -10, -10, 10, 10, 10];
+
         for ( let j = 0; j < MainInit.lss; j ++ ) {
             for ( let i = 0; i < wss; i ++ ) {
                 x = MainInit.points[j].x + dw[i] * MainInit.n[j].x;
@@ -146,7 +147,7 @@ export class MainInit {
             }
         }
         
-        const tex = new THREE.TextureLoader().load("res/imgs/planets/Planet_Pink0.jpg");
+        const tex = new THREE.TextureLoader().load("res/imgs/maps/Multi.png");
         tex.wrapS = THREE.RepeatWrapping;
         tex.repeat.set(MainInit.ls * 2, 0);
         const eIntensity = 10;
@@ -161,20 +162,20 @@ export class MainInit {
             new THREE.MeshStandardMaterial({
                 color: 0x111111,
                 side: THREE.DoubleSide,
-                emissiveIntensity: eIntensity,
+                emissiveIntensity: 2,
                 emissive: 0x111111
             }),
             new THREE.MeshStandardMaterial({
                 map: tex,
                 side: THREE.DoubleSide,
-                emissiveIntensity: eIntensity,
+                emissiveIntensity: 1,
                 emissive: 0xFFFFFF,
                 emissiveMap: tex
             }),
             new THREE.MeshStandardMaterial({
                 color: 0x111111,
                 side: THREE.DoubleSide,
-                emissiveIntensity: eIntensity,
+                emissiveIntensity: 2,
                 emissive: 0x111111
             }),
             new THREE.MeshStandardMaterial({
@@ -191,7 +192,7 @@ export class MainInit {
 
     private static M3 = new THREE.Matrix3();
     private static M4 = new THREE.Matrix4();
-    public static readonly scrollLengthAdv: number = 10;
+    public static readonly scrollLengthAdv: number = 20;
     public static i = -MainInit.scrollLengthAdv;
     public static forward: boolean = false;
     public static doneOneRound: boolean = false;

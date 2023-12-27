@@ -6,5 +6,8 @@ export default {
   ],
   server: {
     host: true
+  },
+  build: {
+    target: "ES2022"
   }
 }

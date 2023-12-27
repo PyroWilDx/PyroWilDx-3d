@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@parcel/transformer-glsl": "^2.10.3",
     "@types/three": "^0.157.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",

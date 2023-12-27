@@ -46,6 +46,7 @@ export class Player extends THREE.Group<THREE.Object3DEventMap> implements Objec
     }
 
     onLookStart(cameraLerp: CameraLerp): void {
+        cameraLerp;
         this.playerLocked = false;
     }
 

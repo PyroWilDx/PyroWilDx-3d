@@ -1,4 +1,4 @@
-1) npm run i
+1) npm i
 2) npm run build
 3) Copy res/ folder into dist/ (Remove .gitignore !)
 4) Upload to GitHub

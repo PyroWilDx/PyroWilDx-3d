@@ -417,6 +417,8 @@ p {
 }
 
 .progress-info-text {
+    user-select: none;
+    pointer-events: none;
     color: white;
     position: fixed;
     top: 10px;
@@ -426,6 +428,7 @@ p {
 }
 
 .equalizer {
+    cursor: pointer;
     position: fixed;
     bottom: 10px;
     left: 10px;

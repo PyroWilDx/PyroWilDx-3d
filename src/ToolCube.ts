@@ -13,6 +13,7 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
 
     public beingAnimated: boolean;
     public currentAnimation: any;
+    public onCompleteF: Function | null;
 
     private light: THREE.PointLight;
     private link: string;
@@ -34,6 +35,7 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
 
         this.beingAnimated = false;
         this.currentAnimation = null;
+        this.onCompleteF = null;
 
         this.light = new THREE.PointLight(0xFFFFFF, 400);
         Scene.addEntity(this.light);
@@ -90,21 +92,30 @@ export class ToolCube extends RotatingObject implements RayCastableInterface, An
 
     addSelf(): void {
         Scene.addEntity(this);
-        Scene.addEntity(this.light);
+        this.light.intensity = 400;
+        // Scene.addEntity(this.light);
         CustomAnimation.popInAnimation(this, 800, true);
     }
 
     removeSelf(): void {
         Scene.removeEntity(this);
-        Scene.removeEntity(this.light);
+        this.light.intensity = 0;
+        // Scene.removeEntity(this.light);
     }
 
     setPosition(position: THREE.Vector3, left: boolean): void {
         this.position.copy(position);
         this.light.position.copy(this.position);
-        if (left) this.light.position.x += ToolCube.cubeSize;
-        else this.light.position.x -= ToolCube.cubeSize;
-        this.light.position.z += ToolCube.cubeSize * 1.2;
+        if (Scene.currentMenu == 0) {
+            if (left) this.light.position.x += ToolCube.cubeSize;
+            else this.light.position.x -= ToolCube.cubeSize;
+            this.light.position.z += ToolCube.cubeSize * 1.2;
+        }
+        if (Scene.currentMenu == 1) {
+            if (left) this.light.position.x += ToolCube.cubeSize;
+            else this.light.position.x -= ToolCube.cubeSize;
+            this.light.position.y += ToolCube.cubeSize * 1.2;
+        }
     }
 
 }

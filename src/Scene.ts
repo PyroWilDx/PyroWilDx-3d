@@ -52,6 +52,7 @@ export class Scene {
 
     public static progressInfoText: HTMLElement | null = null;
 
+    public static equalizerDown: boolean = false;
     public static isPlayingSound: boolean = true;
     public static readonly sECount: number = 5;
     public static sELines: (HTMLElement | null)[] = [null, null, null, null, null];

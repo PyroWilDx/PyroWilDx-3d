@@ -14,11 +14,14 @@ export class CustomAnimation {
                 animatable.beingAnimated = false
             }
         } else {
-            f = () => { animatable.beingAnimated = false; }
+            f = () => { 
+                animatable.beingAnimated = false; 
+            }
         }
         anim.onComplete(f);
 
-        if (animatable.currentAnimation != null) {
+        if (animatable.currentAnimation != null && animatable.beingAnimated) {
+            if (animatable.onCompleteF != null) animatable.onCompleteF();
             animatable.currentAnimation.stop();
         }
 
@@ -26,6 +29,7 @@ export class CustomAnimation {
 
         animatable.beingAnimated = true;
         animatable.currentAnimation = anim;
+        animatable.onCompleteF = f;
     }
 
     static popInAnimation(animatable: AnimatableInterface, duration: number,

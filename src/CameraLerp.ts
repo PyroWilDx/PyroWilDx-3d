@@ -22,7 +22,8 @@ export class CameraLerp {
 
     constructor(camera: THREE.PerspectiveCamera,
             finalPosition: THREE.Vector3, lookObject: ObjectLookedInterface | null) {
-        this.lerpSpeed = 0.026;
+        // this.lerpSpeed = 0.026;
+        this.lerpSpeed = 0.036;
         this.rotateSpeed = 0.08;
 
         this.lookAtObject = true;
@@ -33,8 +34,10 @@ export class CameraLerp {
         this.lookQuaternion = null;
         this.lookObject = lookObject;
         
-        this.distEpsilon = 1;
-        this.rotEpsilon = 0.002;
+        // this.distEpsilon = 1;
+        this.distEpsilon = 1.2;
+        // this.rotEpsilon = 0.002;
+        this.rotEpsilon = 0.012;
 
         this.maxDist = 0;
 

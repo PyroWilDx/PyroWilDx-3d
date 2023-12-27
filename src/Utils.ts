@@ -45,6 +45,19 @@ export class Utils {
         return randomVec;
     }
 
+    static getRandomVector3OneEl(start: number, end: number): THREE.Vector3 {
+        let randomVec: THREE.Vector3 = new THREE.Vector3();
+        let rd = THREE.MathUtils.randFloat(0, 1);
+        if (rd < 0.33) {
+            randomVec.x = THREE.MathUtils.randFloat(start, end);
+        } else if (rd < 0.67) {
+            randomVec.y = THREE.MathUtils.randFloat(start, end);
+        } else {
+            randomVec.z = THREE.MathUtils.randFloat(start, end);
+        }
+        return randomVec;
+    }
+
     static areVector3AlmostEqual(v1: THREE.Vector3, v2: THREE.Vector3,
             epsilon: number = 0.1): boolean {
         return (Math.abs(v1.x - v2.x) < epsilon &&

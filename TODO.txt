@@ -1,5 +1,3 @@
 scale up blurry -> block zooming functions ?
-
-Optimize parce que ca bug fort quand meme la (en fait c'est tween qui bug jsp pk)
-
-at the start the html is appearing without css idk why.
+mobile
+refresh if size change and do the check size in load ?

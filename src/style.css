@@ -483,11 +483,6 @@ p {
     content: '\2193';
 }
 
-/* body {
-    margin: 0;
-    padding: 0;
-} */
-
 .rotate-container {
     position: fixed;
     background: rgba(42, 42, 42, 1);

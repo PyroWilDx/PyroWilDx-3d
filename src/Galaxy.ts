@@ -12,8 +12,10 @@ import { Star } from './Star.ts';
 import { Utils } from './Utils.ts';
 
 export class Galaxy {
-    public static readonly galaxyModelY = 900;
+    public static readonly galaxyModelY = 1000;
     public static readonly galaxyModelScale = 200;
+
+    public static readonly xMenuFlag = 200;
 
     private radius: number;
 
@@ -241,6 +243,25 @@ export class Galaxy {
         }
 
         return false;
+    }
+
+    replaceMenuFlags(): void {
+        let limit = 1.6;
+        let maxLen = 110;
+        let xNew;
+        if (Scene.screenRatio > 0.8) {
+            xNew = ((Scene.screenRatio - 0.8) / (limit - 0.8)) * maxLen;
+            xNew = maxLen - xNew;
+        } else xNew = maxLen;
+        for (const currMenuFlag of this.menuFlags) {
+            if (Scene.screenRatio >= limit) {
+                if (currMenuFlag.position.x < 0) currMenuFlag.position.x = -Galaxy.xMenuFlag;
+                else currMenuFlag.position.x = Galaxy.xMenuFlag;
+            } else {
+                if (currMenuFlag.position.x < 0) currMenuFlag.position.x = -Galaxy.xMenuFlag + xNew;
+                else currMenuFlag.position.x = Galaxy.xMenuFlag - xNew;
+            }
+        }
     }
 
     zShiftMenuFlags(zShift: number): void {

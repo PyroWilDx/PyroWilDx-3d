@@ -285,7 +285,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 // Utils.setEmissiveMesh(this.flagStickMesh, this.flagStickColor);
                 // Utils.setEmissiveMesh(this, "white");
                 // Scene.addEntity(this.flagGlowLight);
-                Scene.addEntity(this.flagGlowMesh);
+                if (Scene.currentMenu == 0) Scene.addEntity(this.flagGlowMesh);
                 document.body.style.cursor = "pointer";
             }
         } else {
@@ -294,7 +294,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 // Utils.removeEmissiveMesh(this.flagStickMesh);
                 // Utils.removeEmissiveMesh(this);
                 // Scene.removeEntity(this.flagGlowLight);
-                Scene.removeEntity(this.flagGlowMesh);
+                if (Scene.currentMenu == 0) Scene.removeEntity(this.flagGlowMesh);
                 if (rmPointer) {
                     document.body.style.cursor = "auto";
                 }
@@ -348,6 +348,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                     this.centeredText.style.transform = "";
                 }
                 this.displayProject();
+                Galaxy.showButtonUpDown(false);
             }
 
         }

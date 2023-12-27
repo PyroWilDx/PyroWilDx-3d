@@ -1,3 +1,0 @@
-scale up blurry -> block zooming functions ?
-mobile
-refresh if size change and do the check size in load ?

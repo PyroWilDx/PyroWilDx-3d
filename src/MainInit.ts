@@ -5,7 +5,7 @@ import { Utils } from './Utils';
 
 export class MainInit {
 
-    public static readonly meanZ: number = 1100;
+    public static readonly meanZ: number = 820;
     public static readonly academicStartZ: number = 840;
     private static readonly curvePoints: number[] = [
         0, 100, 1800,

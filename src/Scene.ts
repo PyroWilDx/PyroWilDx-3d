@@ -64,11 +64,14 @@ export class Scene {
     public static sEMaxs: number[] = [Scene.sEMax, Scene.sEMax, Scene.sEMax,
         Scene.sEMax, Scene.sEMax];
 
+    public static rotateContainer: HTMLElement | null = null;
+    public static askRotating: boolean = false;
+
     static initScene(): void {
         Scene.scene = new THREE.Scene();
 
         Scene.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight,
-            0.1, 2000);
+            0.1, 3000);
         Scene.camera.position.set(0, 2000, 0);
 
         Scene.renderer = new THREE.WebGLRenderer({
@@ -111,6 +114,8 @@ export class Scene {
         for (let i = 0; i < Scene.sECount; i++) {
             Scene.sELines[i] = document.getElementById("sEL" + i);
         }
+
+        Scene.rotateContainer = document.getElementById("rotateContainer");
 
         LoadingScreen.updateCount();
     }
@@ -162,8 +167,19 @@ export class Scene {
         Scene.camera.updateProjectionMatrix();
         
         Scene.renderer.setSize(window.innerWidth, window.innerHeight);
+        Scene.effectComposer.setSize(window.innerWidth, window.innerHeight)
 
         Scene.screenRatio = ratio;
+
+        if (Scene.screenRatio <= 0.8) {
+            if (Scene.rotateContainer != null) Scene.rotateContainer.style.display = "";
+            Scene.askRotating = true;
+        } else {
+            if (Scene.rotateContainer != null) Scene.rotateContainer.style.display = "none";
+            Scene.askRotating = false;
+        }
+        
+        Scene.galaxy.replaceMenuFlags();
     }
 
     static getScreenWidthRatio(): number {
@@ -310,6 +326,10 @@ export class Scene {
                     document.documentElement.style.height = "100%";
                     window.scrollTo(0, 0);
                 }
+            }
+
+            if (Scene.currentMenu == 1) {
+                Galaxy.showButtonUpDown(true);
             }
         }
     }

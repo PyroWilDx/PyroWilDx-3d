@@ -31,7 +31,7 @@ let glPosition = new THREE.Vector3(-130, -130, 600);
 let igPosition = new THREE.Vector3(100, -146, 400);
 let fftPosition = new THREE.Vector3(-130, -122, 200);
 
-let xMenu = 200;
+let xMenu = Galaxy.xMenuFlag;
 let kqMenuPosition = new THREE.Vector3(-xMenu,
 	Galaxy.getGalaxyModelViewY() + menuFlagAddY, -100 + MainInit.meanZ);
 let robotsPVZMenuPosition = new THREE.Vector3(-xMenu,
@@ -393,7 +393,7 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(420, 200, -100);
+tmpObj.position.set(320, 200, 180);
 galaxy.addOtherObject(tmpObj); // OK
 
 LoadingScreen.updateCount();
@@ -420,9 +420,11 @@ LoadingScreen.updateCount();
 // Event Listeners
 window.addEventListener('resize', () => {
 	Scene.updateRenderSize();
-});
+}, false);
 
 window.addEventListener('mousedown', (event) => {
+	if (Scene.askRotating) return;
+
 	if (!loaded) return;
 
 	if (event.button === 0) {
@@ -446,6 +448,8 @@ let clickSound = new Audio("res/sfx/Click.mp3");
 clickSound.volume = 0.6;
 
 window.addEventListener('mouseup', (event) => {
+	if (Scene.askRotating) return;
+
 	if (!loaded) return;
 
 	if (event.button === 0) {
@@ -480,12 +484,19 @@ window.addEventListener('mouseup', (event) => {
 });
 
 window.addEventListener('mousemove', (event) => {
+	if (Scene.askRotating) return;
+	
 	if (!loaded) return;
 	
 	Utils.updateMousePosition(event);
 });
 
 window.addEventListener("wheel", (event) => {
+	if (Scene.askRotating) {
+		event.preventDefault();
+		return;
+	}
+
 	if (!loaded) {
 		event.preventDefault();
 		return;
@@ -524,6 +535,11 @@ window.addEventListener("wheel", (event) => {
 }, {passive: false});
 
 window.addEventListener("scroll", (event) => {
+	if (Scene.askRotating) {
+		event.preventDefault();
+		return;
+	}
+
 	if (!loaded) {
 		event.preventDefault();
 		return;
@@ -567,6 +583,8 @@ if (closeButton != null) {
 }
 
 window.addEventListener("keydown", (event) => {
+	if (Scene.askRotating) return;
+
 	let key = event.key;
 	// Utils.updateKeyMap(key, true);
 
@@ -719,9 +737,10 @@ function animate() {
 
 	TWEEN.update();
 
-	galaxy.updateFrame();
-
-	Scene.updateFrame();
+	if (!Scene.askRotating) {
+		galaxy.updateFrame();
+		Scene.updateFrame();
+	}
 
 	Utils.mouseWheel = false;
 }
@@ -763,6 +782,8 @@ if (loadingScreen != null && bg != null && scrollToExplore != null &&
 	document.documentElement.style.height = MainInit.htmlHeight;
 	window.scrollTo(0, 0);
 }
+
+Scene.updateRenderSize();
 
 let music = new Audio("res/sfx/Music.mp3");
 music.volume = 0.142;

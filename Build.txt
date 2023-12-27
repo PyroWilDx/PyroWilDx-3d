@@ -3,4 +3,5 @@
 3) In dist/index.html, replace every [="/] by [="./]
 4) Test with Live Server
 5) Copy res/ folder into dist/ (Remove .gitignore !)
-6) Upload to GitHub
+6) Add README.md with [# PyroWilDx.github.io]
+7) Upload to GitHub

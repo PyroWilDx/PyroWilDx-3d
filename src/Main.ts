@@ -144,8 +144,8 @@ bleachMenuFlag.rotateX(-Math.PI / 2);
 galaxy.addMenuFlag(bleachMenuFlag);
 LoadingScreen.updateCount();
 
-let glPlanet = new Planet("res/imgs/planets/Planet_RedBlue.jpg", 36,
-	glPosition, 0.4, "white");
+let glPlanet = new Planet("res/imgs/planets/Planet_Sun.jpg", 36,
+	glPosition, 0.8, "orange");
 glPlanet.addRing(2, 8, "res/imgs/rings/Red.png", null, 2, "red");
 glPlanet.addRing(10, 10, "res/imgs/rings/Blue.jpg", null, 0.6, "cyan");
 let glFlag = new Flag(100, 60,
@@ -792,7 +792,7 @@ music.play().then(() => {
 	Scene.isPlayingSound = true;
 }).catch(() => {
 	Scene.isPlayingSound = false;
-	Scene.muteSoundEqualizer();
+	// Scene.muteSoundEqualizer();
 });
 let soundEqualizer = document.getElementById("soundEqualizer");
 if (soundEqualizer != null) {

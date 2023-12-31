@@ -69,6 +69,10 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             if (flagVidPath != null) vid.src = flagVidPath;
             vid.autoplay = true;
             vid.loop = true;
+            vid.muted = true;
+            vid.crossOrigin = "anonymous";
+            vid.playsInline = true;
+            vid.play();
 
             flagTexture = new THREE.VideoTexture(vid);
             flagTexture.minFilter = THREE.LinearFilter;

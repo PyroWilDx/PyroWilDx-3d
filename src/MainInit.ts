@@ -130,7 +130,7 @@ export class MainInit {
             
         }
         
-        const dw = [-10, -8, -1, 1, 8, 10];
+        const dw = [-10, -8, -0.8, 0.8, 8, 10];
         // const dw = [-10, -10, -10, 10, 10, 10];
 
         for ( let j = 0; j < MainInit.lss; j ++ ) {

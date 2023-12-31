@@ -1,7 +1,7 @@
 1) npm i
 2) npm run build
 3) In dist/index.html, replace every [="/] by [="./]
-4) Test with Live Server
-5) Copy res/ folder into dist/ (Remove .gitignore !)
+4) Copy res/ folder into dist/ (Remove .gitignore !)
+5) Test with Live Server
 6) Add README.md with [# PyroWilDx.github.io]
 7) Upload to GitHub

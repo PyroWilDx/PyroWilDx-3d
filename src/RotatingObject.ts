@@ -4,6 +4,7 @@ import { Utils } from './Utils';
 export class RotatingObject extends THREE.Mesh {
 
     private rSpeed: THREE.Vector3;
+    private mSpeed: THREE.Vector3;
 
     constructor(geometry: THREE.BufferGeometry, 
             material: THREE.Material | THREE.Material[],
@@ -18,12 +19,36 @@ export class RotatingObject extends THREE.Mesh {
             let rRot = Utils.getRandomVector3(0, 2 * Math.PI);
             this.rotation.set(rRot.x, rRot.y, rRot.z);
         }
+
+        this.mSpeed = new THREE.Vector3(0, 0, 0);
+    }
+
+    setMoveSpeed(mSpeed: THREE.Vector3): void {
+        this.mSpeed = mSpeed;
+    }
+
+    oppMX(): void {
+        this.mSpeed.x = -this.mSpeed.x;
+    }
+
+    oppMY(): void {
+        this.mSpeed.y = -this.mSpeed.y;
+    }
+
+    oppMZ(): void {
+        this.mSpeed.z = -this.mSpeed.z;
     }
 
     rotate(): void {
         this.rotation.x += this.rSpeed.x * Utils.dt;
         this.rotation.y += this.rSpeed.y * Utils.dt;
         this.rotation.z += this.rSpeed.z * Utils.dt;
+    }
+
+    move(): void {
+        this.position.x += this.mSpeed.x * Utils.dt;
+        this.position.y += this.mSpeed.y * Utils.dt;
+        this.position.z += this.mSpeed.z * Utils.dt;
     }
 
 }

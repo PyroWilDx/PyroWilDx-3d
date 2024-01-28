@@ -52,6 +52,8 @@ export class Scene {
 
     public static progressInfoText: HTMLElement | null = null;
 
+    public static firstClick: boolean = false;
+
     public static equalizerDown: boolean = false;
     public static isPlayingSound: boolean = true;
     public static readonly sECount: number = 5;
@@ -70,8 +72,8 @@ export class Scene {
     static initScene(): void {
         Scene.scene = new THREE.Scene();
 
-        Scene.camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight,
-            0.1, 3000);
+        Scene.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight,
+            0.1, 3600);
         Scene.camera.position.set(0, 2000, 0);
 
         Scene.renderer = new THREE.WebGLRenderer({

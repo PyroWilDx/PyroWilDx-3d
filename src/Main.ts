@@ -18,17 +18,17 @@ Scene.initScene();
 
 // World Building
 let galaxy: Galaxy = Scene.galaxy;
-galaxy.addStars(200, "res/3d/MarioStar/scene.gltf", 1);
+galaxy.addStars(156, "res/3d/MarioStar/scene.gltf", 1);
 
 const menuFlagAddY = -200;
 
-let kqPosition = new THREE.Vector3(110, 40, 1600);
+let kqPosition = new THREE.Vector3(-130, 52, 1600);
 let robotsPVZPosition = new THREE.Vector3(-130, 0, 1400);
-let badApplePosition = new THREE.Vector3(100, -20, 1200);
-let oregairuPosition = new THREE.Vector3(-110, -80, 1000);
-let bleachPosition = new THREE.Vector3(100, -80, 800);
-let glPosition = new THREE.Vector3(-130, -130, 600);
-let igPosition = new THREE.Vector3(100, -146, 400);
+let badApplePosition = new THREE.Vector3(-116, -30, 1200);
+let oregairuPosition = new THREE.Vector3(-100, -100, 1000);
+let bleachPosition = new THREE.Vector3(-130, -62, 800);
+let glPosition = new THREE.Vector3(-130, -146, 600);
+let igPosition = new THREE.Vector3(-120, -146, 400);
 let fftPosition = new THREE.Vector3(-130, -122, 200);
 
 let xMenu = Galaxy.xMenuFlag;
@@ -55,12 +55,11 @@ kqPlanet.addRing(2, 8, "res/imgs/rings/Blue.jpg", null, 0.6, "cyan");
 kqPlanet.addRing(10, 10, "res/imgs/rings/Green.png", null, 6, 0x79B23F);
 let kqFlag = new Flag(106, 60,
 	null, "res/vids/Keqing.mp4",
-	1, 110, 0xFFFFFF, "ProjectKeqing", 0, 0,
+	1, 106, 0xFFFFFF, "ProjectKeqing", 0, 0,
 	null,
 	"res/imgs/icons/Icon_C++.png",
 	"res/imgs/icons/Icon_SDL2.png",
-	"res/imgs/icons/Icon_CLion.png",
-	"res/imgs/icons/Icon_Boost.png");
+	"res/imgs/icons/Icon_CLion.png");
 // kqFlag.rotateY(Math.PI);
 kqPlanet.setFlag(kqFlag);
 galaxy.addPlanet(kqPlanet);
@@ -98,8 +97,7 @@ let badAppleFlag = new Flag(80, 60,
 	null,
 	"res/imgs/icons/Icon_C++.png",
 	"res/imgs/icons/Icon_OpenCV.png",
-	"res/imgs/icons/Icon_CLion.png",
-	"res/imgs/icons/Icon_SFML.png");
+	"res/imgs/icons/Icon_CLion.png");
 badApplePlanet.setFlag(badAppleFlag);
 galaxy.addPlanet(badApplePlanet);
 let badAppleMenuFlag = badAppleFlag.cloneForMenu();
@@ -134,8 +132,7 @@ let bleachFlag = new Flag(112, 60,
 	null,
 	"res/imgs/icons/Icon_Python.png",
 	"res/imgs/icons/Icon_PyGame.png",
-	"res/imgs/icons/Icon_Pyzo.png",
-	"res/imgs/icons/Icon_cxFreeze.png");
+	"res/imgs/icons/Icon_Pyzo.png");
 bleachPlanet.setFlag(bleachFlag);
 galaxy.addPlanet(bleachPlanet);
 let bleachMenuFlag = bleachFlag.cloneForMenu();
@@ -198,77 +195,11 @@ LoadingScreen.updateCount();
 let tmpTex: THREE.Texture;
 let tmpObj: RotatingObject;
 
-// Middle
 import { DecorationCube } from './DecorationCube.ts'; // Je vais devenir fou
-
-tmpTex = Utils.textureLoader.load("res/imgs/maps/Magma.jpg");
-tmpObj = new RotatingObject(
-	new THREE.TorusGeometry(60, 30, 32, 64),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(0, -60, 0);
-galaxy.addOtherObject(tmpObj);
-
-// Left
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioSurprise.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-260, 200, 1520);
-galaxy.addOtherObject(tmpObj); // OK
-
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrick.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-600, -160, 1300);
-galaxy.addOtherObject(tmpObj); // OK
-
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStrength.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(46, 46, 46, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-400, -100, 1200);
-galaxy.addOtherObject(tmpObj); // OK
-
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioPow.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(80, 80, 80, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-600, 100, 1000);
-galaxy.addOtherObject(tmpObj); // OK
 
 tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStar.png");
 tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(42, 42, 42, 1, 1, 1),
+	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
 		side: THREE.FrontSide
@@ -276,50 +207,9 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(-400, 0, 700);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStone.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(46, 46, 46, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-420, -20, 460);
-galaxy.addOtherObject(tmpObj); // OK
-
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCloudPink.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(-300, 100, 100);
-galaxy.addOtherObject(tmpObj); // OK
-
-//Right
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioEvent.png");
-tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
-	new THREE.MeshBasicMaterial({
-		map: tmpTex,
-		side: THREE.FrontSide
-	}),
-	Utils.getRandomVector3Spread(0.006),
-	0.001
-);
-tmpObj.position.set(260, 200, 1320);
-galaxy.addOtherObject(tmpObj); // OK
-
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrickBroken.png");
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCoin.png");
 tmpObj = new DecorationCube(
 	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
@@ -329,12 +219,11 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(600, -160, 1100);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioM.png");
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioSurprise.png");
 tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
+	new THREE.BoxGeometry(62, 62, 62, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
 		side: THREE.FrontSide
@@ -342,10 +231,9 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(400, -100, 1000);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCoin.png");
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCloud.png");
 tmpObj = new DecorationCube(
 	new THREE.BoxGeometry(56, 56, 56, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
@@ -355,12 +243,71 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(600, 100, 800);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCloudPink.png");
+tmpObj = new DecorationCube(
+	new THREE.BoxGeometry(66, 66, 66, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+galaxy.addOtherObjectMoving(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioPow.png");
+tmpObj = new DecorationCube(
+	new THREE.BoxGeometry(72, 72, 72, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+galaxy.addOtherObjectMoving(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioM.png");
+tmpObj = new DecorationCube(
+	new THREE.BoxGeometry(62, 62, 62, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+galaxy.addOtherObjectMoving(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrick.png");
+tmpObj = new DecorationCube(
+	new THREE.BoxGeometry(56, 56, 56, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+galaxy.addOtherObjectMoving(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioEvent.png");
+tmpObj = new DecorationCube(
+	new THREE.BoxGeometry(62, 62, 62, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
 tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioBrickPink.png");
 tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(80, 80, 80, 1, 1, 1),
+	new THREE.BoxGeometry(66, 66, 66, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
 		side: THREE.FrontSide
@@ -368,12 +315,11 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(400, -180, 600);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
-tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioCloud.png");
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStrength.png");
 tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(40, 40, 40, 1, 1, 1),
+	new THREE.BoxGeometry(62, 62, 62, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
 		side: THREE.FrontSide
@@ -381,43 +327,41 @@ tmpObj = new DecorationCube(
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(520, 160, 420);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
 tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioSound.png");
 tmpObj = new DecorationCube(
-	new THREE.BoxGeometry(60, 60, 60, 1, 1, 1),
+	new THREE.BoxGeometry(68, 68, 68, 1, 1, 1),
 	new THREE.MeshBasicMaterial({
 		map: tmpTex,
 	}),
 	Utils.getRandomVector3Spread(0.006),
 	0.001
 );
-tmpObj.position.set(320, 200, 180);
-galaxy.addOtherObject(tmpObj); // OK
+galaxy.addOtherObjectMoving(tmpObj); // OK
+
+tmpTex = Utils.textureLoader.load("res/imgs/maps/MarioStone.png");
+tmpObj = new DecorationCube(
+	new THREE.BoxGeometry(72, 72, 72, 1, 1, 1),
+	new THREE.MeshBasicMaterial({
+		map: tmpTex,
+		side: THREE.FrontSide
+	}),
+	Utils.getRandomVector3Spread(0.006),
+	0.001
+);
+galaxy.addOtherObjectMoving(tmpObj); // OK
 
 LoadingScreen.updateCount();
-
-// Utils.gltfLoader.load("res/3d/RobotUFO/scene.gltf", ( gltf ) => {
-// 	let player = new Player(gltf.scene, 0.01);
-// 	galaxy.setPlayer(player);
-// 	player.position.set(-600, 100, -600);
-// 	LoadingScreen.updateCount();
-// });
 
 MainInit.initRoad();
 LoadingScreen.updateCount();
 
-// Utils.gltfLoader.load("res/3d/Galaxy/scene.gltf", ( gltf ) => {
-// 	let galaxyModel = gltf.scene;
-// 	let scale = Galaxy.galaxyModelScale;
-// 	galaxyModel.scale.set(scale, scale, scale);
-// 	galaxyModel.position.set(0, Galaxy.galaxyModelY, 0);
-// 	galaxy.setGalaxyModel(galaxyModel);
-// 	LoadingScreen.updateCount();
-// });
-
 // Event Listeners
+window.addEventListener("focus", () => { 
+    Utils.dt = 0;
+}, false);
+
 window.addEventListener('resize', () => {
 	Scene.updateRenderSize();
 }, false);
@@ -613,6 +557,9 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	menuRoad.addEventListener("click", () => {
 		if (Scene.currentMenu == 0) return;
 		Scene.setCurrentMenu(0);
+
+		Scene.camera.fov = 60;
+		Scene.camera.updateProjectionMatrix();
 		
 		if (!Utils.scrolled) Scene.showScrollToExplore(true);
 
@@ -637,6 +584,9 @@ if (menuRoad != null && menuOverview != null && menuAbout != null) {
 	menuOverview.addEventListener("click", () => {
 		if (Scene.currentMenu == 1) return;
 		Scene.setCurrentMenu(1);
+
+		Scene.camera.fov = 80;
+		Scene.camera.updateProjectionMatrix();
 
 		if (!Utils.scrolled) Scene.showScrollToExplore(false);
 
@@ -788,12 +738,15 @@ Scene.updateRenderSize();
 let music = new Audio("res/sfx/Music.mp3");
 music.volume = 0.142;
 music.loop = true;
-music.play().then(() => {
-	Scene.isPlayingSound = true;
-}).catch(() => {
-	Scene.isPlayingSound = false;
-	// Scene.muteSoundEqualizer();
-});
+
+window.addEventListener("click", () => {
+	if (!Scene.firstClick) {
+		Scene.isPlayingSound = true;
+		music.play();
+	}
+	Scene.firstClick = true;
+}, false);
+
 let soundEqualizer = document.getElementById("soundEqualizer");
 if (soundEqualizer != null) {
 	soundEqualizer.addEventListener("mousedown", () => {

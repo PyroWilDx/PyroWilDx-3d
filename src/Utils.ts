@@ -37,6 +37,17 @@ export class Utils {
         return randomVec;
     }
 
+    static getRandomVector3SpreadMin(value: number, min: number): THREE.Vector3 {
+        let randomVec: THREE.Vector3 = this.getRandomVector3Spread(value);
+        if (randomVec.x >= 0 && randomVec.x < min) randomVec.x = min;
+        else if (randomVec.x < 0 && randomVec.x > -min) randomVec.x = -min;
+        if (randomVec.y >= 0 && randomVec.y < min) randomVec.y = min;
+        else if (randomVec.y < 0 && randomVec.y > -min) randomVec.y = -min;
+        if (randomVec.z >= 0 && randomVec.z < min) randomVec.z = min;
+        else if (randomVec.z < 0 && randomVec.z > -min) randomVec.z = -min;
+        return randomVec;
+    }
+
     static getRandomVector3(start: number, end: number): THREE.Vector3 {
         let randomVec: THREE.Vector3 = new THREE.Vector3();
         randomVec.x = THREE.MathUtils.randFloat(start, end);

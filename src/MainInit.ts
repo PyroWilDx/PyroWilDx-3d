@@ -16,7 +16,8 @@ export class MainInit {
         0, -20, 800,
         0, -90, 600,
         0, -80, 400,
-        0, -80, 200
+        0, -80, 200,
+        0, -80, 100
     ];
     
     // private static readonly curvePoints: number[] = [];

@@ -28,6 +28,12 @@ export class Galaxy {
     private player: Player | null;
 
     private otherObjects: RotatingObject[];
+    private static otherObjMinX: number = 200;
+    private static otherObjMaxX: number = 900;
+    private static otherObjMinY: number = -200;
+    private static otherObjMaxY: number = 600;
+    private static otherObjMinZ: number = -560;
+    private static otherObjMaxZ: number = 1400;
 
     private lastRayCastTime: number;
 
@@ -154,6 +160,16 @@ export class Galaxy {
     }
 
     addOtherObject(obj: RotatingObject): void {
+        this.otherObjects.push(obj);
+        Scene.addEntity(obj);
+    }
+
+    addOtherObjectMoving(obj: RotatingObject): void {
+        let mSpeed = Utils.getRandomVector3SpreadMin(2., 0.2);
+        obj.setMoveSpeed(mSpeed);
+        obj.position.x = THREE.MathUtils.randFloat(Galaxy.otherObjMinX, Galaxy.otherObjMaxX);
+        obj.position.y = THREE.MathUtils.randFloat(Galaxy.otherObjMinY, Galaxy.otherObjMaxY);
+        obj.position.z = THREE.MathUtils.randFloat(Galaxy.otherObjMinZ, Galaxy.otherObjMaxZ);
         this.otherObjects.push(obj);
         Scene.addEntity(obj);
     }
@@ -306,6 +322,28 @@ export class Galaxy {
 
             for (const currObj of this.otherObjects) {
                 currObj.rotate();
+                currObj.move();
+                if (currObj.position.x > Galaxy.otherObjMaxX) {
+                    currObj.position.x = Galaxy.otherObjMaxX;
+                    currObj.oppMX();
+                } else if (currObj.position.x < Galaxy.otherObjMinX) {
+                    currObj.position.x = Galaxy.otherObjMinX;
+                    currObj.oppMX();
+                }
+                if (currObj.position.y > Galaxy.otherObjMaxY) {
+                    currObj.position.y = Galaxy.otherObjMaxY;
+                    currObj.oppMY();
+                } else if (currObj.position.y < Galaxy.otherObjMinY) {
+                    currObj.position.y = Galaxy.otherObjMinY;
+                    currObj.oppMY();
+                }
+                if (currObj.position.z > Galaxy.otherObjMaxZ) {
+                    currObj.position.z = Galaxy.otherObjMaxZ;
+                    currObj.oppMZ();
+                } else if (currObj.position.z < Galaxy.otherObjMinZ) {
+                    currObj.position.z = Galaxy.otherObjMinZ;
+                    currObj.oppMZ();
+                }
             }
         // }
 

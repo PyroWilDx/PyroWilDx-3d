@@ -230,7 +230,8 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
             
             let currCubePosition = this.position.clone();
             let addX = 85.1;
-            let addY = -1.4 * ToolCube.cubeSize / Scene.getScreenSizeRatio();
+            // let addY = -1.4 * ToolCube.cubeSize / Scene.getScreenSizeRatio();
+            let addY = -2. * ToolCube.cubeSize / Scene.getScreenSizeRatio();
             let addZ = 0;
             currCubePosition.x -= addX;
             currCubePosition.y -= addY * (this.toolCubes.length / 2.) + 6;
@@ -245,10 +246,11 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 currCubePosition.z += addZ * (this.toolCubes.length / 2.) + 6;
             }
             for (let i = 0; i < this.toolCubes.length; i++) {
-                this.toolCubes[i].setPosition(currCubePosition, i % 2 == 0);
+                // this.toolCubes[i].setPosition(currCubePosition, i % 2 == 0);
+                this.toolCubes[i].setPosition(currCubePosition, true);
 
-                if (i % 2 == 1) currCubePosition.x -= 2 * addX;
-                else currCubePosition.x += 2 * addX;
+                // if (i % 2 == 1) currCubePosition.x -= 2 * addX;
+                // else currCubePosition.x += 2 * addX;
 
                 if (Scene.currentMenu == 0) currCubePosition.y += addY;
                 if (Scene.currentMenu == 1) currCubePosition.z -= addZ;
@@ -335,6 +337,7 @@ export class Flag extends THREE.Mesh implements RayCastableInterface, ObjectLook
                 let lookPosition = finalPosition.clone();
                 let addZ = Math.min(this.flagW, this.flagH) / Scene.getScreenSizeRatio();
                 if (this.rotation.y != 0) addZ = -addZ;
+                if (Scene.currentMenu == 0) addZ = addZ * (84. / 60.);
                 finalPosition.z += addZ;
 
                 finalPosition.x += this.xZoomShift;

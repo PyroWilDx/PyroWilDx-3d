@@ -2,14 +2,14 @@
 
 #### ――――――――――
 
-- *Code Editor* : VSCode.
-- *Language* : TypeScript (+ HTML/CSS).
+- *Language* : TypeScript.
 - *Library* : ThreeJs, TweenJs.
+- *ꞮDE* : VSCode.
 
 #### ――――――――――
 
-My Portfolio Website.
+My First Portfolio Website (OutDated).
 
-Link : [https://pyrowildx.github.io/](https://pyrowildx.github.io/).
+Link : [https://pyrowildx.github.io/Portfolio-3d_Page/](https://pyrowildx.github.io/Portfolio-3d_Page/).
 
 #### ――――――――――

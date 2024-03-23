@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-37JF31F2SN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-37JF31F2SN');
+    </script>
+    <style>
+      html {
+        visibility: hidden;
+        opacity: 0;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <link rel="icon" type="image/x-icon" href="./assets/Icon-ffa20ff7.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pierre LIN</title>
+    <script type="module" crossorigin src="./assets/index-4da4be1e.js"></script>
+    <link rel="stylesheet" href="./assets/index-669072c3.css">
+  </head>
+  <body style="background-color: rgba(42, 42, 42, 0.92);">
+    <div id="app"></div>
+
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loading-progress">
+        <div id="loadingBar" class="loading-value"></div>
+      </div>
+      <div id="loadingText" class="loading-text">Loading... 0%</div>
+      <div class="loading-notice">This website is made for Desktop.</div>
+    </div>
+    
+    <canvas id="bg" style="display: none;"></canvas>
+
+    <div id="scrollToExplore" class="text-center-normal" style="display: none;">
+      <section class="scroll-to-explore">
+        <div class="mouse-scroll">
+            <div class="scroll-mouse">
+              <div class="scroll-wheel"></div>
+            </div>
+            <div class="scroll-text" style="font-size: 22px;">Scroll to Explore</div>
+            <div class="scroll-text" style="font-size: 16px;">&ndash;</div>
+            <div class="scroll-text" style="color: #FF2400;">Click on Flags!</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="text-center">
+      <div id="projectOverviewText">
+        <p id="project-overview-wrapper">
+          <span id="projectOverviewTitle">
+            Project Title
+          </span>
+          <br>
+          <span id="projectOverviewYear">
+            2022
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <button id="buttonUp" class="button-up" style="display: none;"></button>
+    <button id="buttonDown" class="button-down" style="display: none;"></button>
+
+    <main id="main">
+      <!-- Project Template
+      <section id="ProjectId" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectIdTitle">Project Title</h2>
+          
+          <div class="el-center-button">
+            <a href="" class="button-link" target="_blank">
+              Button Text
+            </a>
+            <a href="" class="button-link" target="_blank">
+              Button Text
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-vertical" id="ProjectIdImg"
+                style="width: ??%" src="ProjectImage">
+            
+            <video class="src-img-horizontal" id="ProjectIdImg" style="width: ??%" autoplay loop muted>
+              <source src="ProjectVideo" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectIdYear"><b>??</b> &ndash; <b>??</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Technology</i> : <b>Techno</b>.
+          <i>Technology</i> : <b>Techno</b>, <b>Techno</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Text
+        
+          <img src="Image">
+        
+          Other Text
+        </p>
+      </section>
+      -->
+
+      <!-- Project Keqing -->
+      <section id="ProjectKeqing" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectKeqingTitle">Keqing</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/Keqing" class="button-link" target="_blank">
+              Source Code
+            </a>
+          </div>
+          
+          <div class="el-center">
+            <video class="src-img-horizontal" id="ProjectKeqingImg" style="width: 80%;" autoplay loop muted>
+              <source src="./assets/Keqing-cb25b794.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectKeqingYear"><b>June 2023</b> &ndash; <b>Now</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C++</b>.<br>
+          <i>Library</i> : <b>SDL2</b>, <b>Boost</b>.<br>
+          <i>Code Editor</i> : <b>CLion</b>.
+        </p>
+        
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project is a 2d RPG featuring the character Keqing from Genshin Impact.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          To make this game, I've developed a 2d Game Engine entirely from scratch using C++.
+          This includes the implementation of key components such as physics, rendering, animation, sound, and more...
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Right now, I'm working on the actual Gameplay of the game using this Game Engine.
+        </p>
+      </section>
+
+      <!-- Project RobotsPVZ -->
+      <section id="ProjectRobotsPVZ" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectRobotsPVZTitle">Robots PVZ</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/Robots-PVZ" class="button-link" target="_blank">
+              Source Code
+            </a>
+          </div>
+          <img class="src-img-horizontal" id="ProjectRobotsPVZImg"
+              style="width: 80%" src="./assets/WIP-93cf1038.jpg">
+            <!-- <video class="src-img-horizontal" id="ProjectRobotsPVZImg" style="width: 80%" autoplay loop muted>
+              <source src="ProjectVideo" type="video/mp4">
+            </video> -->
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectRobotsPVZYear"><b>October 2023</b> &ndash; <b>Now</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C++</b>.<br>
+          <i>Game Engine</i> : <b>Unreal Engine 5.3</b>.<br>
+          <i>Code Editor</i> : <b>Visual Studio 2022</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          Work in Progress...
+        </p>
+      </section>
+     
+      <!-- Project BadApple -->
+      <section id="ProjectBadApple" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectBadAppleTitle">Bad Apple</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/Bad-Apple" class="button-link" target="_blank">
+              Source Code
+            </a>
+            <a href="https://www.youtube.com/watch?v=Lv5BqYe_Fdo" class="button-link" target="_blank">
+              YouTube Video
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-vertical" id="ProjectBadAppleImg"
+                style="width: 80%" src="./assets/BadApple-230bf6d9.png">
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectBadAppleYear"><b>December 2023</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C++</b>.<br>
+          <i>Library</i> : <b>OpenCV</b>, <b>SFML</b>.<br>
+          <i>Code Editor</i> : <b>CLion</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Bad Apple!! but It's Made of Random "Bad Apple!! but..." Videos.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project reinterprets the original
+          <a class="text-link" href="https://www.youtube.com/watch?v=FtutLA63Cp8" target="_blank">Bad Apple!!</a> 
+          video, but each frame is made of random segments of "Bad Apple!! but..." videos, as depicted in the project's image. 
+          The data structure used to manage the space is a QuadTree.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Video : <a class="text-link" href="https://www.youtube.com/watch?v=Lv5BqYe_Fdo" target="_blank">https://www.youtube.com/watch?v=Lv5BqYe_Fdo</a>
+        </p>
+      </section>
+
+      <!-- Project Oregairu -->
+      <section id="ProjectOregairu" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectOregairuTitle">Oregairu SNAFU</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/Oregairu-SNAFU" class="button-link" target="_blank">
+              Source Code
+            </a>
+            <a href="https://www.mediafire.com/file/lwi4p3m9kevxpdp/Oregairu.apk/file" class="button-link" target="_blank">
+              Download
+            </a>
+          </div>
+
+          <div class="el-center">
+            <video class="src-img-vertical" id="ProjectOregairuImg" style="width: 49.2%;" autoplay loop muted>
+              <source src="./assets/Oregairu-97aa808e.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectOregairuYear"><b>2019</b> &ndash; <b>2020</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>Java</b>.<br>
+          <i>Code Editor</i> : <b>Android Studio</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project is an Android application inspired by the Oregairu series.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This application offers a diverse set of features, including 
+          a music player, a book reader, or a mini-game inspired by the popular 
+          <a class="text-link" href="https://play.google.com/store/apps/details?id=com.VizegrafIndie.Tuturu&hl=ln" target="_blank">Tuturu</a> 
+          application found on the Google Play Store.
+        </p>
+        <div class="el-center-img">
+          <img src="./assets/OregairuMP-3a81dfda.png" style="width: 38%; padding-right: 2%;">
+          <img src="./assets/OregairuTuturu-724842b1.png" style="width: 38%; padding-left: 2%;">
+        </div>
+      </section>
+
+      <!-- Project Bleach -->
+      <section id="ProjectBleach" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectBleachTitle">Bleach Mini-Games</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/Bleach_Mini-Jeux" class="button-link" target="_blank">
+              Source Code
+            </a>
+            <a href="https://www.mediafire.com/file/27hmef479qztqk4/Bleach.msi/file" class="button-link" target="_blank">
+              Download
+            </a>
+          </div>
+
+          <div class="el-center">            
+            <video class="src-img-horizontal" id="ProjectBleachImg" style="width: 80%" autoplay loop muted>
+              <source src="./assets/Bleach-4b06ee19.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectBleachYear"><b>2018</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>Python</b>.<br>
+          <i>Library</i> : <b>PyGame</b>, <b>cx_Freeze</b>.<br>
+          <i>Code Editor</i> : <b>Pyzo</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This is my first-ever personal project, where it all started. This project features mini-games about the Bleach series.
+          The mini-games include an obstacle-dodging game, a song blind-test game with tunes from Bleach, 
+          and a gacha simulator for summoning characters from the Bleach universe.
+        </p>
+        <div class="el-center-img">
+          <img src="./assets/BleachMenu-bc586a48.png" style="width: 80%;">
+        </div>
+      </section>
+     
+      <!-- Project ENSIMAG_GL -->
+      <section id="ProjectENSIMAG_GL" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectENSIMAG_GLTitle">Deca Compiler</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/ENSIMAG_Compilateur-Deca" class="button-link" target="_blank">
+              Source Code
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-vertical" id="ProjectENSIMAG_GLImg"
+                style="width: 80%" src="./assets/WIP-93cf1038.jpg">
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectENSIMAG_GLYear"><b>December 2023</b> &ndash; <b>January 2024</b></span>.
+        </p>
+
+        <p class="p-padding-mid">
+          Work in Progress...
+        </p>
+      </section>
+
+      <!-- Project ENSIMAG_IG -->
+      <section id="ProjectENSIMAG_IG" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectENSIMAG_IGTitle">GUI Library</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/ENSIMAG_Interaction-Graphique" class="button-link" target="_blank">
+              Source Code
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-horizontal" id="ProjectENSIMAG_IGImg"
+                style="width: 80%" src="./assets/IGPuzzle-9d50fb48.png">
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectENSIMAG_IGYear"><b>May 2023</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C</b>.<br>
+          <i>Code Editor</i> : <b>CLion</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          This project was carried out as a team of 3 during my first year at ENSIMAG.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project is a library that helps programmers in creating and managing 
+          widgets (windows, buttons, text inputs...) on the screen. It also helps  
+          them in handling user events with these elements.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          To draw these widgets on the screen, we've implemented our version of 
+          the Scanline algorithm to efficiently draw polygons. Furthermore, we've
+          used profiling to optimize our code.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Here are some examples of applications a programmer can quickly create
+          using our library :
+        </p>
+        <div class="el-center-img">
+          <img src="./assets/IG2048-41e2aa80.png" style="width: 46%; padding-right: 1%;">
+          <img src="./assets/IGPuzzle-9d50fb48.png" style="width: 46%; padding-left: 1%;">
+        </div>
+      </section>
+     
+      <!-- Project UPMC_FFT -->
+      <section id="ProjectUPMC_FFT" style="display: none;">
+        <div class="el-center">
+          <h2 id="ProjectUPMC_FFTTitle">Fast Fourier Transform</h2>
+          
+          <div class="el-center-button">
+            <a href="https://github.com/PyroWilDx/UPMC_FFT" class="button-link" target="_blank">
+              Source Code
+            </a>
+            <a href="res/download/FFTRapport.pdf" target="_blank" class="button-link">
+              Project Report
+            </a>
+            <a href="res/download/FFTSoutenance.pdf" target="_blank" class="button-link">
+              Project Slides
+            </a>
+          </div>
+
+          <div class="el-center">
+            <img class="src-img-horizontal" id="ProjectUPMC_FFTImg"
+                style="width: 80%" src="./assets/FFT-f53f6729.jpg">
+          </div>
+        </div>
+
+        <p class="p-padding-small">
+          <i>Year</i> : <span id="ProjectUPMC_FFTYear"><b>January 2022</b> &ndash; <b>July 2022</b></span>.
+        </p>
+
+        <p class="p-padding-small">
+          <i>Language</i> : <b>C</b>.<br>
+          <i>Vectorization Extension</i> : <b>AVX2</b>.<br>
+          <i>Code Editor</i> : <b>VSCode</b>.
+        </p>
+
+        <p class="p-padding-mid">
+          This project was carried out as a team of 2 during my second year at Sorbonne Université.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          This project is an HPC (High Performance Computing) implementation of
+          the FFT (Fast Fourier Transform) algorithm to efficiently multiply two
+          polynomials in the Z/pZ ring. To further optimize this algorithm we've used 
+          vectorization with AVX2.
+        </p>
+      </section>
+
+      <button id="closeButton" class="close-button" style="display: none;">
+        <span class="cross">&#10006;</span>
+      </button>
+      
+    </main>
+
+    <main id="aboutSection" style="display: none;">
+      <section id="aboutSectionContent">
+        <div class="el-center">
+          <h2>About Me</h2>
+        </div>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Hi! I'm Pierre, a French student at ENSIMAG. My journey with Computer Science began 
+          in high school at the age of 16 when I wrote my first line of code. From that 
+          moment, I found my passion and decided to pursue my studies in this field, exposing 
+          myself to diverse Computer Science topics.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          Beyond the limits of my studies, my passion led me to create various personal 
+          projects during my free time. These projects allowed me to acquire a wide range
+          of skills, beyond what I could have learned through my academic studies alone.
+        </p>
+        <p class="p-padding-mid">
+          <span class="tabulation"></span>
+          My focus lies in Software Development (with a special affinity for 
+          creating Video Games) using languages such as C/C++. I believe in the 
+          power of collaboration and innovation, and I'm always eager to connect 
+          with fellow enthusiasts.
+        </p>
+        <p class="p-padding-mid">
+          Feel free to contact me, let's bring our ideas to life together!
+        </p>
+
+        <p class="p-padding-mid" style="font-size: smaller;">
+          (You can find my contacts at the bottom right of the screen.)
+        </p>
+      </section>
+    </main>
+
+    <div id="menu" class="menu" style="display: none;">
+      <div id="menuRoad" class="menu-clickable">Road</div>
+      <div id="menuOverview" class="menu-clickable">Overview</div>
+      <div id="menuAbout" class="menu-clickable">About Me</div>
+    </div>
+
+    <div id="socialIcons" class="social-icons" style="display: none;">
+      <a href="https://github.com/PyroWilDx" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
+          <path fill="white" d="M16.29,0a16.29,16.29,0,0,0-5.15,31.75c.82.15,1.11-.36,1.11-.79s0-1.41,0-2.77C7.7,29.18,6.74,26,6.74,26a4.36,4.36,0,0,0-1.81-2.39c-1.47-1,.12-1,.12-1a3.43,3.43,0,0,1,2.49,1.68,3.48,3.48,0,0,0,4.74,1.36,3.46,3.46,0,0,1,1-2.18c-3.62-.41-7.42-1.81-7.42-8a6.3,6.3,0,0,1,1.67-4.37,5.94,5.94,0,0,1,.16-4.31s1.37-.44,4.48,1.67a15.41,15.41,0,0,1,8.16,0c3.11-2.11,4.47-1.67,4.47-1.67A5.91,5.91,0,0,1,25,11.07a6.3,6.3,0,0,1,1.67,4.37c0,6.26-3.81,7.63-7.44,8a3.85,3.85,0,0,1,1.11,3c0,2.18,0,3.94,0,4.47s.29.94,1.12.78A16.29,16.29,0,0,0,16.29,0Z"></path>
+        </svg>
+      </a>
+      <a href="mailto:pierre.lin.x@gmail.com" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 492 318.2">
+          <path fill="white" d="M143.6,83.9q51.3,33.15,102.5,66.2a21.41,21.41,0,0,0,1.9-1.3q67-43.35,134-86.6L477.1.7a19,19,0,0,0-5.4-.7H20.4A23.47,23.47,0,0,0,15,.7Q79.35,42.4,143.6,83.9Z"></path>
+          <path fill="white" d="M389.6,203.9q51.15,48.15,102.3,96.2a17.7,17.7,0,0,0,.1-2.3V20.4a20.1,20.1,0,0,0-2.5-9.8Q422.75,53.65,356.1,96.8c-15.9,10.3-31.7,20.5-47.6,30.8Z"></path>
+          <path fill="white" d="M348.6,191.3q-28.2-26.55-56.4-53l-42.3,27.3a7.4,7.4,0,0,1-7.6,0c-1.9-1.2-3.8-2.5-5.7-3.7q-18.3-11.85-36.6-23.6l-89.9,84.5Q60.6,269.3,11,315.9a21,21,0,0,0,9.3,2.3H471.6a19.41,19.41,0,0,0,9.3-2.3Q414.9,253.5,348.6,191.3Z"></path>
+          <path fill="white" d="M2,298.4q67.05-63,134-126c15.9-14.9,31.7-29.8,47.6-44.8q-40.5-26.25-81.1-52.4Q52.55,43,2.5,10.6A20.1,20.1,0,0,0,0,20.4V297.7c0,.8.1,1.6.1,2.3A14.62,14.62,0,0,0,2,298.4Z"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div id="progressContainer" class="progress">
+      <div id="progressBar" class="progress-value"></div>
+    </div>
+
+    <div id="progressInfoText" class="progress-info-text">Personal Projects</div>
+
+    <svg id="soundEqualizer" class="equalizer" viewBox="0 0 99 62" 
+        style="enable-background:new 0 0 99 62;" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+      <line stroke="white" stroke-width="2" x1="99" y1="0" x2="0" y2="0"></line>
+      <line id="sEL0" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="85.6" y1="60" x2="85.6" y2="0" data-svg-origin="85.5999984741211 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.7153,0,0)"></line>
+      <line id="sEL1" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="67.6" y1="60" x2="67.6" y2="0" data-svg-origin="67.5999984741211 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.5773,0,0)"></line>
+      <line id="sEL2" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="49.6" y1="60" x2="49.6" y2="0" data-svg-origin="49.599998474121094 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.1453,0,0)"></line>
+      <line id="sEL3" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="31.6" y1="60" x2="31.6" y2="0" data-svg-origin="31.600000381469727 0" style="transform-origin: 0px 0px;" transform="matrix(1,0,0,0.7825,0,0)"></line>
+      <line id="sEL4" data-equalizer-line="" class="equalizer-line" stroke="white" stroke-width="12" x1="13.6" y1="60" x2="13.6" y2="0" data-svg-origin="13.600000381469727 0" transform="matrix(1,0,0,0.5184,0,0)" style="transform-origin: 0px 0px;"></line>
+    </svg>
+
+    <div id="rotateContainer" class="rotate-container" style="display: none;">
+      <div class="phone">
+      </div>
+      <div class="message">
+        Please rotate your device !
+      </div>
+    </div>
+
+    
+
+    
+    <style>html{visibility: visible;opacity:1;}</style>
+  </body>
+</html>

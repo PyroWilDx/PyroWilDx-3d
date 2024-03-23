@@ -1,0 +1,5 @@
+- npm install
+- npm run build
+- Replace every [="/] by [="./] in dist/index.html
+- Copy res/ folder into dist/
+- Run Live Server
